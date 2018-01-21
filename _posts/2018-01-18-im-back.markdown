@@ -19,7 +19,7 @@ Nesse site pessoal pretendo disponibilizar alguns materiais, como:
 Como alguns que já me conhecem devem saber, esse site conterá material relacionado aos seguintes assuntos:
 - Técnicas de segurança ofensiva geral
 - Técnicas de exploração de corrupção de memória
-- Técnicas que visam bylassar os mecanismos de proteção existentes
+- Técnicas que visam bypassar os mecanismos de proteção existentes
 - Engenharia reversa de software
 - Engenharia reversa de hardware (mais precisamente embedded devices aka IoT)
 - Lock Picking
