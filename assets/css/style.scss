@@ -4,6 +4,12 @@
 @import "{{ site.theme }}";
 
 
+/* ---- FONTS ----*/
+@font-face {
+    font-family: GraublauWeb;
+    src: url("/static/fonts/awesome.otf") format("opentype");
+}
+
 .container { width: 90%; max-width: 1024px; margin: 0 auto; }
 
 
@@ -11,6 +17,49 @@
 	padding: 10px;
 	border: 1px dashed #b5e853;
 	background: #000;
+}
+
+#main_content {
+	float: left;
+	max-width: 700px; 
+}
+
+
+footer { clear:both; text-align: center; }
+
+
+/* ---- Side bar ---- */
+
+#sidebar {
+	width: 280px;
+	float: right;
+}
+
+.sidebar-module {
+	margin-bottom: 40px;
+	font-size: 12px;
+}
+
+.sidebar-module h4 {
+	font-size: 16px;
+	margin: 0px;
+}
+
+
+.sidebar-module li {
+
+}
+
+.sidebar-module img {
+    border-radius: 50%;
+    width: 156px;
+    margin: auto;
+    display: block;
+    padding: 10px;
+}
+
+.sidebar-module span {
+	font-size: 12px;	
 }
 
 /* ---- MENU ---- */

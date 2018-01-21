@@ -16,6 +16,8 @@
 title: Maycon Vitali 
 email: maycon@hacknroll.com
 
+author: Maycon Vitali
+aboutme_photo: /assets/img/profile.jpg
 # , and the opinions expressed here represent my own and not those of my employer.
 description: >- # this means to ignore newlines until "baseurl:"
   I hack stuff!
@@ -45,3 +47,6 @@ google_analytics: [UA-112771650-1]
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+gems:
+  - jekyll-font-awesome-sass

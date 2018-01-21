@@ -1,5 +1,6 @@
 ---
 layout: page
 title: Tools
-permalink: /tools
+permalink: /tools/
+tags: main-menu
 ---
