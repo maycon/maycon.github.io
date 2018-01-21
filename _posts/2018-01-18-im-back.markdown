@@ -3,6 +3,7 @@ layout: post
 title:  "I'm back, bitches!!"
 date:   2018-01-18 15:26:36 +0000
 categories: hello_world
+permalink: /im_back_bitches
 ---
 
 Fala rapaziada. Estou criando essa primeira publicação só pra dizer que estou retomando às atividades de publicação de material e, por isso, estou reformulando tanto meu site pessoal quanto o site oficial da [Hack N' Roll](http://www.hacknroll.io). Assim que o novo leiaute estiver definido (muito provável que seja semelhante a esse, porque mexer com HTML e CSS é um &%#), irei gradativamente repassar as publicações do [site antigo](http://www.hacknroll.com) para o novo.
