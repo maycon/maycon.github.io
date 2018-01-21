@@ -13,11 +13,15 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Maycon Vitali's Page
+title: Maycon Vitali 
 email: maycon@hacknroll.com
+
+# , and the opinions expressed here represent my own and not those of my employer.
 description: >- # this means to ignore newlines until "baseurl:"
-  I hack stuff, and the opinions expressed here represent my own and not those of my employer.
+  I hack stuff!
+
 baseurl: "" # the subpath of your site, e.g. /blog
+
 url: "http://maycon.hacknroll.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: mayconvitali
 github_username:  maycon
@@ -27,6 +31,8 @@ markdown: kramdown
 theme: jekyll-theme-hacker
 plugins:
   - jekyll-feed
+
+google_analytics: [UA-112771650-1]
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
