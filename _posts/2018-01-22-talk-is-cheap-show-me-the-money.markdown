@@ -6,11 +6,11 @@ categories: bug-bounty
 tags: 
 ---
 
-Está primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.
+Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.
 
 ### O que é Bug Bounty?
 
-Pra quem não sabe o que é um `Bug Bounty` Program, uma forma simples de explicar é que são projetos que te recompensam por descobrir vulnerabilidades e reportar de maneira **ética** para o desenvolvedor/vendor do produto. Essas recompensas podem ser o conhecimento da descoberta, muitas vezes com nome e contato profissional divulgado no hall da fama; porém as recompensas também podem ser monetário; e é aí que tudo começa a ficar interessante.
+Pra quem não sabe o que é um `Bug Bounty` Program, uma forma simples de explicar é que são projetos que te recompensam por descobrir vulnerabilidades e reportar de maneira **ética** para o desenvolvedor/vendor do produto ou para quem usa o mesmo. Essas recompensas podem ser o conhecimento da descoberta, muitas vezes com nome e contato profissional divulgado no hall da fama; porém a recompensa também podem ser monetária; e é aí que tudo começa a ficar mais interessante.
 
 Existem diversas empresas que possuem seu programa de recompensa para falhas como o [Facebook](https://pt-br.facebook.com/BugBounty/), [Google](https://www.google.com/about/appsecurity/reward-program/) ou [Microsoft](https://technet.microsoft.com/pt-br/library/dn425036.aspx). Além do mais, existem plataformas que concentram dezenas de centenas de empresas diferentes, atuando como um intermediador, com é o caso do [HackerOne](https://www.hackerone.com/), e outras empresas que aderem a programas de recompensa porém com o intuito de revender as falhas para outros órgãos (aka governos) ou adicionar a algum produto específico de segurança.
 
@@ -18,13 +18,13 @@ Existem diversas empresas que possuem seu programa de recompensa para falhas com
 
 Eu vinha a um tempo já acompanhando relatórios de Bug Bounty que são publicados na plataforma da [HackerOne](https://www.hackerone.com/), e sempre que via alguém ganhando alguns dólares reportando _XSS Reflected_ eu sempre pensava o mesmo: "Pultz! Bem que poderia ser eu". Até que eu resolvi arregaçar as mangas e tentar a "sorte" em algum programa.
 
-Para a escolha do programa, eu avaliei alguns pontos analisando os reports públicos
+Para a escolha do programa, eu avaliei alguns pontos analisando os reports públicos:
 
-- Um programa que possuísse regras e escopo claro.
-- A responsividade do vendor quando alguém reportava alguma falha.
-- O valor médio pago por cada recompensa.
-- Algo que não fosse extremamente obscuro de testar (queria algo acessível).
-- E, é claro, algo que eu considerasse extremamente divertido.
+- Um programa que possuísse regras e escopo claro
+- A responsividade do vendor quando alguém reportava alguma falha
+- O valor médio pago por cada tipo de falha
+- Algo que não fosse extremamente obscuro de testar (queria algo acessível)
+- E, é claro, algo que eu considerasse extremamente divertido
 
 ### Escolhendo o Vendor
 
@@ -36,7 +36,7 @@ O próximo passo foi identificar o alvo e, depois de alguma pesquisa e de conver
 
 ![EdgeRouter X no MercadoLivre]({{ "/assets/images/posts/2018/01/edgerouter-ml.png" | absolute_url }})
 
-Fiz a compra na quinta-feira, dia 30 de maio, e o router foi entregue quase duas semanas depois, no dia 14 de junho, véspera do feriado de 15 de junho (Corpus Christi). Segue uma foto:
+Fiz a compra na quinta-feira, dia 30 de maio, e o router foi entregue quase duas semanas depois, no dia 14 de junho, véspera do feriado de 15 de junho (Corpus Christi).
 
 
 ### Testes e Resultados
@@ -70,7 +70,7 @@ Fui deitar e confesso que tentei dormir rápido, mas a ansiedade não me deixou,
 
 Ao acordar de manhã <strike>não tão cedo</strike>, fui checar meus e-mails no celular como de costume, e notei que já tinham dois e-mails na caixa de entrada referente ao HackerOne. De cara eu já pensei o pior: "Será que falta alguma coisa no processo?", "Será que esqueci de reportar algo?", "Será que é duplicado?" etc.
 
-O primeiro e-mail foi que o meu report passou pela triagem, o que significa que a vulnerabilidade que eu reportei foi confirmada:
+O primeiro e-mail foi que o meu report passou pela triagem, o que significa que a vulnerabilidade que eu reportei foi confirmada.
 
 Já me dei por satisfeito, ficando contente com os possíveis U$ 250,00 que estariam por vir. Até que eu vi o seguinte e-mail, que simplesmente dizia que eu já havia sido pago. Isso mesmo! Em menos de 12 horas a vulnerabilidade que eu identifiquei foi confirmada e a recompensa foi paga. Além do mais, ao invés dos U$ 250,00 que eu esperava, eu fui **recompensado em U$ 1.500,00**, que além de pagar o investimento no EdgeRouter que eu havia comprado, daria para comprar mais 15 modelos iguais.
 
@@ -78,15 +78,15 @@ Já me dei por satisfeito, ficando contente com os possíveis U$ 250,00 que esta
 
 ### Money, money e um convite inusitado(?)
 
-Ganhar U$ 1.500,00 em uma brincadeira que levou poucos minutos foi mais que o suficiente para eu viciar na coisa. Lembram-se que era véspera de feriado? Pois então. Fiquei o feriado e o final de semana praticamente inteiro fuçando o aparelho, e o resultado foi mais quatro vulnerabilidades reportadas. Porém, diferente do primeiro bounty, uma delas foi considerada duplicada e os demais três foram recompensados em dois de U$ 150,00 e um de U$ 500,00. Isso se deve provavelmente à necessidade de iteração com o usuário e pelo fato da vulnerabilidade ter sido identificada em uma _feature_ beta do firmware.
+Ganhar U$ 1.500,00 em uma brincadeira que levou poucos minutos foi mais que o suficiente para eu viciar na coisa. Lembram-se que era véspera de feriado? Pois então. Fiquei o feriado e o final de semana praticamente inteiro fuçando o aparelho, e o resultado foi mais quatro vulnerabilidades reportadas. Porém, diferente do primeiro report, uma delas foi considerada duplicada e os demais três foram recompensados em dois de U$ 150,00 e um de U$ 500,00. Isso se deve provavelmente à necessidade de iteração com o usuário e pelo fato da vulnerabilidade ter sido identificada em uma _feature_ beta do firmware.
 
-Como eu peguei gosto pela coisa, mas não tinha muito tempo disponível fora dos finais de semana, decidi me acalmar um pouco e só olhar um pouco durante os finais de semana. Porém no dia 15 eu recebi uma mensagem privada da Ubiquiti me convidando para testar um equipamento do Beta Store, o [EtherMagic](https://store.ubnt.com/products/ethermagic), e caso eu aceitasse, eles me enviariam um kit **gratuito**. Isso fez com que eu percebesse o reconhecimento da empresa frente às minhas pesquisas de vulnerabilidade dos equipamentos deles.
+Como eu peguei gosto pela coisa, mas não tinha muito tempo disponível fora dos finais de semana, decidi me acalmar um pouco e só olhar um pouco durante os finais de semana. Porém no dia 15 de junho eu recebi uma mensagem privada da Ubiquiti me convidando para testar um equipamento do Beta Store, o [EtherMagic](https://store.ubnt.com/products/ethermagic), e caso eu aceitasse, eles me enviariam um kit **gratuito**. Isso fez com que eu percebesse o reconhecimento da empresa frente às minhas pesquisas de vulnerabilidade dos equipamentos deles.
 
 ![Convite recebido]({{ "/assets/images/posts/2018/01/invite-beta-test.png" | absolute_url }})
 
 ### Não deixa o samba morrer...
 
-Enquanto o aparelho não chegava, eu acabei olhando mais um pouco no bom e velho EdgeRouter durante mais um final de semana e o resultado foi a descoberta de mais duas vulnerabilidades. Como eu fiquei um pouco frustado com a recompensa anterior, resolvi voltar para o último release não-beta do firmware e o resultado foi interessante. Das duas falhas que havia reportado, uma delas me rendeu U$ 1.000,00 e a outra me rendeu mais U$ 1.500,00.
+Enquanto o aparelho novo não chegava, eu acabei olhando mais um pouco no bom e velho EdgeRouter durante mais um final de semana e o resultado foi a descoberta de mais duas vulnerabilidades. Como eu fiquei um pouco frustado com a recompensa anterior, resolvi voltar para o último release não-beta do firmware e o resultado foi interessante. Das duas falhas que havia reportado, uma delas me rendeu U$ 1.000,00 e a outra me rendeu mais U$ 1.500,00.
 
 Vamos fazer as contas: U$ 1.500,00 do primeiro relatório, U$ 150,00 + U$ 150,00 + U$ 500,00 da segunda "remessa" de reports (queimei um report como duplicado), e depois mais U$ 2.500,00 em dois reports reportados no final de semana seguinte. Eu já havia, somente olhando no meu tempo livre, acumulado U$ 4.800,00. Como diz um amigo meu: "Já da pra pagar umas contas!". 
 
