@@ -4,14 +4,21 @@
 @import "{{ site.theme }}";
 
 
-/* ---- FONTS ----*/
-@font-face {
-    font-family: GraublauWeb;
-    src: url("/static/fonts/awesome.otf") format("opentype");
+/*
+.container { width: 90%; max-width: 1024px; margin: 0 auto; }
+*/
+
+.container {
+	display: flex;
+	width: 90%;
+	max-width: 1024px;
+	flex-wrap: wrap;
+	align-content: center;
 }
 
-.container { width: 90%; max-width: 1024px; margin: 0 auto; }
-
+header .container {
+	flex-direction: column;
+}
 
 .post {
 	padding: 10px;
@@ -20,9 +27,13 @@
 }
 
 #main_content {
-	float: left;
 	max-width: 700px; 
 }
+/*
+#main_content {
+	float: left;
+
+*/
 
 footer { clear:both; text-align: center; }
 
@@ -32,10 +43,11 @@ footer { clear:both; text-align: center; }
 #sidebar {
 	width: 280px;
 	float: right;
+	padding-left: 20px;
 }
 
 .sidebar-module {
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 	font-size: 12px;
 }
 
@@ -58,7 +70,7 @@ footer { clear:both; text-align: center; }
 }
 
 .sidebar-module span {
-	font-size: 12px;	
+	font-size: 11px;	
 }
 
 /* ---- MENU ---- */
@@ -86,3 +98,7 @@ nav li a {
 nav li a:hover {
     background-color: #111;
 }
+
+
+
+.post-content { font-size: 14px; }

@@ -8,17 +8,14 @@
     {% include fb-like.html %}
     {% include header.html %}
     <div class="container">
-        
         <section id="main_content">
             {{ content }}
         </section>
-
-        <section id="sidebar">
+        <div id="sidebar">
         	{% include sidebar.html %}
-        </section>
-
-        {% include footer.html %}
+        </div>
     </div>
+    {% include footer.html %}
 </body>
 
 </html>

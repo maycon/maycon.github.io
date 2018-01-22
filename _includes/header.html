@@ -1,17 +1,11 @@
 <header class="site-header">
-
-    <div class="wrapper">
-
-        <div class="container">
-            <h1>{{ site.title | default: site.github.repository_name }}</h1>
-            <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-        </div>
-
-        <nav id="menu">
-            <div class="container">
-                {% include menu.html %}
-            </div>
-        </nav>
+    <div class="container">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
     </div>
-
+    <nav id="menu">
+        <div class="container">
+            {% include menu.html %}
+        </div>
+    </nav>
 </header>
