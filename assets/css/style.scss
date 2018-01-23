@@ -48,7 +48,7 @@ footer { clear:both; text-align: center; }
 
 .sidebar-module {
 	margin-bottom: 30px;
-	font-size: 12px;
+	font-size: 11px;
 }
 
 .sidebar-module h4 {
@@ -71,6 +71,45 @@ footer { clear:both; text-align: center; }
 
 .sidebar-module span {
 	font-size: 11px;	
+}
+
+/* ---------- Sidebar Archive Tree ---------- */
+
+.sb-archive-tree li input {
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+    top: 0;
+}
+
+.sb-archive-tree li label {
+    cursor: pointer;
+    display: block;
+}
+
+.sb-archive-tree li input + ul {
+    display: block;
+}
+
+.sb-archive-tree li input + ul > li {
+    display: none;
+}
+
+.sb-archive-tree li {
+    position: relative;
+    margin-left: -20px;
+    list-style: none;
+}
+
+.sb-archive-tree li input:checked + ul > li { display: block; }
+.sb-archive-tree li input:checked + ul > li:last-child {  }
+
+.sb-archive-tree a {
+	text-decoration: none;
+	color: white;
 }
 
 /* ---- MENU ---- */
