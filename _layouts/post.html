@@ -5,7 +5,7 @@ layout: default
 <div class="post">
 	<header class="post-header">
 	    <h2 class="post-title">{{ page.title }}</h2>
-		<div class="fb-like" data-width="" data-colorscheme="dark"></div>
+		<div class="fb-like" data-width="" data-href="{{ page.url | prepend: site.url }}" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
