@@ -3,12 +3,16 @@ layout: default
 ---
 
 <div class="post">
-    <h2 class="post-title">{{ page.title }}</h2>
-	<div class="fb-like" data-width="" data-colorscheme="dark"></div>
+	<header class="post-header">
+	    <h2 class="post-title">{{ page.title }}</h2>
+		<div class="fb-like" data-width="" data-colorscheme="dark"></div>
+	</header>
 
-	<article class="post-content"> 
-	    {{ content }}
-	</article>
+	<div class="post-content">
+    	{{ content }}
+	</div>
 
-	<div class="fb-comments" data-width="100%" data-colorscheme="dark"></div>
+	<div class="comments">
+		<div class="fb-comments" data-width="100%" data-colorscheme="light"></div>
+	</div>
 </div> 
