@@ -14,17 +14,17 @@ Eu espero não ter que delongar muito sobre isso. Mas só para deixar claro, vam
 
 O firmware (também conhecido como software embarcado -- _embedded software_) é parte do sistema embarcado responsável por armazenar o software que irá executar e controlar todo o sistema. Presente em diversos dispositivos, os firmwares podem ser encontrados em processadores, em microcontroladores, na BIOS do seu computador, em impressoras e nos nossos tão preciosos modems domésticos. Basicamente qualquer dispositivo que não foi feito 100% em hardware precisa de um firmware para funcionar. E esse pequeno "programa" será nosso alvo de estudo de engenharia reversa para descoberta de vulnerabilidades.
 
-Quando fazemos o update do firmware de um dispositivo, podemos ter alguma funcionalidade completamente transparente para esse processo, onde simplesmente clicamos em algum botão e o firmware se atualiza sozinho. Porém, geralmente algumas vezes é necessários baixar um arquivo no site do fabricante/fornecedor e fazer o update manualmente através de uma ferramenta de auxílio. Essa ferramenta pode variar desde uma aplicação de celular até uma funcionalidade de atualização da própria versão atual do firmware.
+Quando fazemos o update do firmware de um dispositivo, podemos ter alguma funcionalidade completamente transparente para esse processo, onde simplesmente clicamos em algum botão e o firmware se atualiza sozinho. Porém, algumas vezes é necessários baixar um arquivo no site do fabricante/fornecedor e fazer o update manualmente através de uma ferramenta de auxílio. Essa ferramenta pode variar desde uma aplicação de celular até uma funcionalidade de atualização da própria versão atual do firmware.
 
-Mas o que temos nesse arquivo? Pois bem, abaixo seguem algumas coisas que podemos ter dentro desses arquivos. Mas lembrem-se que isso varia de firmware para firmware, ou seja, um firmware em questão pode ter nenhum ou todas as opções abaixo:
+Mas o que temos nesse arquivo? Pois bem, abaixo seguem algumas coisas que podemos ter dentro desses arquivos. Mas, lembre-se que isso varia de firmware para firmware, ou seja, um firmware em questão pode ter nenhum ou todas as opções abaixo:
 
 #### Bootloader
 
-Esse cara é o startup do dispositivo embarcado. Geralmente ele que é responsável por carregar na inicialização do aparelho e contém aquelas funcionalidades de "segurar algumas teclas" e entrar em algum menu de administração (ex: recovery). Basicamente, se você corromper seu dispositivo mas o bootloader ainda estiver intacto, as chances de você recuperar seu aparelho é quase que certa. Para se ter uma ideia mais abrangente, o bootloader em um PC fica após o processo de teste de inicialização (power-on self-test - POST) e da inicialização da BIOS. Quem já utilizou o *GR*and *U*nifield *B*ootloader (grub) ou o *LI*nux *LO*ader (lilo) sabe exatamente do que eu estou falando.
+Esse cara é o startup do dispositivo embarcado. Geralmente ele que é responsável por carregar na inicialização do aparelho e contém aquelas funcionalidades de "segurar algumas teclas" e entrar em algum menu de administração (ex: recovery). Basicamente, se você corromper seu dispositivo, mas o bootloader ainda estiver intacto, as chances de você recuperar seu aparelho é quase que certa. Para se ter uma ideia mais abrangente, o bootloader em um PC é chamado após o processo de teste de inicialização (power-on self-test - POST) e da inicialização da BIOS. Quem já utilizou o *GR*and *U*nifield *B*ootloader (grub) ou o *LI*nux *LO*ader (lilo) sabe exatamente do que eu estou falando.
 
-Existem alguns tipos diferentes de Bootloader para embarcados, e eles possuem funcionalidades que podem danificar seu dispositivo, como a leitura e escrita diretamente na memória flash do aparelho (EEPROM). Porém, os dispositivos embarcados possuem em sua grande maioria o [Das U-Boot](https://www.denx.de/wiki/U-Boot), um bootloader open source compatível com mais de uma dezena de arquiteturas. Entretanto, como o U-Boot é open source, é comum acharmos versões limitadas (sem funcionalidades) ou modificada dele sendo executada em alguns dispositivos.
+Existem alguns tipos diferentes de Bootloader para embarcados, e eles possuem funcionalidades que podem danificar seu dispositivo, como a leitura e escrita diretamente na memória flash do aparelho (EEPROM). Porém, os dispositivos embarcados possuem, em sua grande maioria, o [Das U-Boot](https://www.denx.de/wiki/U-Boot), um bootloader open source compatível com mais de uma dezena de arquiteturas. Entretanto, como o U-Boot é open source, é comum encontrar versões limitadas (sem funcionalidades) ou modificada dele sendo executada em alguns dispositivos.
 
-Só para fazer uma referência, em minha [publicação sobre Bug Bounty]({% post_url 2018-01-22-talk-is-cheap-show-me-the-money %}) eu descrevo superficialmente como eu consegui danifica um equipamento após executar alguns comandos no bootloader do aparelho de maneira "despreocupada".
+Só para fazer uma referência, em minha [publicação sobre Bug Bounty]({% post_url 2018-01-22-talk-is-cheap-show-me-the-money %}), eu descrevo superficialmente como eu consegui danifica um equipamento após executar alguns comandos no bootloader do aparelho de maneira "despreocupada".
 
 É importante ressaltar que muitas vezes a atualização do firmware não atualiza o bootloader do dispositivo, mas somente seu sistemas de arquivos (descrito logo abaixo).
 
@@ -93,6 +93,10 @@ Nessa parte irei demonstrar na prática como foi possível extrair o firmware do
 - Um [BusPirate](http://dangerousprototypes.com/docs/Bus_Pirate)
 - Pinças de teste (pode utiliza uma [pinça SOIC8](https://lista.mercadolivre.com.br/pin%C3%A7a-soic-8))
 - O software [flashrom](https://www.flashrom.org/Flashrom)
+
+O BusPirate é uma ferramenta hacker open-source desenvolvida pela [Dangerous Prototypes](http://dangerousprototypes.com/) e ele possui a capacidade de conversar com dispositivos eletrônicos, permitindo a programação de FPGAs, programação de microcontroladores, acesso à interface JTAG e, como no nosso caso, comunicação com memória flash.
+
+Como o BusPirate é um hardware não muito acessível, gostaria de deixar registrado que é possível fazer os mesmos procedimentos aqui [utilizando um RaspberryPi](https://github.com/bibanon/Coreboot-ThinkPads/wiki/Hardware-Flashing-with-Raspberry-Pi).
 
 Então! Temos nosso modem em mãos:
 
