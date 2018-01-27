@@ -30,11 +30,16 @@ header .container {
 }
 
 .post-header {
-    padding: 0px;
-    border: none;
-    marging: 0px;
-    font-size: 12px;
     color: #b5e853;
+    font-size: 12px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.post-header h3 {
+    padding: 0px;
+    margin: 0px;
 }
 
 .post-title {
@@ -68,7 +73,9 @@ header .container {
     font-size: 10px;    
 }
 
-
+article {
+    padding-bottom: 10px;
+}
 footer { clear:both; text-align: center; }
 
 
