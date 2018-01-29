@@ -8,7 +8,7 @@ lang: en
 ref: hello
 ---
 
-Hi guys. I writing this first post to tell you I'm back to share some technical stuff and, for that reason, I am remaking both my personal site and the [Hack N' Roll](http://www.hacknroll.io) one. Once the new layout is done (maybe the same of this site, because I'm not good with HTML+CSS), I will migrate the publications from the [old site](http://www.hacknroll.com) to the new one.
+Hi guys. I am writing this first post to tell you I'm back to share some technical stuff and, for this reason, I am remaking both my personal site and the [Hack N' Roll](http://www.hacknroll.io) one. Once the new layout is done (maybe the same of this site, because I'm not good with HTML+CSS), I will migrate the posts from the [old site](http://www.hacknroll.com) to the new one.
 
 In this personal page, I intend to provide some material related to:
 - Some research result
@@ -32,6 +32,5 @@ As some people that know me already know, this site will have material related t
 
 Unfortunately, the main language of this site will be Brazilian Portuguese. But I will try to rewrite all posts to English as fast I can. Feel free to send me any feedback about the content of this site, including subject, typos, misspelling etc.
 
-Let's hack!
-
+Let's hack!<br />
 Maycon Vitali
