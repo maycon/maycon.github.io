@@ -4,6 +4,8 @@ title:  "Talk is cheap. Show me the money!"
 date:   2018-01-22 00:00:00 +0000
 categories: bug-bounty
 tags: bug-bounty hackerone ubiquiti
+lang: br
+ref: talk-is-cheap
 ---
 
 Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.

@@ -4,6 +4,8 @@ title:  "IoT Hacking: Extração de Firmware usando SPI"
 date:   2018-01-26 00:00:00 +0000
 categories: embedded-hacking
 tags: embedded-devices hacking-embedded IoT-hacking
+lang: br
+ref: firmware-extraction-spi
 ---
 
 O objetivo desse post é dar inicio a uma série de publicações sobre hacking de embedded devices. Apesar de eu não ser nenhum mestre nisso, acredito que já tenha feito experimentos o suficiente para ajudar aos iniciantes que tiveram pouco ou nenhum contato com hacking de dispositivos embarcados. E, como de praxe, uma das primeiras partes geralmente envolve a obtenção do firmware do dispositivo. E é sobre isso que iremos falar nesse post. Caso identifiquem algum erro basta entrar em contato comigo pelos comentários no final do post ou por qualquer um dos contatos disponíveis na barra lateral do site.

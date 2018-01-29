@@ -1,4 +1,7 @@
 <header class="site-header">
+    <div class="container lang-selector">
+		{% include lang-selector.html %}
+	</div>
     <div class="container">
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>

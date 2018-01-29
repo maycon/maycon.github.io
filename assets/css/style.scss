@@ -67,7 +67,12 @@ header .container {
     margin-bottom: 30px;
     border-radius: 10px;
 }
-
+/*
+header time {
+    display: block;
+    text-align: right;
+}
+*/
 .post-content pre
 {
     font-size: 10px;    
@@ -76,7 +81,7 @@ header .container {
 article {
     padding-bottom: 10px;
 }
-footer { clear:both; text-align: center; }
+footer { clear:both; text-align: center; font-size: 14px; }
 
 
 /* ---- Side bar ---- */
@@ -84,7 +89,7 @@ footer { clear:both; text-align: center; }
 #sidebar {
 	width: 280px;
 	float: right;
-	padding-left: 20px;
+	padding-left: 15px;
 }
 
 .sidebar-module {
@@ -104,14 +109,38 @@ footer { clear:both; text-align: center; }
 
 .sidebar-module img {
     border-radius: 50%;
+    border: 1px dashed #b5e853;
     width: 156px;
     margin: auto;
     display: block;
-    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .sidebar-module span {
 	font-size: 11px;	
+}
+
+/* ---------- Language Selector ---------- */
+
+.lang-selector {
+    
+}
+
+.lang-selector ul {
+    margin-bottom: 0px;
+}
+
+.lang-selector ul li {
+    list-style-type: none;
+    display: inline;
+    float: right;
+    margin-botton:0px;
+}
+
+.lang-selector ul li img {
+    width: 24px;
+    margin-left: 10px;
 }
 
 /* ---------- Sidebar Archive Tree ---------- */
@@ -175,3 +204,11 @@ nav li a:hover {
     background-color: #111;
 }
 
+nav ul li img {
+    margin: 0px;
+    width: 28px;
+}
+
+nav ul .menu-icon a {
+    padding: 10px 16px 6px 16px;
+}

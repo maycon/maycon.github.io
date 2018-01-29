@@ -1,5 +1,5 @@
 <div class="sidebar-module">
-	<h4>Categorias</h4>
+	<h4>{{ site.data.lang[page.lang].categories }}</h4>
 	{% for cat in site.categories %}
 		<li><a href="{{ site.baseurl }}/categories/#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">{{ cat[0] }} ({{ cat[1].size }})</a></li>
 	{% endfor %}

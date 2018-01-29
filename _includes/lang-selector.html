@@ -1,0 +1,21 @@
+<ul>
+{% for lang in site.data.lang %}
+	{% assign pages = site.pages | where:"ref", page.ref | where:"lang", lang[0]  %}
+	{% assign posts = site.posts | where:"ref", page.ref | where:"lang", lang[0]  %}
+
+	{% if pages[0] %}
+		<li>
+			<a href="{{ pages[0].url }}" class="{{ lang[0] }}"><img src="/assets/images/lang/{{ lang[0] }}.png" /></a>
+		</li>
+	{% elsif posts[0] %}
+		<li>
+			<a href="{{ posts[0].url }}" class="{{ lang[0] }}"><img src="/assets/images/lang/{{ lang[0] }}.png" /></a>
+		</li>
+	{% else %}
+		<li>
+			<a href="/404-{{ lang[0] }}.html" class="{{ lang[0] }}"><img src="/assets/images/lang/{{ lang[0] }}.png" /></a>
+		</li>
+	{% endif %}
+	
+{% endfor %}
+</ul>

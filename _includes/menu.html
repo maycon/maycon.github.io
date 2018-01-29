@@ -1,7 +1,9 @@
 <ul>
-    {% for page in site.pages %}
-        {% if page.tags contains 'main-menu' %}
-            <li><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
-        {% endif %}
-    {% endfor %}
+	{% for menu in site.data.lang[page.lang].menu %}
+		{% if menu[0] == 'home' %}
+			<li class='menu-icon'><a href="{{ menu[0] | prepend: '/' | prepend: page.lang | prepend: '/' | prepend: site.url }}"><img src="/assets/images/icons/home.png" /></a></li>
+		{% else %}
+			<li><a href="{{ menu[0] | prepend: '/' | prepend: page.lang | prepend: '/' | prepend: site.url }}">{{ menu[1] }}</a></li>
+		{% endif %}
+	{% endfor %}
 </ul>

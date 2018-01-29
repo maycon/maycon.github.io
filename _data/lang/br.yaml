@@ -1,0 +1,28 @@
+description: Português Brasileiro
+
+menu:
+  home: Inicial
+  about: Sobre
+  tools: Ferramentas
+  posts: Publicações
+  contact: Contatos
+
+format:
+  date: \%d/\%m/\%Y
+
+error-404:
+  title: Página não encontrada :(
+  description: A página requisitada não pode ser encontrada ou não está disponível (ainda) no idioma selecionado.
+
+about: Olá! Me chamo Maycon Vitali e utilizo esse site para fornecer informações sobre hacking e segurança da informação. Puxe uma cadeira, pegue um café, tire seu chapéu e boa leitura.
+
+disclaimer:
+  title: Aviso Legal
+  text: Todo e qualquer material e publicações feitas nesse site são de inteira responsabilidade minha e não representam a visão de meu empregador. Porém, como o objetivo desse site é fornecer material puramente educacional, e eu não me responsabilizo pelo mal uso de tais informações.
+
+# general texts
+more-info-and-contacts: Mais informações e contatos
+recent-posts: Publicações Recentes
+categories: Categorias
+tags: Tags
+archive: Histórico
