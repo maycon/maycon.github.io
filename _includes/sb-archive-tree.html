@@ -2,7 +2,8 @@
     <h4>{{ site.data.lang[page.lang].archive }}</h4>
 
 {% assign counter_year = 0 %}
-{% for post in site.posts  %}
+{% assign posts=site.posts | where:"lang", page.lang %}
+{% for post in posts  %}
     {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
     {% capture this_month %}{{ post.date | date: "%B" }}{% endcapture %}
     {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
@@ -49,96 +50,4 @@
         {% endif %}
     {% endif %}
 {% endfor %}
-
-{% comment %}
-
-    <ul>
-    	<li><label for="year2017">► 2017</label>
-    		<input type="checkbox" id="year2017" />
-	    	<ul>
-	    		<li><label for="jun2017">► June</label>
-	    			<input type="checkbox" id="jun2017" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    			</ul>
-	    		</li>
-	    		<li><label for="mar2017">► March</label>
-	    			<input type="checkbox" id="mar2017" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    				<li>► Title 3</li>
-	    			</ul>
-	    		</li>
-	    		<li><label for="jan2017">► January</label>
-	    			<input type="checkbox" id="jan2017" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    				<li>► Title 3</li>
-	    			</ul>
-	    		</li>
-	    	</ul>
-    	</li>
-    	<li><label for="year2016">► 2016</label>
-    		<input type="checkbox" id="year2016" />
-	    	<ul>
-	    		<li><label for="jun2016">► June</label>
-	    			<input type="checkbox" id="jun2016" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    				<li>► Title 3</li>
-	    			</ul>
-	    		</li>
-	    		<li><label for="mar2016">► March</label>
-	    			<input type="checkbox" id="mar2016" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    				<li>► Title 3</li>
-	    			</ul>
-	    		</li>
-	    		<li><label for="jan2016">► January</label>
-	    			<input type="checkbox" id="jan2016" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    				<li>► Title 3</li>
-	    			</ul>
-	    		</li>
-	    	</ul>
-    	</li>
-    	<li><label for="year2015">► 2015</label>
-    		<input type="checkbox" id="year2015" />
-	    	<ul>
-	    		<li><label for="jun2015">► June</label>
-	    			<input type="checkbox" id="jun2015" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    				<li>► Title 3</li>
-	    			</ul>
-	    		</li>
-	    		<li><label for="mar2015">► March</label>
-	    			<input type="checkbox" id="mar2015" />
-	    			<ul>
-	    				<li>► Title 1</li>
-	    				<li>► Title 2</li>
-	    				<li>► Title 3</li>
-	    			</ul>
-	    		</li>
-	    		<li><label for="jan2015">January</label>
-	    			<input type="checkbox" id="jan2015" />
-	    			<ul>
-	    				<li>Title 1</li>
-	    				<li>Title 2</li>
-	    				<li>Title 3</li>
-	    			</ul>
-	    		</li>
-	    	</ul>
-    	</li>
-    </ul>
-{% endcomment %}
 </div>

@@ -1,7 +1,8 @@
 <div class="sidebar-module">
 	<h4>{{ site.data.lang[page.lang].recent-posts }}</h4>
-	{% for post in site.posts limit:5 %}
-	<li><a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></li>
+	{% assign posts=site.posts | where:"lang", page.lang %}
+	{% for post in posts limit:5 %}
+		<li><a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></li>
 	{% endfor %}
 </div>
 
