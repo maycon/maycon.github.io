@@ -1,0 +1,42 @@
+{% comment %}
+<ul>
+	{% assign posts = site.posts | sort:"date" %}
+	{% for post in posts %}
+		<li>
+			<time datetime="{{ default.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d/%m/%Y" }}</time> &raquo;
+			{% for lang in site.data.lang %}
+				{% assign post_lang = site.posts | where:"ref", post.ref | where: "lang", lang[0] %}
+				{% if post_lang[0] %}
+					<a href="{{ post_lang[0].url }}"><img class="flag" title="{{ site.data.lang[post_lang[0].lang].description }}" src="/assets/images/lang/{{ post_lang[0].lang }}.png" /></a>
+				{% else %}
+					<a href="/404-{{ lang[0] }}.html?ref={{ page.url }}" class="{{ lang[0] }}"><img title="{{ lang[1].description }}" src="/assets/images/lang/{{ lang[0] }}.png" class="flag desaturate" /></a>
+				{% endif %}
+			{% endfor %}
+			&raquo; {{ post.title }}
+		</li>
+	{% endfor %}
+</ul>
+{% endcomment %}
+
+<ul>
+	{% assign posts = site.posts | where:"lang", page.lang %}
+	{% for default in posts %}
+		<li>
+			<time datetime="{{ default.date | date:"%Y-%m-%d" }}">{{ default.date | date:"%d/%m/%Y" }}</time> &raquo;
+			<a href="{{ default.url }}">{{ default.title }}</a>
+			{% assign translations = site.posts | where:"ref", default.ref %}
+			{% for translation in translations %}
+				{% if translation.lang != page.lang %}
+					<a href="{{ translation.url }}">
+						<img class="flag" title="{{ site.data.lang[translation.lang].description }}" src="/assets/images/lang/{{ translation.lang }}.png" />
+					</a>
+				{% endif %}
+			{% endfor %}
+		</li>
+	{% endfor %}
+</ul>
+
+
+<!--
+<asciinema-player src="/assets/cast/DSL-100HN-T1-NV-boot.json" preload="1" poster="npt:0:13" theme="asciinema"></asciinema-player>
+-->

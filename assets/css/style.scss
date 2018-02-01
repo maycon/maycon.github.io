@@ -148,6 +148,10 @@ footer { clear:both; text-align: center; font-size: 14px; }
     vertical-align: bottom;
 }
 
+img.desaturate {
+    filter: grayscale(100%);
+}
+
 /* ---------- Sidebar Archive Tree ---------- */
 
 .sb-archive-tree li input {

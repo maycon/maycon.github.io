@@ -1,3 +1,4 @@
+<h2>{{ site.data.lang[page.lang].posts-lang-title }} <img src="/assets/images/lang/{{ page.lang }}.png"/></h2>
 {% assign posts=site.posts | where:"lang", page.lang %}
 {% for post in posts %}
 	<header class="post-header">
