@@ -1,23 +1,39 @@
-{% comment %}
-<ul>
-	{% assign posts = site.posts | sort:"date" %}
+<ul class="post-list">
+	{% assign posts = site.posts %}
 	{% for post in posts %}
-		<li>
-			<time datetime="{{ default.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d/%m/%Y" }}</time> &raquo;
-			{% for lang in site.data.lang %}
-				{% assign post_lang = site.posts | where:"ref", post.ref | where: "lang", lang[0] %}
+		{% assign first_posts = true %}
+		{% assign old_posts = site.posts | where:"ref", post.ref %}
+		{% for old_post in old_posts %}
+			{% capture post_date %}{{ post.date | date: '%s' }}{% endcapture %}
+			{% capture old_post_date %}{{ old_post.date | date: '%s' }}{% endcapture %}
+			{% if post.lang != old_post.lang and old_post_date < post_date  %}
+				{% assign first_posts = false %}
+			{% endif %}
+		{% endfor %}
+
+		{% if first_posts == true %}
+			<li>
+				<time datetime="{{ default.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d/%m/%Y" }}</time> &raquo;
+				{% for lang in site.data.lang %}
+					{% assign post_lang = site.posts | where:"ref", post.ref | where: "lang", lang[0] %}
+					{% if post_lang[0] %}
+						<a href="{{ post_lang[0].url }}"><img class="flag" title="{{ site.data.lang[post_lang[0].lang].description }}" src="/assets/images/lang/{{ post_lang[0].lang }}.png" /></a>
+					{% else %}
+						<a href="/404-{{ lang[0] }}.html?ref={{ page.url }}" class="{{ lang[0] }}"><img title="{{ lang[1].description }}" src="/assets/images/lang/{{ lang[0] }}.png" class="flag desaturate" /></a>
+					{% endif %}
+				{% endfor %}
+				&raquo;
+				{% assign post_lang = site.posts | where:"ref", post.ref | where: "lang", page.lang %}
 				{% if post_lang[0] %}
-					<a href="{{ post_lang[0].url }}"><img class="flag" title="{{ site.data.lang[post_lang[0].lang].description }}" src="/assets/images/lang/{{ post_lang[0].lang }}.png" /></a>
+					<a href="{{ post_lang[0].url }}">{{ post_lang[0].title }}</a>
 				{% else %}
-					<a href="/404-{{ lang[0] }}.html?ref={{ page.url }}" class="{{ lang[0] }}"><img title="{{ lang[1].description }}" src="/assets/images/lang/{{ lang[0] }}.png" class="flag desaturate" /></a>
+					<strike>{{ post.title }}</strike>
 				{% endif %}
-			{% endfor %}
-			&raquo; {{ post.title }}
-		</li>
+			</li>
+		{% endif %}
 	{% endfor %}
 </ul>
-{% endcomment %}
-
+{% comment %}
 <ul>
 	{% assign posts = site.posts | where:"lang", page.lang %}
 	{% for default in posts %}
@@ -36,7 +52,8 @@
 	{% endfor %}
 </ul>
 
-
 <!--
 <asciinema-player src="/assets/cast/DSL-100HN-T1-NV-boot.json" preload="1" poster="npt:0:13" theme="asciinema"></asciinema-player>
 -->
+
+{% endcomment %}
