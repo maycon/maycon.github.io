@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "IoT Hacking: Extração de Firmware usando SPI"
+title:  "Embedded Hacking: Extração de Firmware usando SPI"
 date:   2018-01-26 00:00:00 +0000
 categories: embedded-hacking
 tags: embedded-devices hacking-embedded IoT-hacking
