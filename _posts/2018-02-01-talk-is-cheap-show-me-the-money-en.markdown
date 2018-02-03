@@ -8,7 +8,7 @@ lang: en
 ref: talk-is-cheap
 ---
 
-The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future. 
+The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future.
 
 ### What is a Bug Bounty Program?
 
