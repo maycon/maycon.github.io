@@ -8,7 +8,7 @@ menu:
   contact: Contact
 
 format:
-  date: \%Y/\%m/\%d
+  date: "%m-%d-%Y"
 
 error-404:
   title: Page not found :(
