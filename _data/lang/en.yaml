@@ -14,11 +14,11 @@ error-404:
   title: Page not found :(
   description: The requested page could not be found or it's not available in the selected language (for while).
 
-about: Hi! My name is Maycon Vitali and I have using this personal site to provide infromation about hacking and general security information. Pull up a chair, take of your hat and enjoy the reading.
+about: Hi! My name is Maycon Vitali and I have using this personal site to provide information about hacking and general security information. Pull up a chair, take off your hat and enjoy the reading.
 
 disclaimer:
   title: Disclaimer
-  text: All and every material and posts in this site represent my own opinion and not those of my employer. All the content of this site should be used purelly for educational purposes only. You are solely and personally responsible for your choices, actions and results obtained through this site content, now and in the future. 
+  text: All and every material and posts on this site represent my own opinion and not those of my employer. All the content of this site should be used purely for educational purposes only. You are solely and personally responsible for your choices, actions, and results obtained through this site content, now and in the future. 
 
 # general texts
 more-info-and-contacts: More information and contacts
