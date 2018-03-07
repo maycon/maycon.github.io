@@ -11,7 +11,7 @@
 .container {
 	display: flex;
 	width: 90%;
-	max-width: 1024px;
+	max-width: 1280px;
 	flex-wrap: wrap;
 	align-content: center;
 }
@@ -21,7 +21,7 @@ header .container {
 }
 
 #main_content {
-	max-width: 680px; 
+	max-width: 920px; 
     padding: 10px;
     border: 1px dashed #b5e853;
     background: #000;
@@ -87,7 +87,7 @@ footer { clear:both; text-align: center; font-size: 14px; }
 /* ---- Side bar ---- */
 
 #sidebar {
-	width: 280px;
+	width: 320px;
 	float: right;
 	padding-left: 15px;
 }
