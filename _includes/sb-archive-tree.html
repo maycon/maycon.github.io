@@ -22,13 +22,13 @@
 			<li><label for="year{{this_year}}">► {{this_year}}</label>
 				<input type="checkbox" id="year{{this_year}}" checked/>
 				<ul>
-					<li><label for="{{ this_month }}{{this_year}}">► {{ this_month }}</label>
+					<li><label for="{{ this_month }}{{this_year}}">► {{ site.data.lang[page.lang].months[this_month] }}</label>
 						<input type="checkbox" id="{{ this_month }}{{this_year}}" checked />
 						<ul>
 	{% elsif this_month != last_month %}
 					</ul>
 				</li>
-				<li><label for="{{ this_month }}{{ this_year }}">► {{ this_month }}</label>
+				<li><label for="{{ this_month }}{{ this_year }}">► {{ site.data.lang[page.lang].months[this_month] }}</label>
 					<input type="checkbox" id="{{ this_month }}{{ this_year }}" />
 					<ul>
 	{% endif %}
