@@ -85,7 +85,7 @@ Tendo tudo verificado e conectado, agora basta acessar a interface fornecida pel
 Após conectar o screen na interface serial e ligar o dispositivo, caso tudo esteja corretamente configurado, será possível visualizar o processo de boot desde o kernel até a shell Linux. Abaixo é possível visualizar o resultado do boot do _MitraStar DSL-100HN-T1-NV_ através da interface serial:
 
 
-<asciinema-player src="/assets/cast/DSL-100HN-T1-NV-boot.json" preload="true" rows="25" cols="80" poster="npt:0:11"></asciinema-player>
+<asciinema-player src="/assets/cast/DSL-100HN-T1-NV-boot.json" preload="true" rows="25" cols="100" poster="npt:0:11"></asciinema-player>
 
 Só a mensagem de boot acima fornece diversas informações úteis para análise futuras (inclusive um _Segmentation Fault_). Alguns dispositivos já fornecem diretamente uma shell root, outros permitem login utilizando as mesmas credenciais da interface web, alguns possuem senhas hardcoded que podem ser obtidas através da [extração do firmware]({% post_url 2018-01-26-iot-hacking-extracao-de-firmware-usando-spi %}) etc; cada caso é um caso. Mas, como de praxe, isso ficará para postagens futuras.
 
