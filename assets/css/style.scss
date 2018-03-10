@@ -23,13 +23,14 @@ header .container {
 #main_content {
 	max-width: 920px; 
     padding: 10px;
-    border: 1px dashed #b5e853;
-    background: #000;
+    /*border: 1px dashed #b5e853;
+    background: #000;*/
     color: #C0C0C0;
 
 }
 
 .post-header {
+    background: none;
     color: #b5e853;
     font-size: 12px;
     border: none;
