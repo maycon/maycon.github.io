@@ -2,7 +2,6 @@
 layout: page
 title: Contact
 permalink: /en/contact/
-tags: main-menu
 lang: en
 ref: page-contact
 ---

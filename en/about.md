@@ -2,7 +2,6 @@
 layout: page
 title: About
 permalink: /en/about/
-tags: main-menu
 lang: en
 ref: page-about
 ---

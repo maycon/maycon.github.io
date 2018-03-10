@@ -2,7 +2,6 @@
 layout: page
 title: Sobre
 permalink: /br/about/
-tags: main-menu
 lang: br
 ref: page-about
 ---

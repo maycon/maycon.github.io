@@ -2,7 +2,6 @@
 layout: page
 title: Contato
 permalink: /br/contact/
-tags: main-menu
 lang: br
 ref: page-contact
 ---
