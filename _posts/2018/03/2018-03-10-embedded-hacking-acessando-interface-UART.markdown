@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Embedded Hacking: Acessando a interface UART/Serial"
-date:   2018-03-07
+date:   2018-03-10
 categories: embedded-hacking
 tags: embedded-devices hacking-embedded IoT-hacking uart serial
 lang: br
