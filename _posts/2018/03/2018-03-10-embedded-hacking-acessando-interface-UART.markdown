@@ -9,7 +9,7 @@ ref: embedded-hacking-interface-uart
 has-asciinema: true
 ---
 
-Na última publicação foi falado sobre uma forma de se iniciar o processo de análise dinâmica de alguns binários utilizando o qemu. A principal vantagem dessa técnica é a possibilidade de conseguir dinamicamente analisar alguns binários sem a necessidade de possuir o hardware em mãos. Porém, tendo o hardware me mãos, muitas vezes é possível identificar uma interface serial no dispositivo, que resulta praticamente no acesso a um console do dispositivo. Nessa publicação será explicado como podemos identificar e acessar essa interface serial presente em praticamente todos os dispositivos embarcados.
+Na última publicação foi falado sobre uma forma de se iniciar o processo de análise dinâmica de alguns binários utilizando o qemu. A principal vantagem dessa técnica é a possibilidade de conseguir dinamicamente analisar alguns binários sem a necessidade de possuir o hardware em mãos. Porém, tendo o hardware em mãos, muitas vezes é possível identificar uma interface serial no dispositivo, que resulta praticamente no acesso a um console do dispositivo. Nessa publicação será explicado como podemos identificar e acessar essa interface serial presente em praticamente todos os dispositivos embarcados.
 
 ### A interface UART
 
