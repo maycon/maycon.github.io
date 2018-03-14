@@ -3,9 +3,9 @@ description: Português Brasileiro
 menu:
   home: Inicial
   about: Sobre
-  tools: Ferramentas
+#  tools: Ferramentas
   posts: Publicações
-  contact: Contatos
+#  contact: Contatos
 
 format:
   date: "%d/%m/%Y"

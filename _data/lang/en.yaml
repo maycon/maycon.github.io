@@ -3,9 +3,9 @@ description: English
 menu:
   home: Home
   about: About
-  tools: Tools
+#  tools: Tools
   posts: Posts
-  contact: Contact
+#  contact: Contact
 
 format:
   date: "%m-%d-%Y"
