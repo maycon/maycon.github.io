@@ -9,11 +9,11 @@ ref: embedded-hacking-emulando-binarios
 has-asciinema: true
 ---
 
-Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o *DSL-100HN-T1-NV*, [extraído diretamente da memória flash]({% post_url 2018-01-26-iot-hacking-extracao-de-firmware-usando-spi %}) do aparelho.
+Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o *DSL-100HN-T1-NV*, [extraído diretamente da memória flash]({{ site.baseurl }}{% link _posts/2018/01/2018-01-26-iot-hacking-extracao-de-firmware-usando-spi.markdown %}) do aparelho.
 
 ## O dump do Firmware
 
-Na [postagem anterior]({% post_url 2018-01-26-iot-hacking-extracao-de-firmware-usando-spi %}) dessa série foi explicado quais elementos podem ser encontrados no firmware de um dispositivo embarcado. No firmware que extraímos, é possível identificar e extrair todas esses elementos separadamente e, então, analisá-los. Para isso vamos utilizar uma ferramente já bem conhecido pelo pessoal que faz engenharia reversa de firmware e perícia forense, o [binwalk](https://github.com/ReFirmLabs/binwalk).
+Na [postagem anterior]({{ site.baseurl }}{% link _posts/2018/01/2018-01-26-iot-hacking-extracao-de-firmware-usando-spi.markdown %}) dessa série foi explicado quais elementos podem ser encontrados no firmware de um dispositivo embarcado. No firmware que extraímos, é possível identificar e extrair todas esses elementos separadamente e, então, analisá-los. Para isso vamos utilizar uma ferramente já bem conhecido pelo pessoal que faz engenharia reversa de firmware e perícia forense, o [binwalk](https://github.com/ReFirmLabs/binwalk).
 
 ## Introdução ao Binwalk
 

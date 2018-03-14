@@ -86,7 +86,7 @@ Após conectar o screen na interface serial e ligar o dispositivo, caso tudo est
 
 <asciinema-player src="/assets/cast/DSL-100HN-T1-NV-boot.json" preload="true" rows="25" cols="100" poster="npt:0:11"></asciinema-player>
 
-Só a mensagem de boot acima fornece diversas informações úteis para análise futuras (inclusive um _Segmentation Fault_). Alguns dispositivos já fornecem diretamente uma shell root, outros permitem login utilizando as mesmas credenciais da interface web, alguns possuem senhas hardcoded que podem ser obtidas através da [extração do firmware]({% post_url 2018-01-26-iot-hacking-extracao-de-firmware-usando-spi %}) etc; cada caso é um caso. Mas, como de praxe, isso ficará para postagens futuras.
+Só a mensagem de boot acima fornece diversas informações úteis para análise futuras (inclusive um _Segmentation Fault_). Alguns dispositivos já fornecem diretamente uma shell root, outros permitem login utilizando as mesmas credenciais da interface web, alguns possuem senhas hardcoded que podem ser obtidas através da [extração do firmware]({{ site.baseurl }}{% link _posts/2018/01/2018-01-26-iot-hacking-extracao-de-firmware-usando-spi.markdown %}) etc; cada caso é um caso. Mas, como de praxe, isso ficará para postagens futuras.
 
 ### Conclusão
 

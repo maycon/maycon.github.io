@@ -26,7 +26,8 @@ Esse cara é o startup do dispositivo embarcado. Geralmente ele que é responsá
 
 Existem alguns tipos diferentes de Bootloader para embarcados, e eles possuem funcionalidades que podem danificar seu dispositivo, como a leitura e escrita diretamente na memória flash do aparelho (EEPROM). Porém, os dispositivos embarcados possuem, em sua grande maioria, o [Das U-Boot](https://www.denx.de/wiki/U-Boot), um bootloader open source compatível com mais de uma dezena de arquiteturas. Entretanto, como o U-Boot é open source, é comum encontrar versões limitadas (sem funcionalidades) ou modificada dele sendo executada em alguns dispositivos.
 
-Só para fazer uma referência, em minha [publicação sobre Bug Bounty]({% post_url 2018-01-22-talk-is-cheap-show-me-the-money %}), eu descrevo superficialmente como eu consegui danifica um equipamento após executar alguns comandos no bootloader do aparelho de maneira "despreocupada".
+Só para fazer uma referência, em minha [publicação sobre Bug Bounty]({{ site.baseurl }}{% link _posts/2018/01/2018-01-22-talk-is-cheap-show-me-the-money.markdown %}), eu descrevo superficialmente como eu consegui danifica um equipamento após executar alguns comandos no bootloader do aparelho de maneira "despreocupada".
+
 
 É importante ressaltar que muitas vezes a atualização do firmware não atualiza o bootloader do dispositivo, mas somente seu sistemas de arquivos (descrito logo abaixo).
 
