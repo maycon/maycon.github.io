@@ -50,5 +50,7 @@ google_analytics: [UA-112771650-1]
 #   - vendor/gems/
 #   - vendor/ruby/
 
-gems:
+plugins:
   - jekyll-font-awesome-sass
+
+github: [metadata]
