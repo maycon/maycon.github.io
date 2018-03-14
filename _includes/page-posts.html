@@ -28,7 +28,7 @@
 				{% if post_lang[0] %}
 					<a href="{{ post_lang[0].url }}">{{ post_lang[0].title }}</a>
 				{% else %}
-					<strike>{{ post.title }}</strike>
+					{{ post.title }}
 				{% endif %}
 			</li>
 		{% endif %}
