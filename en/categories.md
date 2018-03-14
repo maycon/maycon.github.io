@@ -6,4 +6,4 @@ lang: en
 ref: site-categories
 ---
 
-{% include page-categories.html %}
+{% include page/categories.html %}

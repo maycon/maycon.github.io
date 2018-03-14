@@ -6,4 +6,4 @@ lang: br
 ref: page-posts
 ---
 
-{% include page-posts.html %}
+{% include page/posts.html %}
