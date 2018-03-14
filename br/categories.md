@@ -6,4 +6,4 @@ lang: br
 ref: site-categories
 ---
 
-{% include page-posts.html %}
+{% include page-categories.html %}
