@@ -28,7 +28,7 @@
 				{% if post_lang[0] %}
 					<a href="{{ post_lang[0].url }}">{{ post_lang[0].title }}</a>
 				{% else %}
-					{{ post.title }}
+					<abbr title="{{ site.data.lang[page.lang].not-available-lang }}">{{ post.title }}</abbr>
 				{% endif %}
 			</li>
 		{% endif %}
