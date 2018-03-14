@@ -51,37 +51,22 @@ header .container {
     color: #b5e853;
 }
 
-.page-content {
-    font-size: 12px;
-}
-
-.post-content {
-    font-size: 14px;
-}
-
 .post-content img {
     width: 80%;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 30px;
     border-radius: 10px;
 }
-/*
-header time {
-    display: block;
-    text-align: right;
-}
-*/
-.post-content pre
-{
-    font-size: 10px;    
-}
+
+
 
 article {
     padding-bottom: 10px;
 }
+
 footer { clear:both; text-align: center; font-size: 14px; }
 
 
@@ -147,6 +132,7 @@ footer { clear:both; text-align: center; font-size: 14px; }
 .flag {
     height: 16px;
     vertical-align: bottom;
+    padding-bottom: 5px;
 }
 
 .post-list .flag {
