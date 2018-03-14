@@ -1,0 +1,63 @@
+<div>
+	{% if site.posts == empty %}
+		No posts
+	{% else %}
+		{% for cat in site.categories %}
+			<a href="#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">{{ cat[0] | join: "/"}}<span class="size"> {{ cat[1].size }}</span></a>
+		{% endfor %}
+		<br/><br/>
+
+		<!--
+		{% for cat in site.categories %}
+			{{ cat[0]}}<br />
+			{% for post in cat[1] %}
+				<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
+				<a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a><br />
+			{% endfor %}
+			<br />
+		{% endfor %}
+		-->
+
+		{% for cat in site.categories %}
+			<h3><a name="{{ cat[0]}}">{{ cat[0]}}</a></h3>
+
+			<ul class="post-list">
+				{% assign posts = cat[1] %}
+				{% for post in posts %}
+
+					{% assign first_posts = true %}
+					{% assign old_posts = site.posts | where:"ref", post.ref %}
+					{% for old_post in old_posts %}
+						{% capture post_date %}{{ post.date | date: '%s' }}{% endcapture %}
+						{% capture old_post_date %}{{ old_post.date | date: '%s' }}{% endcapture %}
+						{% if post.lang != old_post.lang and old_post_date < post_date  %}
+							{% assign first_posts = false %}
+						{% endif %}
+					{% endfor %}
+
+					{% if first_posts == true %}
+						<li>
+							<time datetime="{{ default.date | date:"%Y-%m-%d" }}">{{ post.date | date: site.data.lang[page.lang].format.date }}</time> &raquo;
+							{% for lang in site.data.lang %}
+								{% assign post_lang = site.posts | where:"ref", post.ref | where: "lang", lang[0] %}
+								{% if post_lang[0] %}
+									<a href="{{ post_lang[0].url }}"><img class="flag" title="{{ site.data.lang[post_lang[0].lang].description }}" src="/assets/images/lang/{{ post_lang[0].lang }}.png" /></a>
+								{% else %}
+									<a href="/404-{{ lang[0] }}.html?ref={{ page.url }}" class="{{ lang[0] }}"><img title="{{ lang[1].description }}" src="/assets/images/lang/{{ lang[0] }}.png" class="flag desaturate" /></a>
+								{% endif %}
+							{% endfor %}
+							&raquo;
+							{% assign post_lang = site.posts | where:"ref", post.ref | where: "lang", page.lang %}
+							{% if post_lang[0] %}
+								<a href="{{ post_lang[0].url }}">{{ post_lang[0].title }}</a>
+							{% else %}
+								<strike>{{ post.title }}</strike>
+							{% endif %}
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		{% endfor %}
+
+	{% endif %}
+</div>
