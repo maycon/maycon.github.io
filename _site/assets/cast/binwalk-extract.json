@@ -1,0 +1,858 @@
+{
+  "version": 1,
+  "width": 105,
+  "height": 55,
+  "duration": 20.625257,
+  "command": null,
+  "title": null,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/bash"
+  },
+  "stdout": [
+    [
+      0.005883,
+      "\u001b]0;maycon@DayOfDevil:~\u0007"
+    ],
+    [
+      9.2e-05,
+      "[maycon@DayOfDevil ~]$ "
+    ],
+    [
+      1.17417,
+      "b"
+    ],
+    [
+      0.107304,
+      "i"
+    ],
+    [
+      0.061644,
+      "n"
+    ],
+    [
+      0.060992,
+      "w"
+    ],
+    [
+      0.072334,
+      "a"
+    ],
+    [
+      0.13643,
+      "l"
+    ],
+    [
+      0.240838,
+      "k"
+    ],
+    [
+      0.700524,
+      " "
+    ],
+    [
+      0.273556,
+      "-"
+    ],
+    [
+      0.159907,
+      "e"
+    ],
+    [
+      0.251444,
+      " "
+    ],
+    [
+      0.264883,
+      "f"
+    ],
+    [
+      0.078151,
+      "l"
+    ],
+    [
+      0.084328,
+      "a"
+    ],
+    [
+      0.078437,
+      "s"
+    ],
+    [
+      0.087611,
+      "h"
+    ],
+    [
+      0.252484,
+      "."
+    ],
+    [
+      0.111433,
+      "d"
+    ],
+    [
+      0.161803,
+      "u"
+    ],
+    [
+      0.213001,
+      "m"
+    ],
+    [
+      0.083224,
+      "p"
+    ],
+    [
+      0.339862,
+      "\r\n"
+    ],
+    [
+      0.364138,
+      "\r\nDECIMAL       HEXADECIMAL     DESCRIPTION\r\n--------------------------------------------------------------------------------\r\n"
+    ],
+    [
+      1.093189,
+      "26112         0x6600          LZMA compressed data, properties: 0x5D, dictionary size: 8388608 bytes, uncompressed size: 107920 bytes\r\n"
+    ],
+    [
+      1.101635,
+      "69600         0x10FE0         LZMA compressed data, properties: 0x5D, dictionary size: 8388608 bytes, uncompressed size: 42848 bytes\r\n"
+    ],
+    [
+      1.178328,
+      "197120        0x30200         LZMA compressed data, properties: 0x5D, dictionary size: 8388608 bytes, uncompressed size: 3482360 bytes\r\n"
+    ],
+    [
+      0.32512,
+      "1372293       0x14F085        Squashfs filesystem, little endian, version 4.0, compression:lzma, size: 6471498 bytes, 1385 inodes, blocksize: 131072 bytes, created: 2016-07-15 11:37:07\r\n"
+    ],
+    [
+      1.316948,
+      "8389120       0x800200        LZMA compressed data, properties: 0x5D, dictionary size: 8388608 bytes, uncompressed size: 3482360 bytes\r\n"
+    ],
+    [
+      0.32839,
+      "9564293       0x91F085        Squashfs filesystem, little endian, version 4.0, compression:lzma, size: 6471498 bytes, 1385 inodes, blocksize: 131072 bytes, created: 2016-07-15 11:37:07\r\n"
+    ],
+    [
+      0.084785,
+      "\r\n"
+    ],
+    [
+      0.036033,
+      "\u001b]0;maycon@DayOfDevil:~\u0007[maycon@DayOfDevil ~]$ "
+    ],
+    [
+      0.528465,
+      "c"
+    ],
+    [
+      0.078663,
+      "d"
+    ],
+    [
+      0.125863,
+      " "
+    ],
+    [
+      0.180408,
+      "_"
+    ],
+    [
+      0.125137,
+      "f"
+    ],
+    [
+      0.120749,
+      "l"
+    ],
+    [
+      0.060107,
+      "a"
+    ],
+    [
+      0.102187,
+      "s"
+    ],
+    [
+      0.413078,
+      "h"
+    ],
+    [
+      0.312321,
+      ".dump.extracted/"
+    ],
+    [
+      0.565328,
+      "\r\n"
+    ],
+    [
+      0.000499,
+      "\u001b]0;maycon@DayOfDevil:~/_flash.dump.extracted\u0007"
+    ],
+    [
+      0.000296,
+      "[maycon@DayOfDevil _flash.dump.extracted]$ "
+    ],
+    [
+      0.401039,
+      "l"
+    ],
+    [
+      0.018258,
+      "s"
+    ],
+    [
+      0.116627,
+      " "
+    ],
+    [
+      0.15261,
+      "-"
+    ],
+    [
+      0.174793,
+      "l"
+    ],
+    [
+      0.360869,
+      "\b\u001b[K"
+    ],
+    [
+      0.143586,
+      "\b\u001b[K"
+    ],
+    [
+      0.129236,
+      "\b\u001b[K"
+    ],
+    [
+      0.744576,
+      "\r\n"
+    ],
+    [
+      0.023855,
+      "'['                                          m06_on.jpg\r\n 10FE0                                       m07.jpg\r\n 10FE0.7z                                    m07_on.jpg\r\n 14F085.squashfs                             mac_address_list1.cgi\r\n \u001b[0m\u001b[01;34m2.6.36\u001b[0m                                      mac_address_list2.cgi\r\n 2tierCSS.css                                mac_address_list3.cgi\r\n 2tiers.html                                 mac_address_list_5G.cgi\r\n"
+    ],
+    [
+      8.4e-05,
+      " 2tiers_save.asp                             mac_address_list.cgi\r\n 30200                                       MACAuthentication.asp\r\n 30200.7z                                    MACAuthentication.html\r\n 6600                                        maceui\r\n 6600.7z                                     \u001b[01;34mmacFilter\u001b[0m\r\n 800200                                      mac.js\r\n 800200.7z                                   mailsend\r\n 91F085.squashfs                             main.html\r\n about-power-box.html                        \u001b[01;34mmaintenance\u001b[0m\r\n ac0                                         mConnectionStatus.gif\r\n"
+    ],
+    [
+      8.9e-05,
+      " accept.png                                  mConnectionStatus_on.gif\r\n acl0                                        md5\r\n acl_stop.sh                                 mdev\r\n acptBoth.png                                menu-active.png\r\n acptLocal.png                               menu_a_down.gif\r\n"
+    ],
+    [
+      6.6e-05,
+      " acptRemote.png                              menu_a_left.gif\r\n act_mirred.ko                               menu_a_left_on.gif\r\n addgroup                                    menu_a_right.gif\r\n addrMap_add.html                            menu_a_right_on.gif\r\n"
+    ],
+    [
+      5.7e-05,
+      " addrMapping.asp                             menu_a_up.gif\r\n"
+    ],
+    [
+      8.2e-05,
+      " adduser                                     menu_bg.jpg\r\n adslcmd                                     menu_default.gif\r\n adslstat                                    menu_hover.gif\r\n adv_addrMapping_table.cgi                   menu.json\r\n adv_routing_table.cgi                       menu.png\r\n aim.pat                                     minifw_version\r\n algcmd                                      mirror.html\r\n ansi_cprng.ko                               mkdir\r\n AppFilterStop.sh                            mMaintenance.gif\r\n application6_list.cgi                       mMaintenance_on.gif\r\n application6_mhs_list.cgi                   mNetworkSetting.gif\r\n"
+    ],
+    [
+      9e-05,
+      " arp                                         mNetworkSetting_on.gif\r\n arrow_down.png                              mnt.conf\r\n arrow.gif                                   \u001b[01;34mmodules\u001b[0m\r\n arrow_up.png                                module_sel.ko\r\n ash                                         monitor.html"
+    ],
+    [
+      5.9e-05,
+      "\r\n \u001b[01;34massets\u001b[0m                                      more\r\n ated                                        moreAP.html\r\n atmcmd                                      mount\r\n"
+    ],
+    [
+      5.8e-05,
+      " autofw_notify.asp                           mpstat\r\n autofw_notify_check.asp                     mSecurity.gif\r\n awk                                         mSecurity_on.gif\r\n \u001b[01;34mbackupRestore\u001b[0m                               msnmessenger.pat\r\n"
+    ],
+    [
+      4.6e-05,
+      " backupRestore.html                          mSystemMonitor.gif\r\n basename                                    mSystemMonitor_on.gif\r\n basic.css                                   mt7510sar.ko\r\n before_tr069_download.sh                    mt7603eap.ko\r\n"
+    ],
+    [
+      6.1e-05,
+      " before_web_download_remove_wifi.sh          mt7603eap_led.ko\r\n before_web_download.sh                      mtd\r\n before_web_upgrade.sh                       mtd0\r\n"
+    ],
+    [
+      4.9e-05,
+      " \u001b[01;34mBEL\u001b[0m                                         mtd1\r\n bftpd                                       mtd10\r\n bftpd.conf                                  mtd11\r\n bg.gif                                      mtd12\r\n"
+    ],
+    [
+      4.7e-05,
+      " bg-header-gateway.jpg                       mtd2\r\n bgiframe.htm                                mtd3\r\n bg.jpg                                      mtd4\r\n \u001b[01;34mbin\u001b[0m                                         mtd5\r\n"
+    ],
+    [
+      4.8e-05,
+      " blank.gif                                   mtd6\r\n boa                                         mtd7\r\n boa_argentina.conf                          mtd8\r\n"
+    ],
+    [
+      5.3e-05,
+      " boa_chile.conf                              mtd9\r\n boa.conf                                    mtdblock0\r\n boa_peru.conf                               mtdblock1\r\n \u001b[01;34mboaroot\u001b[0m                                     mtdblock10\r\n"
+    ],
+    [
+      6.1e-05,
+      " boa_user_argentina.conf                     mtdblock11\r\n boa_user_chile.conf                         mtdblock12\r\n boa_user.conf                               mtdblock2\r\n"
+    ],
+    [
+      4.5e-05,
+      " boa_user_sophia_FTTH.conf                   mtdblock3\r\n br2684ctl                                   mtdblock4\r\n \u001b[01;34mBRA\u001b[0m                                         mtdblock5\r\n brasinfo                                    mtdblock6\r\n"
+    ],
+    [
+      4.7e-05,
+      " br_conf.sh                                  mtdblock7\r\n brctl                                       mtdblock8\r\n brick.css                                   mtdblock9\r\n"
+    ],
+    [
+      5.5e-05,
+      " brickRichMenu.js                            mtr0\r\n \u001b[01;34mbridge\u001b[0m                                      Multi_Language_gvt.js\r\n \u001b[01;34mbroadband\u001b[0m                                   Multi_Language.js\r\n"
+    ],
+    [
+      5.4e-05,
+      " broadband.html                              Multi_Language_sophia.js\r\n broadband_list.cgi                          mv\r\n broadband_list_Chile.cgi                    mVoIP.gif\r\n bullet.png                                  mVoIP_on.gif\r\n"
+    ],
+    [
+      5.6e-05,
+      " busybox                                     \u001b[01;34mmycert\u001b[0m\r\n busy.gif                                    \u001b[01;34mnat\u001b[0m\r\n CAdecoder                                   NAT_AddrMapping.html\r\n"
+    ],
+    [
+      4.5e-05,
+      " callrule_CO.json                            NAT_General.asp\r\n cat                                         NAT_General.html\r\n center_bg.gif                               nat.html\r\n"
+    ],
+    [
+      4.4e-05,
+      " \u001b[01;34mcertificates\u001b[0m                                \u001b[01;34mnat_pvc0\u001b[0m\r\n cfg_manager                                 \u001b[01;34mnat_pvc1\u001b[0m\r\n"
+    ],
+    [
+      6.5e-05,
+      " \u001b[01;34mcgi-bin\u001b[0m                                     \u001b[01;34mnat_pvc10\u001b[0m\r\n \u001b[01;34mCHE\u001b[0m                                         \u001b[01;34mnat_pvc10_0\u001b[0m\r\n check_disable.gif                           \u001b[01;34mnat_pvc10_1\u001b[0m\r\n check.gif                                   \u001b[01;34mnat_pvc10_2\u001b[0m\r\n"
+    ],
+    [
+      6.4e-05,
+      " \u001b[01;34mCHL\u001b[0m                                         \u001b[01;34mnat_pvc10_3\u001b[0m\r\n chmod                                       \u001b[01;34mnat_pvc10_4\u001b[0m\r\n \u001b[01;34mCHN\u001b[0m                                         \u001b[01;34mnat_pvc10_5\u001b[0m\r\n"
+    ],
+    [
+      4.9e-05,
+      " classSetup_add.html                         \u001b[01;34mnat_pvc10_6\u001b[0m\r\n classSetup.html                             \u001b[01;34mnat_pvc10_7\u001b[0m\r\n"
+    ],
+    [
+      4.5e-05,
+      " clear_first_access.asp                      \u001b[01;34mnat_pvc2\u001b[0m\r\n cls_fw.ko                                   \u001b[01;34mnat_pvc3\u001b[0m\r\n cmdp.sh                                     \u001b[01;34mnat_pvc4\u001b[0m\r\n"
+    ],
+    [
+      4.7e-05,
+      " cmdsh                                       \u001b[01;34mnat_pvc5\u001b[0m\r\n collapsed.gif                               \u001b[01;34mnat_pvc6\u001b[0m\r\n common.css                                  \u001b[01;34mnat_pvc7\u001b[0m\r\n"
+    ],
+    [
+      5.8e-05,
+      " common.js                                   \u001b[01;34mnat_pvc8\u001b[0m\r\n concurrentWANRemove.sh                      \u001b[01;34mnat_pvc8_0\u001b[0m\r\n concurrentWAN.sh                            \u001b[01;34mnat_pvc8_1\u001b[0m\r\n conexao-wan-icon.png                        \u001b[01;34mnat_pvc8_2\u001b[0m\r\n"
+    ],
+    [
+      4.6e-05,
+      " \u001b[01;34mconfig\u001b[0m                                      \u001b[01;34mnat_pvc8_3\u001b[0m\r\n ConfigFilter                                \u001b[01;34mnat_pvc8_4\u001b[0m\r\n ConfigFilter.cgi                            \u001b[01;34mnat_pvc8_5\u001b[0m\r\n"
+    ],
+    [
+      4.3e-05,
+      " config.json                                 \u001b[01;34mnat_pvc8_6\u001b[0m\r\n config.json.txt                             \u001b[01;34mnat_pvc8_7\u001b[0m\r\n"
+    ],
+    [
+      5.2e-05,
+      " connection_icon_list.cgi                    \u001b[01;34mnat_pvc9\u001b[0m\r\n \u001b[01;34mconnectionStatus\u001b[0m                            nat_start.sh\r\n connectionStatus.cgi                        nat_stop.sh\r\n connectionStatus_p1.asp                     naviView.html\r\n"
+    ],
+    [
+      4.5e-05,
+      " connectionStatus_p1.html                    naviView.json\r\n connectionStatus_p2.html                    naviView_partialLoad.html\r\n"
+    ],
+    [
+      4.4e-05,
+      " connectionStatus_p3.html                    naviView_partialLoad_ok.html\r\n connection_table_list.cgi                   NeedFilter.txt\r\n console                                     \u001b[01;34mnet\u001b[0m\r\n"
+    ],
+    [
+      5.3e-05,
+      " \u001b[01;34mcontent\u001b[0m                                     \u001b[01;34mnetfilter\u001b[0m\r\n control.css                                 \u001b[01;34mnet-snmp\u001b[0m\r\n \u001b[01;34mCountrySetting\u001b[0m                              netstat\r\n cp                                          network\r\n"
+    ],
+    [
+      5.3e-05,
+      " cpu                                         networkMapb.html\r\n crond                                       networkMap.html\r\n \u001b[01;34mcrypto\u001b[0m                                      nice\r\n"
+    ],
+    [
+      4.4e-05,
+      " \u001b[01;34mcss\u001b[0m                                         \u001b[01;34mNLD\u001b[0m\r\n \u001b[01;34m_css\u001b[0m                                        nm_semicircle.gif\r\n css.css                                     noDslLink.html\r\n current.html                                nslookup\r\n"
+    ],
+    [
+      4.3e-05,
+      " current_routing_table.cgi                   ntpclient\r\n current_upnp_table.cgi                      ntpclient.sh\r\n cut                                         null\r\n"
+    ],
+    [
+      5.3e-05,
+      " date                                        officinaserif-bold-webfont.eot\r\n dbclient                                    officinaserif-bold-webfont.svg\r\n"
+    ],
+    [
+      4.6e-05,
+      " dd                                          officinaserif-bold-webfont.ttf\r\n ddns_inadyn.sh                              officinaserif-bold-webfont.woff\r\n ddns_run.sh                                 officinaserif-book-webfont.eot\r\n"
+    ],
+    [
+      4.5e-05,
+      " ddns.sh                                     officinaserif-book-webfont.svg\r\n defaultWan.conf                             officinaserif-book-webfont.ttf\r\n delete.html                                 officinaserif-book-webfont.woff\r\n"
+    ],
+    [
+      4.4e-05,
+      " delete_RuleSum.html                         others.asp\r\n delgroup                                    others.html\r\n deluser                                     \u001b[01;34mP-660HNU-F1\u001b[0m\r\n"
+    ],
+    [
+      5.8e-05,
+      " \u001b[01;34mDEU\u001b[0m                                         \u001b[01;34mpages\u001b[0m\r\n \u001b[01;34mdev\u001b[0m                                         \u001b[01;34mparentalcontrol\u001b[0m\r\n \u001b[01;34mdeviceConfiguration\u001b[0m                         ParentalControladd.html\r\n"
+    ],
+    [
+      4.3e-05,
+      " device-management-account-settings.asp      ParentalControl.html\r\n device-management-account-settings.html     ParentalControl_view.html\r\n"
+    ],
+    [
+      4.4e-05,
+      " device-management-language.asp              passLogout.html\r\n device-management-language.html             passWarning.html\r\n device-management-rebootinfo.html           passwd\r\n"
+    ],
+    [
+      0.000108,
+      " device-management-resets.asp                PCP_ClientListIndex.cgi\r\n device-management-resets.html               PCP_ClientListIndex_view.cgi\r\n"
+    ],
+    [
+      5.9e-05,
+      " device-management-restoreinfo.html          pcplist.cgi\r\n device-management-statistics.cgi            \u001b[01;34mpeers\u001b[0m\r\n device-management-system-logs.asp           percent_bar_1.gif\r\n device-management-system-logs.html          percent_bar.gif\r\n"
+    ],
+    [
+      5e-05,
+      " device-management-utilities-internet.asp    percent_bg_1.gif\r\n device-management-utilities-internet.cgi    pidof\r\n device-management-utilities-internet.html   pidofzombie\r\n"
+    ],
+    [
+      6.8e-05,
+      " devInf.conf                                 ping\r\n dhcp6c                                      ping6\r\n dhcp6c.conf                                 ping.asp\r\n"
+    ],
+    [
+      5.6e-05,
+      " dhcp6c_script                               ping.html\r\n dhcp6s                                      p_login.gif\r\n dhcp6s.conf                                 pmap\r\n dhcp_client_list.cgi                        \u001b[01;34mpopup\u001b[0m\r\n"
+    ],
+    [
+      5e-05,
+      " \u001b[01;34mdhcpd\u001b[0m                                       popup2_center.png\r\n DhcpOptionList.html                         popup2_left.png\r\n dhcp_static_list.cgi                        popup2_right.png\r\n"
+    ],
+    [
+      6.5e-05,
+      " dhcrelay                                    popup_bg.png\r\n DiagGeneral.cgi                             popup.css\r\n"
+    ],
+    [
+      6.8e-05,
+      " dirname                                     popup_i_message.gif\r\n \u001b[01;34mdisagnostic\u001b[0m                                 popup_i_warning.gif\r\n dmesg                                       popup-op-mode.html\r\n dmz.html                                    popup-reboot.html\r\n"
+    ],
+    [
+      5.4e-05,
+      " dmz.sh                                      popup-resets.html\r\n \u001b[01;34mDNK\u001b[0m                                         popup-utilities.html\r\n dnsmasq                                     port4_start.sh\r\n"
+    ],
+    [
+      5.6e-05,
+      " dns_routing_add.html                        port4_stop.sh\r\n dns_routing.asp                             portbindcmd\r\n dns_routing.html                            \u001b[01;34mportbinding\u001b[0m\r\n"
+    ],
+    [
+      5.3e-05,
+      " dns_routing_interface_list.cgi              portbinding_table.cgi\r\n dns_routing_table.cgi                       portDef.js\r\n"
+    ],
+    [
+      6.8e-05,
+      " \u001b[01;34mDNSSEC\u001b[0m                                      PortForward.cgi\r\n DNSSEC_add.html                             portForwarding_add.asp\r\n DNSSEC.asp                                  portForwarding_add.html\r\n"
+    ],
+    [
+      6.3e-05,
+      " DNSSEC.html                                 portForwarding_edit.html\r\n downloadinfo.html                           portForwarding.html\r\n dproxy.conf                                 PortForwardWizard.cgi\r\n dproxy.conf.tmp                             portmap.conf\r\n"
+    ],
+    [
+      5.4e-05,
+      " \u001b[01;34mdrivers\u001b[0m                                     power-box3.png\r\n dropbear                                    power-box.png\r\n DSL-2401HN-T1C.png                          ppp\r\n"
+    ],
+    [
+      5.3e-05,
+      " dslite_start.sh                             ppp_async.ko\r\n dslLine.asp                                 ppp_connect\r\n dslLine.html                                pppd\r\n"
+    ],
+    [
+      5.9e-05,
+      " dummy.file                                  pppoe_connection.html\r\n dying_gasp.ko                               pppoeInfo.cgi\r\n dynamicDNS.html                             PPPoEManulDial.asp\r\n"
+    ],
+    [
+      7.8e-05,
+      " earthnet.gif                                pppoe-relay\r\n earthnet_up_direction.gif                   pppoe_setting.html\r\n"
+    ],
+    [
+      4.3e-05,
+      " ebtable_broute.ko                           pppoe_wireless_save.asp\r\n ebtable_nat.ko                              ppp_start.sh\r\n ebtables                                    pppstat\r\n"
+    ],
+    [
+      6e-05,
+      " ebt_dnat.ko                                 printf\r\n ebt_ftos.ko                                 \u001b[01;34mproc\u001b[0m\r\n ebt_ip6.ko                                  profile.cfg\r\n"
+    ],
+    [
+      4.6e-05,
+      " ebt_mark.ko                                 protocols\r\n ebt_mark_m.ko                               ps\r\n ebt_policer.ko                              ptmx\r\n"
+    ],
+    [
+      4.1e-05,
+      " ebt_snat.ko                                 \u001b[01;34mpts\u001b[0m\r\n ebt_tc.ko                                   ptyp0\r\n ebt_vlan.ko                                 ptyp1\r\n"
+    ],
+    [
+      5.1e-05,
+      " echo                                        ptyp2\r\n edit2.png                                   pvc.js\r\n"
+    ],
+    [
+      4.6e-05,
+      " edit.png                                    pwd\r\n email4log                                   qdma.ko\r\n ematch_map                                  \u001b[01;34mqos\u001b[0m\r\n"
+    ],
+    [
+      4.9e-05,
+      " enableEfuseBufferMode.sh                    qos.asp\r\n end_netper.cgi                              qos_class_list.cgi\r\n env                                         qoscmd\r\n"
+    ],
+    [
+      4.2e-05,
+      " \u001b[01;34mESP\u001b[0m                                         QoS_Monitor.cgi\r\n etc                                         qostype\r\n ethcmd                                      queue_add.asp\r\n"
+    ],
+    [
+      4.7e-05,
+      " ether_mac.sh                                queue_add.html\r\n ethertypes                                  queue_edit.html\r\n \u001b[01;34mETS\u001b[0m                                         queue.html\r\n"
+    ],
+    [
+      4.5e-05,
+      " expanded.gif                                quickstart.asp\r\n expr                                        quickstart.css\r\n"
+    ],
+    [
+      8.2e-05,
+      " ez-ipupdate                                 quickstart.html\r\n false                                       radvd\r\n \u001b[01;34mfancybox\u001b[0m                                    radvd.conf\r\n fancybox_loading.gif                        raeth.ko\r\n"
+    ],
+    [
+      5e-05,
+      " fancybox_sprite.png                         rcS\r\n \u001b[01;34mfilter\u001b[0m                                      reboot\r\n filter_dos_forward_start.sh                 reboot.html\r\n filter_dos_forward_stop.sh                  RebootScript\r\n"
+    ],
+    [
+      5.1e-05,
+      " filter_forward_start.sh                     reject.png\r\n filter_forward_stop.sh                      rejectSym.png\r\n \u001b[01;34mFIN\u001b[0m                                         RemMagDNS.asp\r\n"
+    ],
+    [
+      4.6e-05,
+      " \u001b[01;34mfirewall\u001b[0m                                    RemMagDNS.html\r\n Firewall_RuleSort.cgi                       RemMagFTP.asp\r\n Firewall_ServiceIndex.cgi                   RemMagFTP.html\r\n"
+    ],
+    [
+      4.8e-05,
+      " Firewall_ServiceName.cgi                    RemMagGeneral.asp\r\n Firewall_ServiceSort.cgi                    RemMagGeneral.html\r\n Firewallv6Wizard.asp                        RemMagICMP.html\r\n"
+    ],
+    [
+      4.4e-05,
+      " \u001b[01;34mfirewareUpgrade\u001b[0m                             RemMagMISC.asp\r\n firewareUpgrade.html                        RemMagSNMP.asp\r\n Fireware_UpgradesManaged.html               RemMagSNMP.html\r\n"
+    ],
+    [
+      4.2e-05,
+      " fonte-de-alimentacao-icon.png               RemMagSSH.asp\r\n \u001b[01;34mfonts\u001b[0m                                       RemMagSSH.html\r\n fonts.css                                   RemMagTELNET.asp\r\n"
+    ],
+    [
+      4.3e-05,
+      " \u001b[01;34mFRA\u001b[0m                                         RemMagTELNET.html\r\n free                                        RemMagTFTP.asp\r\n"
+    ],
+    [
+      4.6e-05,
+      " fstab                                       RemMagTFTP.html\r\n ftpget                                      RemMagTR64.asp\r\n ftpput                                      RemMagTR64.html\r\n"
+    ],
+    [
+      6.4e-05,
+      " functions.js                                RemMagWWW.asp\r\n fw_dos_start.sh                             RemMagWWW.html\r\n fw_dos_stop.sh                              \u001b[01;34mremotemgmt\u001b[0m\r\n"
+    ],
+    [
+      3e-05,
+      " fw_high_obm.sh                              remoteMGMT.asp\r\n fw_high.sh                                  remoteMGMT.html\r\n fw_low.sh                                   reset.css\r\n"
+    ],
+    [
+      2.6e-05,
+      " fw_middle.sh                                resolv.conf\r\n fw_start.sh                                 resolv_ipv4.conf\r\n fw_stop.sh                                  resolv_ipv6.conf\r\n"
+    ],
+    [
+      2.7e-05,
+      " fwTCver.conf                                restart_boa.sh\r\n fw_upgrade_sw_watchdog_start.sh             result_netper.cgi\r\n"
+    ],
+    [
+      3.4e-05,
+      " fw_upgrade_sw_watchdog_stop.sh              ripd\r\n fwver.conf                                  rjctBoth.png\r\n gateconnSCPD.xml                            rjctLocal.png\r\n"
+    ],
+    [
+      2.9e-05,
+      " gatedesc.xml                                rjctRemote.png\r\n gateicfgSCPD.xml                            rm\r\n gateinfoSCPD.xml                            rmdir\r\n"
+    ],
+    [
+      2.6e-05,
+      " \u001b[01;34mgateway_sophia\u001b[0m                              rmmod\r\n gateway_sophia.css                          romfile.cfg\r\n \u001b[01;34mGBR\u001b[0m                                         route\r\n"
+    ],
+    [
+      2.7e-05,
+      " general_ext.html                            \u001b[01;34mrouting\u001b[0m\r\n general.html                                rpRManage.asp\r\n"
+    ],
+    [
+      2.6e-05,
+      " general.js                                  rpWLANRedirect.asp\r\n General.js                                  \u001b[01;34mRT2860AP\u001b[0m\r\n getnow.sh                                   rt2860apd\r\n"
+    ],
+    [
+      3.4e-05,
+      " getty                                       RT2860AP.dat\r\n GetVDInfo.html                              RT30xxEEPROM.bin\r\n"
+    ],
+    [
+      2.7e-05,
+      " gpio                                        rt_dsfield\r\n grep                                        rtp.pat\r\n group                                       rt_protos\r\n \u001b[01;34mgroups\u001b[0m                                      rt_realms\r\n"
+    ],
+    [
+      2.8e-05,
+      " guiDebug.sh                                 rt_scopes\r\n gvt_info.html                               rtsp.pat\r\n"
+    ],
+    [
+      2.9e-05,
+      " gvt_info_lan1.cgi                           rt_tables\r\n gvt_info_lan2.cgi                           run-parts\r\n gvt_info_lan3.cgi                           s0.gif\r\n"
+    ],
+    [
+      3.1e-05,
+      " gvt_info_lan4.cgi                           s1.gif\r\n gvt_info_lan.cgi                            s2.gif\r\n gvt_info_tv.cgi                             s3.gif\r\n"
+    ],
+    [
+      2.9e-05,
+      " gvt_info_tv_client.cgi                      s4.gif\r\n gvt_info_wifi.cgi                           s5.gif\r\n GVT_portForwarding_rule.cgi                 \u001b[01;34msamba\u001b[0m\r\n"
+    ],
+    [
+      2.9e-05,
+      " gvt_viewsyslog.cgi                          samba_add_dir.sh\r\n gzip                                        samba.sh\r\n head                                        \u001b[01;34msbin\u001b[0m\r\n"
+    ],
+    [
+      3.1e-05,
+      " hgu.jpg                                     scanchannel_result.html\r\n \u001b[01;34mhomeNetworking\u001b[0m                              \u001b[01;34msched\u001b[0m\r\n hostname                                    scheduledelete.html\r\n"
+    ],
+    [
+      3e-05,
+      " hosts                                       schedulelist.cgi\r\n hpna-icon.png                               scheduling.asp\r\n \u001b[01;34mhtml\u001b[0m                                        scheduling.html\r\n"
+    ],
+    [
+      2.6e-05,
+      " \u001b[01;34mhtml_sophia\u001b[0m                                 sch_htb.ko\r\n httpsCA_list.cgi                            sch_prio.ko\r\n \u001b[01;34mHUN\u001b[0m                                         scp\r\n"
+    ],
+    [
+      2.9e-05,
+      " hw_nat                                      \u001b[01;34mscript\u001b[0m\r\n hwnat0                                      sda\r\n hw_nat.ko                                   sda1\r\n"
+    ],
+    [
+      3e-05,
+      " i_2tiers.gif                                sda2\r\n i_accept_off.gif                            sdb\r\n"
+    ],
+    [
+      2.7e-05,
+      " i_accept_on.gif                             sdb1\r\n i_active_off.gif                            sdb2\r\n i_active_on.gif                             secondkey.cgi\r\n"
+    ],
+    [
+      3e-05,
+      " i_block_off.gif                             \u001b[01;34msecurity\u001b[0m\r\n i_block_on.gif                              sed\r\n i_button.gif                                selfDiagnostic_config.html\r\n"
+    ],
+    [
+      3.2e-05,
+      " i_button_on.gif                             selfDiagnostic.html\r\n i_caution.gif                               services\r\n i_close.gif                                 sessionkey.cgi\r\n icon-ball-green.png                         seta-hover.png\r\n"
+    ],
+    [
+      3e-05,
+      " icon-ball-red.png                           seta.png\r\n iconDefine.css                              settime.sh\r\n"
+    ],
+    [
+      2.9e-05,
+      " icon-dsl2.png                               settings-firewall.asp\r\n icon-dsl.png                                settings-games-action.asp\r\n icon-fiber2.png                             settings-games.cgi\r\n"
+    ],
+    [
+      2.7e-05,
+      " icon-fiber.png                              settings-games.html\r\n icon-internet.png                           settings-internet.asp\r\n icon-local.png                              settings-internet.html\r\n"
+    ],
+    [
+      2.7e-05,
+      " icon-phone.png                              settings-local-network.asp\r\n icon_refresh.png                            settings-local-network-ddns.asp\r\n"
+    ],
+    [
+      3e-05,
+      " icon-set-top.png                            settings-local-network-dhcp.asp\r\n icon-wi-fi.png                              settings-local-network-dhcp.cgi\r\n i_delete.gif                                settings-local-network-dmz.asp\r\n"
+    ],
+    [
+      2.8e-05,
+      " i_delete_on.gif                             settings-local-network.html\r\n i_downarrow.gif                             settings-op-mode.asp\r\n"
+    ],
+    [
+      2.9e-05,
+      " i_draw_center.gif                           settings-wan-mode.html\r\n i_draw_icon.gif                             settings-wireless-network-5g_advanced.asp\r\n i_dsl.gif                                   settings-wireless-network-5g_basic.asp\r\n"
+    ],
+    [
+      0.000272,
+      " i_dsl_up_direction.gif                      settings-wireless-network-5g.html\r\n i_duplicate.gif                             settings-wireless-network_advanced.asp\r\n"
+    ],
+    [
+      0.000126,
+      " i_duplicate_on.gif                          settings-wireless-network_basic.asp\r\n i_edit.gif                                  settings-wireless-network.html\r\n i_edit_on.gif                               sftp\r\n i_error.gif                                 sftp-server\r\n ifconfig                                    sh\r\n i_firewall.gif                              \u001b[01;34mshaper\u001b[0m\r\n iframe.jquery.js                            shells\r\n \u001b[01;34migd\u001b[0m                                         \u001b[01;34mshm\u001b[0m\r\n igd.sh                                      simple_result_netper.cgi\r\n igmp                                        SingleSKU_CE.dat\r\n igmpproxy                                   SingleSKU_DSL-100HN-T1v4_Brazil.dat\r\n igmpsnoop.ko                                SingleSKU_FCC.dat\r\n i_godown.gif                                SIP_ALG.html\r\n i_green_line2-1.gif                         sleep\r\n i_green_line2.gif                           smuxctl\r\n i_green_line.gif                            \u001b[01;34msnmp\u001b[0m\r\n i_inte"
+    ],
+    [
+      5.5e-05,
+      "rnet.gif                              snmpd\r\n i_language.gif                              snmpd.conf\r\n i_left_arrow.gif                            snmpd.conf.tmp\r\n i_left_bn.gif                               snmp.html\r\n i_listview.gif                              sobre-power-box-adsl.jpg\r\n i_listview_on.gif                           sobre-power-box.jpg\r\n i_locked.gif                                sophia_header.html\r\n i_logout.gif                                sophia_header_new.asp\r\n \u001b[01;34mimages\u001b[0m                                      sophia_header_new.html\r\n \u001b[01;34m_images\u001b[0m                                     sophia_index.asp\r\n i_mapview.gif                               sophia_index.html\r\n i_mapview_on.gif                            sophia_info_dsl.cgi\r\n i_menu_bottom.gif                           sophia_info_wifi5g.cgi\r\n i_menu_center.gif                           sophia_login.asp\r\n i_menu_center_on.gif                        sophia_login.html\r\n i_menu_top.gif                              sophia_l"
+    ],
+    [
+      8.6e-05,
+      "ogout.asp\r\n i_move.gif                                  sophia_main.asp\r\n i_move_on.gif                               sophia_main.html\r\n inadyn                                      sophia_menu.html\r\n index.asp                                   sophia_side.html\r\n index.html                                  sophia_wifi5g_SelectIndex.cgi\r\n info.cgi                                    spi_fw_start.sh\r\n init                                        spi_fw_stop.sh\r\n \u001b[01;34minit.d\u001b[0m                                      \u001b[01;34msquashfs-root\u001b[0m\r\n inittab                                     \u001b[01;34msquashfs-root-0\u001b[0m\r\n inittab_no_ra_menu                          ssh\r\n inittab_ra_menu                             sshCA_list.cgi\r\n"
+    ],
+    [
+      4.4e-05,
+      " i_note.gif                                  static_add.html\r\n insmod                                      static.asp\r\n internet-icon.png                           staticDHCP_add.html\r\n ip                                          staticDHCP.asp\r\n ip6tables                                   staticDHCP.html\r\n ipaddr_mapping.sh                           static.html\r\n"
+    ],
+    [
+      4.9e-05,
+      " ipalias.asp                                 status.html\r\n ipalias.html                                statusview.cgi\r\n i_parental.gif                              stop_netper.cgi\r\n i_pc.gif                                    StopWps.cgi\r\n"
+    ],
+    [
+      0.004905,
+      " ipcs                                        strace\r\n ip_down_0.cgi                               submenu_bottom.gif\r\n ip_down_1.cgi                               submenu_center.gif\r\n ip_down_2.cgi                               submenu_hover.gif\r\n ip_down_3.cgi                               submenu_top.gif\r\n ip_down_4.cgi                               \u001b[01;34mSWE\u001b[0m\r\n ip_down_5.cgi                               sys\r\n ip_down_6.cgi                               sysBackupCfg.sh\r\n ip_down_7.cgi                               syscmd\r\n"
+    ],
+    [
+      6.1e-05,
+      " i_percentage_blue.gif                       \u001b[01;34msysconfig\u001b[0m\r\n i_percentage_center.gif                     sysctl\r\n ipfilter.sh                                 sysdiagd\r\n ipfilter_start.sh                           syslogd\r\n ipfilter_stop.sh                            syslogd.sh\r\n i_pin.gif                                   sysSWUpdate.sh\r\n ip.js                                       \u001b[01;34msystem\u001b[0m\r\n IP_MAC_Filter.html                          system.html\r\n ipMacFilterList.cgi                         \u001b[01;34msystemMonitoring\u001b[0m\r\n ipmacfilter_stop.sh                         sysUpdateCfg.sh\r\n ip_new.js                                   \u001b[01;34mtabFW\u001b[0m\r\n \u001b[01;34miproute2\u001b[0m                                    tabFW.html\r\n iptables                                    tab.gif\r\n ipt_REDIRECT.ko                             tab.json\r\n iptvLoginAuth.asp                           table_top.gif\r\n ip_up_0.cgi                                 tabs.css\r\n ip_up_1.cgi                                 tail\r\n ip_up_2"
+    ],
+    [
+      3.2e-05,
+      ".cgi                                 tar\r\n ip_up_3.cgi                                 t_asc.gif\r\n ip_up_4.cgi                                 taskset\r\n ip_up_5.cgi                                 t_bg.gif\r\n ip_up_6.cgi                                 tc\r\n ip_up_7.cgi                                 tc3162_dmt.ko\r\n \u001b[01;34mipv4\u001b[0m                                        tcapi\r\n ipv6adv_routing_table.cgi                   tcci\r\n IPv6_Dos_stop.sh                            tccicmd.ko\r\n IPv6_Firewall_start.sh                      tce\r\n IPv6_Firewall_stop.sh                       tcledctrl.ko\r\n ipv6Lan_PDList.cgi                          tcportbind.ko\r\n ipv6LanSetup.asp                            tcsmux.ko\r\n ipv6LanSetup.html                           tcvlantag.ko\r\n IPv6_MAC_Filter.html                        tcwdog\r\n ipv6MacFilterList.cgi                       t_desc.gif\r\n ipv6macfilter_stop.sh                       telefone-icon.png\r\n ipv6static_add.html                         TELFirewall_DoS_Adv.html\r\n ipv6st"
+    ],
+    [
+      3.8e-05,
+      "atic.asp                              TELFirewall_DoS.asp\r\n ipv6static.html                             TELFirewall_DoS.html\r\n ipv6-up                                     TELFirewall_FrwlEdit.html\r\n i_right_arrow.gif                           TELFirewall_FrwlSort.cgi\r\n i_right_bn.gif                              TELFirewall_general.asp\r\n i_router.gif                                TELFirewall_general.html\r\n i_s_bar_1.gif                               TELFirewall_InterfaceIndex.cgi\r\n i_s_bar_3.gif                               TELFirewall_IntfDirIndex.cgi\r\n i_s_bar_5.gif                               TELFirewall_RuleEdit.html\r\n i_s_bar_left.gif                            TELFirewall_RuleSIndex.cgi\r\n i_s_bar_right.gif                           TELFirewall_RuleSort.cgi\r\n i_s_bar_triangle1.gif                       TELFirewall_RuleSum.asp\r\n i_s_bar_triangle.gif                        TELFirewall_RuleSum_frame.html\r\n i_select_arrow.gif                          TELFirewall_RuleSum.html\r\n i_signal_0.gif             "
+    ],
+    [
+      1.8e-05,
+      "                 TELFirewall_RuleTable.cgi\r\n i_signal_1.gif                              TELFirewall_RuleTableWizard.cgi\r\n i_signal_2.gif                              TELFirewall_ServiceIndex.cgi\r\n i_signal_3.gif                              TELFirewall_Table.cgi\r\n i_sim_card.gif                              test\r\n i_s_pc.gif                                  tftp\r\n i_s_pc_on.gif                               tftpd\r\n i_s_router.gif                              thirdkey.cgi\r\n \u001b[01;34mITA\u001b[0m                                         Thumbs.db\r\n i_title2.gif                                \u001b[01;34mtime\u001b[0m\r\n i_ton.gif                                   time.html\r\n i_ton_on.gif                                TimeZone.js\r\n i_vd2.gif                                   \u001b[01;34mtmp\u001b[0m\r\n i_vd.gif                                    toneSetting.txt\r\n i_voip.png                                  tools.scrollable-1.1.0.min.js\r\n i_wifi.gif                                  top\r\n i_wifi_on.gif                               top_bg"
+    ],
+    [
+      2e-05,
+      ".gif\r\n i_wifi.png                                  top_style_bg.jpg\r\n i_wizard.gif                                touch\r\n iwpriv                                      tr069\r\n i_wps_bottom.jpg                            tr069Client.html\r\n i_wps_top.jpg                               TR181FirewallRule.cgi\r\n \u001b[01;34mJPN\u001b[0m                                         tr69\r\n jquery-1.3.2.min.js                         tr69cfg.html\r\n jquery-1.5.min.js                           traceroute\r\n jquery.bgiframe.pack.js                     traceroute6\r\n jquery.clickmenu.pack.js                    traffic_nat.cgi\r\n jquery.coda-slider-3.0.min.js               \u001b[01;34mtrafficStatus\u001b[0m\r\n jquery.cookie.js                            trash.png\r\n jquery.easing.1.3.js                        true\r\n jquery.fancybox.css                         trust_anchor_table.cgi\r\n jquery.fancybox.pack.js                     trustedCA_add.html\r\n jquery.getParams.js                         trustedCA_detail.cgi\r\n jquery.layout.js                        "
+    ],
+    [
+      2.5e-05,
+      "    trustedCA.html\r\n jquery.mousewheel.js                        trustedCA_list.cgi\r\n jquery.pngFix.pack.js                       trustedCA_view.html\r\n jquery.sessionTimeout.js                    tty\r\n jquery.simplemodal-1.3.min.js               tty0\r\n jquery.tablesorter.min.js                   ttyp0\r\n jquery.text-overflow.js                     ttyp1\r\n jquery.tools.min_tab.js                     ttyp2\r\n jquery.tooltip.min.js                       ttyS0\r\n jquery-ui-1.7.2.custom.min.js               tun6to4restart.sh\r\n jquery-ui-1.8.20.custom.min.js              tun6to4stop.sh\r\n jquery-ui.css                               tv-icon.png\r\n jquery-ui.js                                udhcpc\r\n jquery-ui-slider.min.js                     udhcpc_nodef.sh\r\n jquery.validate.pack.js                     udhcpc.sh\r\n jquery.zyCheckTree.css                      udhcpd\r\n jquery.zyCheckTree.js                       udhcpipq\r\n \u001b[01;34mjs\u001b[0m                                          \u001b[01;34mui\u001b[0m\r\n \u001b[01;34m_js\u001b[0m             "
+    ],
+    [
+      2.1e-05,
+      "                            ui-icons_444444_256x240.png\r\n jsl.js                                      ui-icons_555555_256x240.png\r\n jsonParser.js                               ui-icons_777620_256x240.png\r\n \u001b[01;34mkernel\u001b[0m                                      ui-icons_777777_256x240.png\r\n kill                                        ui-icons_cc0000_256x240.png\r\n killall                                     ui-icons_ffffff_256x240.png\r\n kill_apps_modules_for_save_memory.sh        umount\r\n klogd                                       uname\r\n \u001b[01;34ml7-protocols\u001b[0m                                uncompress\r\n lanAlias_start.sh                           unzip\r\n lanAlias_stop.sh                            upgrade_firmware.sh\r\n lan_frame1.html                             uploadinfo.html\r\n lan_frame.cgi                               upnp.asp\r\n \u001b[01;34m_language\u001b[0m                                   upnp.html\r\n lan.html                                    uptime\r\n lan.js                                      urandom\r\n "
+    ],
+    [
+      2.4e-05,
+      "lanSetup.asp                                urlFilterList.cgi\r\n lanSetup.html                               urlfilter_start.sh\r\n ld-uClibc.so.0                              urlfilter_stop.sh\r\n led                                         UrlFilterStop.sh\r\n led.conf                                    \u001b[01;34mUSA\u001b[0m\r\n \u001b[01;34mlib\u001b[0m                                         \u001b[01;34musb\u001b[0m\r\n libbase64.so                                \u001b[01;34muserAccount\u001b[0m\r\n libcore.so                                  userAccount.asp\r\n libcrypto.so                                userAccount.html\r\n libcrypto.so.0.9.7                          \u001b[01;34muserfs\u001b[0m\r\n libcrypt.so.0                               \u001b[01;34musers\u001b[0m\r\n libc.so.0                                   userSwitchPanel.js\r\n libdl.so.0                                  usleep\r\n libebt_802_3.so                             \u001b[01;34musr\u001b[0m\r\n libebtable_broute.so                        utelnetd\r\n libebtable_filter.so                        util.js\r\n libebtable_nat.so  "
+    ],
+    [
+      2.8e-05,
+      "                         val.js\r\n libebt_among.so                             var\r\n libebt_arpreply.so                          vconfig\r\n libebt_arp.so                               \u001b[01;34mVD\u001b[0m\r\n libebtc.so                                  VDcomponent.js\r\n libebt_ftos.so                              VD.html\r\n libebt_ip6.so                               VD.js\r\n libebt_ip.so                                vdview.cgi\r\n libebt_limit.so                             vi\r\n libebt_log.so                               viewlog.asp\r\n libebt_mark_m.so                            viewlog.html\r\n libebt_mark.so                              ViewSyslog.cgi\r\n libebt_nat.so                               virtualdevice.html\r\n libebt_pkttype.so                           vivo-bold-webfont.eot\r\n libebt_policer.so                           vivo-bold-webfont.svg\r\n libebt_redirect.so                          vivo-bold-webfont.ttf\r\n libebt_standard.so                          vivo-bold-webfont.woff\r\n libebt_stp.so                       "
+    ],
+    [
+      2.4e-05,
+      "        vMenu.css\r\n libebt_tc.so                                vserver.sh\r\n libebt_ulog.so                              w\r\n libebt_vlan.so                              wan\r\n libgcc_s.so.1                               wanConnTables.html\r\n libiw.so.28                                 wan_frame1.html\r\n liblog.so                                   wan_frame2.html\r\n libmatrixssl-3-7.so                         wanfunc.js\r\n libmatrixssl.so                             wan.html\r\n libm.so.0                                   wan_phy_statistics.html\r\n libmxml.so                                  wanRemoteNode_Edit.asp\r\n libmxml.so.1                                wanRemoteNode_VDSL_Edit.asp\r\n libmxml.so.1.4                              wan_start_ipv4.sh\r\n libnsl.so.0                                 wan_start_ipv6.sh\r\n libpppoatm.so                               wan_start.sh\r\n libpppoe.so                                 wan_stop.sh\r\n libpscrypto.so                              watchdog\r\n libpthread.so.0                    "
+    ],
+    [
+      2.4e-05,
+      "         wc\r\n libresolv.so.0                              wcdma\r\n librt.so.0                                  wds.html\r\n libssl.so.0.9.7                             WFADeviceDesc.xml\r\n libtcapi.so                                 WFAWLANConfigSCPD.xml\r\n libtcapi.so.1                               wget\r\n libtcapi.so.1.4                             wi-fi-icon.png\r\n libutil.so.0                                wifi-locked2.png\r\n line_bg.png                                 \u001b[01;34mwireless\u001b[0m\r\n linuxrc                                     \u001b[01;34mWireless\u001b[0m\r\n ln                                          wireless.js\r\n loading.gif                                 \u001b[01;34mwizard\u001b[0m\r\n loadingMask.js                              wizard_Logout.asp\r\n loadingStatus.cgi                           wlan\r\n localCA_frame.html                          wlancmd\r\n localCA_frame_save.asp                      wlanlanisolate\r\n localCA.html                                wlanlanisolate.ko\r\n log                                         w"
+    ],
+    [
+      2.2e-05,
+      "lan_macfilter_add.html\r\n login                                       wlan_macfilter_edit.html\r\n login.asp                                   wlan_moreap_edit.html\r\n login.html                                  wlan_schedule_add.html\r\n loginsum.html                               wlan_schedule_edit.html\r\n Login_Timer.asp                             wmm.asp\r\n logo_brazil.gif                             wmm.html\r\n logo.gif                                    wps.html\r\n logo-gvt.png                                wpsinfo2.html\r\n logo_movistar.gif                           wpsinfo.html\r\n _logo.png                                   wps_pic2.gif\r\n logo.png                                    wps_pic.gif\r\n Logout.asp                                  WpsStatus.cgi\r\n logo_vivo.gif                               WPStimerRunning.cgi\r\n logSet.asp                                  write_wan_mac\r\n logSet.html                                 wscd\r\n \u001b[01;34mlogSetting\u001b[0m                                  \u001b[01;34mxml\u001b[0m\r\n ls        "
+    ],
+    [
+      2.4e-05,
+      "                                  xt_layer7.ko\r\n lsmod                                       yahoo.pat\r\n m01.jpg                                     yes\r\n m01_on.jpg                                  yline_error.gif\r\n m02.jpg                                     zebra\r\n m02_on.jpg                                  zero\r\n m03.jpg                                     zyJqFunctions.js\r\n m03_on.jpg                                  \u001b[01;34mzyjs\u001b[0m\r\n m05.jpg                                     zyMacUi.js\r\n m05_on.jpg                                  zyMask.js\r\n m06.jpg                                     zyUiDialog.js\r\n\u001b]0;maycon@DayOfDevil:~/_flash.dump.extracted\u0007[maycon@DayOfDevil _flash.dump.extracted]$ "
+    ],
+    [
+      2.043712,
+      "c"
+    ],
+    [
+      0.069618,
+      "d"
+    ],
+    [
+      0.896879,
+      " "
+    ],
+    [
+      0.420721,
+      "s"
+    ],
+    [
+      0.083227,
+      "q"
+    ],
+    [
+      0.171506,
+      "\u0007uashfs-root"
+    ],
+    [
+      0.393685,
+      "\r\n"
+    ],
+    [
+      0.000583,
+      "\u001b]0;maycon@DayOfDevil:~/_flash.dump.extracted/squashfs-root\u0007"
+    ],
+    [
+      0.000448,
+      "[maycon@DayOfDevil squashfs-root]$ "
+    ],
+    [
+      0.2693,
+      "l"
+    ],
+    [
+      0.037606,
+      "s"
+    ],
+    [
+      0.101806,
+      " "
+    ],
+    [
+      0.055624,
+      "-"
+    ],
+    [
+      0.087329,
+      "l"
+    ],
+    [
+      0.06511,
+      "a"
+    ],
+    [
+      0.194963,
+      "\r\n"
+    ],
+    [
+      0.010679,
+      "total 88\r\n"
+    ],
+    [
+      9.2e-05,
+      "drwxr-xr-x  12 maycon users  4096 Jul 15  2016 \u001b[0m\u001b[01;34m.\u001b[0m\r\ndrwxr-xr-x 141 maycon users 40960 Feb 19 03:07 \u001b[01;34m..\u001b[0m\r\ndrwxr-xr-x   2 maycon users  4096 Jul 15  2016 \u001b[01;34mbin\u001b[0m\r\n"
+    ],
+    [
+      6.3e-05,
+      "drwxrwxrwx   4 maycon users  4096 Jul 15  2016 \u001b[34;42mboaroot\u001b[0m\r\ndrwxr-xr-x   5 maycon users  4096 Jul 15  2016 \u001b[01;34mdev\u001b[0m\r\nlrwxrwxrwx   1 maycon users     8 Feb 19 03:07 \u001b[01;36metc\u001b[0m -> /tmp/etc\r\n"
+    ],
+    [
+      5.9e-05,
+      "drwxr-xr-x   3 maycon users  4096 Jul 15  2016 \u001b[01;34mlib\u001b[0m\r\nlrwxrwxrwx   1 maycon users    11 Feb 19 03:07 \u001b[01;36mlinuxrc\u001b[0m -> bin/busybox\r\ndrwxr-xr-x   2 maycon users  4096 Jul 15  2016 \u001b[01;34mproc\u001b[0m\r\n"
+    ],
+    [
+      5.9e-05,
+      "drwxr-xr-x   2 maycon users  4096 Jul 15  2016 \u001b[01;34msbin\u001b[0m\r\ndrwxr-xr-x   2 maycon users  4096 Jul 15  2016 \u001b[01;34msys\u001b[0m\r\ndrwxr-xr-x   2 maycon users  4096 Jul 15  2016 \u001b[01;34mtmp\u001b[0m\r\ndrwxr-xr-x   4 maycon users  4096 Jul 15  2016 \u001b[01;34muserfs\u001b[0m\r\n"
+    ],
+    [
+      5.5e-05,
+      "drwxr-xr-x   6 maycon users  4096 Jul 15  2016 \u001b[01;34musr\u001b[0m\r\nlrwxrwxrwx   1 maycon users     8 Feb 19 03:07 \u001b[01;36mvar\u001b[0m -> /tmp/var\r\n"
+    ],
+    [
+      0.00096,
+      "\u001b]0;maycon@DayOfDevil:~/_flash.dump.extracted/squashfs-root\u0007"
+    ],
+    [
+      0.000268,
+      "[maycon@DayOfDevil squashfs-root]$ "
+    ]
+  ]
+}
