@@ -1,4 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-01-08T01:51:47-02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="br"><title type="html">Hacking Tricks: Escalação de Privilégio em Linux com Capability</title><link href="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" rel="alternate" type="text/html" title="Hacking Tricks: Escalação de Privilégio em Linux com Capability" /><published>2019-01-08T00:00:00-02:00</published><updated>2019-01-08T00:00:00-02:00</updated><id>http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html">&lt;p&gt;Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de &lt;em&gt;hacking tricks&lt;/em&gt; que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com &lt;em&gt;Linux Capabilities&lt;/em&gt;. Boa leitura!&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-05T11:28:50-03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="br"><title type="html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</title><link href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" rel="alternate" type="text/html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" /><published>2019-11-05T00:00:00-03:00</published><updated>2019-11-05T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">&lt;p&gt;Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.&lt;/p&gt;
+
+&lt;p&gt;Durante um teste me deparei com essa situação e, para aproveitar minha saudade de codar alguma tool, resolvi implementar uma ferramenta que aceitasse qualquer conexão que viessem (em qualquer porta). Dessa forma é possível identificar se o host comprometido possui alguma exceção no firewall da rede que permita ele sair para a internet.&lt;/p&gt;
+
+&lt;p&gt;No mais, boa leitura.&lt;/p&gt;
+
+&lt;h3 id=&quot;trick&quot;&gt;Trick&lt;/h3&gt;
+
+&lt;p&gt;Essa dica se resume basicamente a um código Python que responde &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN+ACK&lt;/code&gt; para qualquer pacote &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; que recebido. Utilizando a biblioteca Scapy do Python foi possível desenvolver essa técnica com muito pouco esforço, como pode ser visto abaixo:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env python3&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# SYN+ACK ALL - Written by Maycon Vitali&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scapy.all&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;[{}] SYN packet received from {} on port {}. Replying with SYN+ACK...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Y-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;m-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;d &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;H:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;M:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;S&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Create the IP datagram exchanging the source and the destination&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c&quot;&gt;# Create the TCP datagrana exchanging the ports annd adjusting the flags&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# and the seq/ack numbers.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SA'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Do it!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Start the sniffing&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;iface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eth0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(tcp[tcpflags] &amp;amp; tcp-syn != 0)&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes &lt;code class=&quot;highlighter-rouge&quot;&gt;RST&lt;/code&gt; quando m emso receber uma mensagem &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; em uma porta não aberta. Isso pode ser feito com o seguinte comando do &lt;code class=&quot;highlighter-rouge&quot;&gt;iptables&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
+root@hacknroll:~# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Tendo feito isso, basta executar o nosso script para começar a receber mensagens de conexão do além (aka Internet):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# ./synack-all.py
+[2019-11-05 14:05:12] SYN packet received from 117.xxx.xxx.160 on port 445. Replying with SYN+ACK...
+[2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
+[2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
+[2019-11-05 14:05:48] SYN packet received from 45.xxx.xxx.87 on port 6052. Replying with SYN+ACK...
+[2019-11-05 14:05:54] SYN packet received from 185.xxx.xxx.14 on port 4590. Replying with SYN+ACK...
+[2019-11-05 14:06:05] SYN packet received from 14.xxx.xxx.191 on port 445. Replying with SYN+ACK...
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Caso deseje capturar e responder somente para algum host/rede específico, basta adicionar os filtros correspondentes, como exemplificado abaixo:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;iface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eth0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(tcp[tcpflags] &amp;amp; tcp-syn != 0) and (src net 192.111.0.0 mask 255.255.0.0)&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Agora basta utilizar qualquer artifício que desejar para validar se o script está funcionando corretamente. Abaixo é possível que a porta 80 aparenta estar aberta:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ncat -z -v 68.xxx.xxx.181 80
+Ncat: Version 7.80 ( https://nmap.org/ncat )
+Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Com pouco esfoço é possível varrer todas as portas e validar quais portas podem sair para a internet e, então, utilizá-las para obter a sua tão sonhada shell reversa:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;PORT &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;seq 65535&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;ncat &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; 68.xxx.xxx.181 &lt;span class=&quot;nv&quot;&gt;$PORT&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done
+&lt;/span&gt;Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: Connected to 68.xxx.xxx.181:443.
+Ncat: Connected to 68.xxx.xxx.181:3389.
+Ncat: Connected to 68.xxx.xxx.181:8080.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;No caso acima, as portas 80, 443, 3389 (rdp) e 8080 possúem acesso à internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h3&gt;
+
+&lt;p&gt;That’s all folks!&lt;/p&gt;
+
+&lt;p&gt;Hack N’ Roll&lt;/p&gt;
+
+&lt;h3 id=&quot;referências&quot;&gt;Referências&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://scapy.net&quot;&gt;Scapy Project&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="network" /><category term="pentest" /><category term="check-outgoing-ports" /><summary type="html">Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.</summary></entry><entry xml:lang="br"><title type="html">Hacking Tricks: Escalação de Privilégio em Linux com Capability</title><link href="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" rel="alternate" type="text/html" title="Hacking Tricks: Escalação de Privilégio em Linux com Capability" /><published>2019-01-08T00:00:00-02:00</published><updated>2019-01-08T00:00:00-02:00</updated><id>http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html">&lt;p&gt;Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de &lt;em&gt;hacking tricks&lt;/em&gt; que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com &lt;em&gt;Linux Capabilities&lt;/em&gt;. Boa leitura!&lt;/p&gt;
 
 &lt;h3 id=&quot;o-que-são-capabilities&quot;&gt;O que são &lt;em&gt;capabilities&lt;/em&gt;&lt;/h3&gt;
 

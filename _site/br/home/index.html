@@ -18,7 +18,7 @@
 <meta property="og:url" content="http://localhost:4000/br/home/" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <script type="application/ld+json">
-{"description":"I hack stuff!","@type":"WebPage","headline":"Maycon Vitali","url":"http://localhost:4000/br/home/","author":{"@type":"Person","name":"Maycon Vitali"},"@context":"http://schema.org"}</script>
+{"url":"http://localhost:4000/br/home/","author":{"@type":"Person","name":"Maycon Vitali"},"description":"I hack stuff!","headline":"Maycon Vitali","@type":"WebPage","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -95,6 +95,46 @@
 	<div class="page-content"> 
 		<h2>Publicações em Português <img src="/assets/images/lang/br.png"/></h2>
 
+
+	<header class="post-header">
+		<meta itemprop="keywords" content="hacking-tricks,network,pentest,check-outgoing-ports" />
+
+		<time itemprop="datePublished" datetime="2019-11-05">
+			Em Nov 5, 2019
+		</time>
+
+		<h3 itemprop="name" class="post-title">
+			<a itemprop="url" class="post-link" href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</a>
+		</h3>
+
+		<div class="post-meta">
+			Categorias
+			
+				<a href="/categories/#hacking-tricks">hacking-tricks</a>
+			
+			
+				Tags
+				
+					<a href="/tags/#hacking-tricks" title="hacking-tricks">hacking-tricks</a>, 
+				
+					<a href="/tags/#network" title="network">network</a>, 
+				
+					<a href="/tags/#pentest" title="pentest">pentest</a>, 
+				
+					<a href="/tags/#check-outgoing-ports" title="check-outgoing-ports">check-outgoing-ports</a>
+				
+			
+		</div>
+
+	</header>
+
+	<article class="post-content" itemprop="articleBody">
+		<p>Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.</p>
+
+
+	</article>
+
+	<hr />
 
 	<header class="post-header">
 		<meta itemprop="keywords" content="hacking-tricks,privilege-escalation,linux,capability" />
@@ -357,6 +397,8 @@
 	<h4>Publicações Recentes</h4>
 	
 	
+		<li><a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" rel="bookmark">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</a></li>
+	
 		<li><a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" title="Hacking Tricks: Escalação de Privilégio em Linux com Capability" rel="bookmark">Hacking Tricks: Escalação de Privilégio em Linux com Capability</a></li>
 	
 		<li><a href="/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html" title="Embedded Hacking: Acessando a interface UART/Serial" rel="bookmark">Embedded Hacking: Acessando a interface UART/Serial</a></li>
@@ -364,8 +406,6 @@
 		<li><a href="/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" title="Embedded Hacking: Emulando binários dos firmwares" rel="bookmark">Embedded Hacking: Emulando binários dos firmwares</a></li>
 	
 		<li><a href="/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html" title="Embedded Hacking: Extração de Firmware usando SPI" rel="bookmark">Embedded Hacking: Extração de Firmware usando SPI</a></li>
-	
-		<li><a href="/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money.html" title="Talk is cheap. Show me the money!" rel="bookmark">Talk is cheap. Show me the money!</a></li>
 	
 </div>
 
@@ -381,7 +421,7 @@
 	
 		<li><a href="/br/categories/#advisories" title="advisories" rel="1">advisories (1)</a></li>
 	
-		<li><a href="/br/categories/#hacking-tricks" title="hacking-tricks" rel="1">hacking-tricks (1)</a></li>
+		<li><a href="/br/categories/#hacking-tricks" title="hacking-tricks" rel="2">hacking-tricks (2)</a></li>
 	
 </div>
 
@@ -414,13 +454,19 @@
 	
 		<a href="/tags/#serial" title="serial" rel="1">serial</a> &nbsp;
 	
-		<a href="/tags/#hacking-tricks" title="hacking-tricks" rel="1">hacking-tricks</a> &nbsp;
+		<a href="/tags/#hacking-tricks" title="hacking-tricks" rel="2">hacking-tricks</a> &nbsp;
 	
 		<a href="/tags/#privilege-escalation" title="privilege-escalation" rel="1">privilege-escalation</a> &nbsp;
 	
 		<a href="/tags/#linux" title="linux" rel="1">linux</a> &nbsp;
 	
 		<a href="/tags/#capability" title="capability" rel="1">capability</a> &nbsp;
+	
+		<a href="/tags/#network" title="network" rel="1">network</a> &nbsp;
+	
+		<a href="/tags/#pentest" title="pentest" rel="1">pentest</a> &nbsp;
+	
+		<a href="/tags/#check-outgoing-ports" title="check-outgoing-ports" rel="1">check-outgoing-ports</a> &nbsp;
 	
 </div>
 <div class="sidebar-module sb-archive-tree">
@@ -442,9 +488,26 @@
 			<li><label for="year2019">► 2019</label>
 				<input type="checkbox" id="year2019" checked/>
 				<ul>
-					<li><label for="January2019">► Janeiro</label>
-						<input type="checkbox" id="January2019" checked />
+					<li><label for="November2019">► Novembro</label>
+						<input type="checkbox" id="November2019" checked />
 						<ul>
+	
+	<li>► <a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+					</ul>
+				</li>
+				<li><label for="January2019">► Janeiro</label>
+					<input type="checkbox" id="January2019" />
+					<ul>
 	
 	<li>► <a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html">Hacking Tricks: Escalação de Privilégio em Linux com Capability</a></li>
 
