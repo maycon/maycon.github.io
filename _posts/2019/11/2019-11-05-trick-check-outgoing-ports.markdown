@@ -3,7 +3,7 @@ layout: post
 title:  "Hacking Tricks: Identificando Portas de Saída para Shell Reversa"
 date:   2019-11-05
 categories: hacking-tricks
-tags: hacking-tricks network pentest check-outgoing-ports
+tags: hacking-tricks network pentest
 lang: br
 ref: check-outgoing-ports
 has-asciinema: false
