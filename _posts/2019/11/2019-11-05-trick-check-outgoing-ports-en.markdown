@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell"
-date:   2019-11-05
+date:   2019-11-06
 categories: hacking-tricks
 tags: hacking-tricks network pentest
 lang: en
