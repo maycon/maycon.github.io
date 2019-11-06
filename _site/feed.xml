@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-06T07:42:42-03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="en"><title type="html">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</title><link href="http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html" rel="alternate" type="text/html" title="Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell" /><published>2019-11-06T00:00:00-03:00</published><updated>2019-11-06T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html">&lt;p&gt;Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-06T08:00:19-03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="en"><title type="html">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</title><link href="http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html" rel="alternate" type="text/html" title="Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell" /><published>2019-11-06T00:00:00-03:00</published><updated>2019-11-06T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html">&lt;p&gt;Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.&lt;/p&gt;
 
 &lt;p&gt;During a pentest, I came across this situation and as I was looking to practice my coding, I decided to implement a tool that would accept any connection that came (any port). It was useful to identify if the compromised host had any outgoing port exposed to the Internet.&lt;/p&gt;
 
@@ -105,6 +105,15 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;In the above example, the TCP ports 80, 443, 3389 (rdp) and 8080 have outgoing access to the internet.&lt;/p&gt;
+
+&lt;p&gt;If you wanna increase the scan speed and avoid some firewall/ips rules, you can use the following trick provided by &lt;a href=&quot;https://twitter.com/usscastro?lang=pt&quot;&gt;@usscastro&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq 65535 | shuf | xargs &lt;span class=&quot;nt&quot;&gt;-P32&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;@ sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ncat -z -v 68.xxx.xxx.181 @&quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected
+Ncat: Connected to 68.xxx.xxx.181:3389.
+Ncat: Connected to 68.xxx.xxx.181:443.
+Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: Connected to 68.xxx.xxx.181:8080.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;conclusionn&quot;&gt;Conclusionn&lt;/h3&gt;
 
@@ -224,6 +233,15 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;No caso acima, as portas 80, 443, 3389 (rdp) e 8080 possúem acesso à internet.&lt;/p&gt;
+
+&lt;p&gt;Uma forma de aumentar a velicidade do scan e evatir algumas regras de firewall/ips é utilizar o seguinte trick sugerido pelo &lt;a href=&quot;https://twitter.com/usscastro?lang=pt&quot;&gt;@usscastro&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq 65535 | shuf | xargs &lt;span class=&quot;nt&quot;&gt;-P32&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;@ sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ncat -z -v 68.xxx.xxx.181 @&quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected
+Ncat: Connected to 68.xxx.xxx.181:3389.
+Ncat: Connected to 68.xxx.xxx.181:443.
+Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: Connected to 68.xxx.xxx.181:8080.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h3&gt;
 

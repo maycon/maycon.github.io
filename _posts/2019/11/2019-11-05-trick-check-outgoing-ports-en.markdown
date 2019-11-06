@@ -127,6 +127,16 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 
 In the above example, the TCP ports 80, 443, 3389 (rdp) and 8080 have outgoing access to the internet.
 
+If you wanna increase the scan speed and avoid some firewall/ips rules, you can use the following trick provided by [@usscastro](https://twitter.com/usscastro?lang=pt):
+``` bash
+$ seq 65535 | shuf | xargs -P32 -I@ sh -c "ncat -z -v 68.xxx.xxx.181 @" 2>&1 | grep Connected
+Ncat: Connected to 68.xxx.xxx.181:3389.
+Ncat: Connected to 68.xxx.xxx.181:443.
+Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: Connected to 68.xxx.xxx.181:8080.
+
+```
+
 ### Conclusionn
 
 That's all folks!

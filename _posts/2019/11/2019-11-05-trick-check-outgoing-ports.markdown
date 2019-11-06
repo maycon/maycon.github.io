@@ -129,6 +129,16 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 
 No caso acima, as portas 80, 443, 3389 (rdp) e 8080 possúem acesso à internet.
 
+Uma forma de aumentar a velicidade do scan e evatir algumas regras de firewall/ips é utilizar o seguinte trick sugerido pelo [@usscastro](https://twitter.com/usscastro?lang=pt):
+``` bash
+$ seq 65535 | shuf | xargs -P32 -I@ sh -c "ncat -z -v 68.xxx.xxx.181 @" 2>&1 | grep Connected
+Ncat: Connected to 68.xxx.xxx.181:3389.
+Ncat: Connected to 68.xxx.xxx.181:443.
+Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: Connected to 68.xxx.xxx.181:8080.
+
+```
+
 ### Conclusão
 
 That's all folks!
