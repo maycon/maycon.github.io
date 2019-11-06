@@ -1,4 +1,121 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-05T14:33:03-03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="br"><title type="html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</title><link href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" rel="alternate" type="text/html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" /><published>2019-11-05T00:00:00-03:00</published><updated>2019-11-05T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">&lt;p&gt;Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-06T07:39:32-03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="en"><title type="html">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</title><link href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html" rel="alternate" type="text/html" title="Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell" /><published>2019-11-05T00:00:00-03:00</published><updated>2019-11-05T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html">&lt;p&gt;Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.&lt;/p&gt;
+
+&lt;p&gt;During a pentest, I came across this situation and as I was looking to practice my coding, I decided to implement a tool that would accept any connection that came (any port). It was useful to identify if the compromised host had any outgoing port exposed to the Internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;trick&quot;&gt;Trick&lt;/h3&gt;
+
+&lt;p&gt;This trick is basically a python code that anwser &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN+ACK&lt;/code&gt; to any incoming &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; package. Using the python Scapy library, it was possible to easly develop this mechaninsm, as you can see bellow:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env python3&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# SYN+ACK ALL - Written by Maycon Vitali&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scapy.all&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;[{}] SYN packet received from {} on port {}. Replying with SYN+ACK...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Y-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;m-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;d &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;H:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;M:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;S&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Create the IP datagram exchanging the source and the destination&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c&quot;&gt;# Create the TCP datagrana exchanging the ports annd adjusting the flags&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# and the seq/ack numbers.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SA'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Do it!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Start the sniffing&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;iface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eth0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(tcp[tcpflags] &amp;amp; tcp-syn != 0)&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The the above code work properly, we need to avoid the Linux kernel to sennd &lt;code class=&quot;highlighter-rouge&quot;&gt;RST&lt;/code&gt; packades when it receives a &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; package to a closed port. It can be done usign the following &lt;code class=&quot;highlighter-rouge&quot;&gt;iptables&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
+root@hacknroll:~# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Having done that, just run our script to start receiving connection messages from the unknown hosts:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# ./synack-all.py
+[2019-11-05 14:05:12] SYN packet received from 117.xxx.xxx.160 on port 445. Replying with SYN+ACK...
+[2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
+[2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
+[2019-11-05 14:05:48] SYN packet received from 45.xxx.xxx.87 on port 6052. Replying with SYN+ACK...
+[2019-11-05 14:05:54] SYN packet received from 185.xxx.xxx.14 on port 4590. Replying with SYN+ACK...
+[2019-11-05 14:06:05] SYN packet received from 14.xxx.xxx.191 on port 445. Replying with SYN+ACK...
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or we also can change the filter parameter (pcap filtering) to anwser to only a specific host or network:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;iface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eth0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(tcp[tcpflags] &amp;amp; tcp-syn != 0) and (src net 192.111.0.0 mask 255.255.0.0)&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To verify if the host you have access has an specific outgoing port open (e.g. 80/tcp) to the internet, you can use the following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ncat -z -v 68.xxx.xxx.181 80
+Ncat: Version 7.80 ( https://nmap.org/ncat )
+Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And with little effort, you can scan all ports and validate which ports can go out to the Internet and then use them to get your desired reverse shell:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;PORT &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;seq 65535&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;ncat &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; 68.xxx.xxx.181 &lt;span class=&quot;nv&quot;&gt;$PORT&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done
+&lt;/span&gt;Ncat: Connected to 68.xxx.xxx.181:80.
+Ncat: Connected to 68.xxx.xxx.181:443.
+Ncat: Connected to 68.xxx.xxx.181:3389.
+Ncat: Connected to 68.xxx.xxx.181:8080.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In the above example, the TCP ports 80, 443, 3389 (rdp) and 8080 have outgoing access to the internet.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusionn&quot;&gt;Conclusionn&lt;/h3&gt;
+
+&lt;p&gt;That’s all folks!&lt;/p&gt;
+
+&lt;p&gt;Hack N’ Roll&lt;/p&gt;
+
+&lt;h3 id=&quot;referências&quot;&gt;Referências&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://scapy.net&quot;&gt;Scapy Project&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="network" /><category term="pentest" /><summary type="html">Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.</summary></entry><entry xml:lang="br"><title type="html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</title><link href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" rel="alternate" type="text/html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" /><published>2019-11-05T00:00:00-03:00</published><updated>2019-11-05T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">&lt;p&gt;Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.&lt;/p&gt;
 
 &lt;p&gt;Durante um teste me deparei com essa situação e, para aproveitar minha saudade de codar alguma tool, resolvi implementar uma ferramenta que aceitasse qualquer conexão que viessem (em qualquer porta). Dessa forma é possível identificar se o host comprometido possui alguma exceção no firewall da rede que permita ele sair para a internet.&lt;/p&gt;
 
@@ -53,7 +170,7 @@
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes &lt;code class=&quot;highlighter-rouge&quot;&gt;RST&lt;/code&gt; quando m emso receber uma mensagem &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; em uma porta não aberta. Isso pode ser feito com o seguinte comando do &lt;code class=&quot;highlighter-rouge&quot;&gt;iptables&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes &lt;code class=&quot;highlighter-rouge&quot;&gt;RST&lt;/code&gt; quando o memso receber uma mensagem &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; em uma porta não aberta. Isso pode ser feito com o seguinte comando do &lt;code class=&quot;highlighter-rouge&quot;&gt;iptables&lt;/code&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
 root@hacknroll:~# iptables -L
@@ -89,7 +206,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Agora basta utilizar qualquer artifício que desejar para validar se o script está funcionando corretamente. Abaixo é possível que a porta 80 aparenta estar aberta:&lt;/p&gt;
+&lt;p&gt;Agora basta utilizar qualquer artifício que desejar para validar se o script está funcionando corretamente. Abaixo é possível verificar que a porta 80 aparenta estar aberta:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ncat -z -v 68.xxx.xxx.181 80
 Ncat: Version 7.80 ( https://nmap.org/ncat )
@@ -977,37 +1094,4 @@ Maycon Vitali&lt;/p&gt;
 &lt;p&gt;Boa caçada!&lt;/p&gt;
 
 &lt;p&gt;Maycon Vitali&lt;br /&gt;
-Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="bug-bounty" /><category term="hackerone" /><category term="ubiquiti" /><summary type="html">Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.</summary></entry><entry xml:lang="br"><title type="html">I’m back, bitches!!</title><link href="http://localhost:4000/hello-world/2018/01/18/im-back.html" rel="alternate" type="text/html" title="I'm back, bitches!!" /><published>2018-01-18T13:26:36-02:00</published><updated>2018-01-18T13:26:36-02:00</updated><id>http://localhost:4000/hello-world/2018/01/18/im-back</id><content type="html" xml:base="http://localhost:4000/hello-world/2018/01/18/im-back.html">&lt;p&gt;Fala rapaziada. Estou criando essa primeira publicação só pra dizer que estou retomando às atividades de publicação de material e, por isso, estou reformulando tanto meu site pessoal quanto o site oficial da &lt;a href=&quot;http://www.hacknroll.io&quot;&gt;Hack N’ Roll&lt;/a&gt;. Assim que o novo leiaute estiver definido (muito provável que seja semelhante a esse, porque mexer com HTML e CSS é um &amp;amp;%#), irei gradativamente repassar as publicações do &lt;a href=&quot;http://www.hacknroll.com&quot;&gt;site antigo&lt;/a&gt; para o novo.&lt;/p&gt;
-
-&lt;p&gt;Nesse site pessoal pretendo disponibilizar alguns materiais, como:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Resultados de algumas pesquisas&lt;/li&gt;
-  &lt;li&gt;Material de palestras&lt;/li&gt;
-  &lt;li&gt;Metodologia e material de estudo&lt;/li&gt;
-  &lt;li&gt;Alguma ferramenta interessante que eu desenvolver&lt;/li&gt;
-  &lt;li&gt;Dicas e truques de InfoSec (OffSec, okay? haha)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Como alguns que já me conhecem devem saber, esse site conterá material relacionado aos seguintes assuntos:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Técnicas de segurança ofensiva geral&lt;/li&gt;
-  &lt;li&gt;Técnicas de exploração de corrupção de memória&lt;/li&gt;
-  &lt;li&gt;Técnicas que visam bypassar os mecanismos de proteção existentes&lt;/li&gt;
-  &lt;li&gt;Engenharia reversa de software&lt;/li&gt;
-  &lt;li&gt;Engenharia reversa de hardware (mais precisamente embedded devices aka IoT)&lt;/li&gt;
-  &lt;li&gt;Lock Picking&lt;/li&gt;
-  &lt;li&gt;Web Application Hacking&lt;/li&gt;
-  &lt;li&gt;Vulnerabilidades encontradas&lt;/li&gt;
-  &lt;li&gt;Informações sobre projetos pessoais e relacionado à HnR&lt;/li&gt;
-  &lt;li&gt;Bug Bounty (O bom e velho &lt;code class=&quot;highlighter-rouge&quot;&gt;Talk is cheap! Show me the money...&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;etc&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Como alguns devem estar se perguntando “Por que em português?!”, a minha resposta será simples: “Porque eu quero!”. :-)
-Na verdade pretendo com o tempo tentar internacionalizar o site e refazer as postagens em ambos, inglês e português. Mas a principio meu objetivo e favorecer ao povo tupiniquim. Além do mais, diversas coisas que eu publicar nesse site já terá material saturado em inglês.&lt;/p&gt;
-
-&lt;p&gt;Apesar de eu não achar necessário por hora, vale resaltar que todo e qualquer material, comentários, visões e publicações feitas nesse site são de inteira responsabilidade minha e não de meu empregador.&lt;/p&gt;
-
-&lt;p&gt;Let’s hack!&lt;/p&gt;
-
-&lt;p&gt;Maycon Vitali&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="hello" /><summary type="html">Fala rapaziada. Estou criando essa primeira publicação só pra dizer que estou retomando às atividades de publicação de material e, por isso, estou reformulando tanto meu site pessoal quanto o site oficial da Hack N’ Roll. Assim que o novo leiaute estiver definido (muito provável que seja semelhante a esse, porque mexer com HTML e CSS é um &amp;amp;%#), irei gradativamente repassar as publicações do site antigo para o novo.</summary></entry></feed>
+Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="bug-bounty" /><category term="hackerone" /><category term="ubiquiti" /><summary type="html">Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.</summary></entry></feed>

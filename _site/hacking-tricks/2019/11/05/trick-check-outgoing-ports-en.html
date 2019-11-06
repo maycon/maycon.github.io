@@ -7,20 +7,20 @@
 <link rel="stylesheet" href="/assets/css/style.css?v=">
 
 <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Hacking Tricks: Identificando Portas de Saída para Shell Reversa | Maycon Vitali</title>
+<title>Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell | Maycon Vitali</title>
 <meta name="generator" content="Jekyll v3.7.4" />
-<meta property="og:title" content="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" />
+<meta property="og:title" content="Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell" />
 <meta name="author" content="Maycon Vitali" />
-<meta property="og:locale" content="br" />
-<meta name="description" content="Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet." />
-<meta property="og:description" content="Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet." />
-<link rel="canonical" href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
-<meta property="og:url" content="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port." />
+<meta property="og:description" content="Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port." />
+<link rel="canonical" href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html" />
+<meta property="og:url" content="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-11-05T00:00:00-03:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"},"url":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html","author":{"@type":"Person","name":"Maycon Vitali"},"description":"Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.","headline":"Hacking Tricks: Identificando Portas de Saída para Shell Reversa","dateModified":"2019-11-05T00:00:00-03:00","datePublished":"2019-11-05T00:00:00-03:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html"},"url":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html","author":{"@type":"Person","name":"Maycon Vitali"},"description":"Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.","headline":"Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell","dateModified":"2019-11-05T00:00:00-03:00","datePublished":"2019-11-05T00:00:00-03:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -73,15 +73,15 @@
             <ul>
 	
 		
-			<li class='menu-icon'><a href="http://localhost:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
+			<li class='menu-icon'><a href="http://localhost:4000/en/home"><img src="/assets/images/icons/home.png" /></a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/about">Sobre</a></li>
+			<li><a href="http://localhost:4000/en/about">About</a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/posts">Publicações</a></li>
+			<li><a href="http://localhost:4000/en/posts">Posts</a></li>
 		
 	
 </ul>
@@ -93,20 +93,18 @@
         <section id="main_content">
             <div class="post">
 	<header class="post-header">
-	    <h2 class="post-title">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</h2>
-		<div class="fb-like" data-width="" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
+	    <h2 class="post-title">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</h2>
+		<div class="fb-like" data-width="" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
-    	<p>Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.</p>
+    	<p>Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.</p>
 
-<p>Durante um teste me deparei com essa situação e, para aproveitar minha saudade de codar alguma tool, resolvi implementar uma ferramenta que aceitasse qualquer conexão que viessem (em qualquer porta). Dessa forma é possível identificar se o host comprometido possui alguma exceção no firewall da rede que permita ele sair para a internet.</p>
-
-<p>No mais, boa leitura.</p>
+<p>During a pentest, I came across this situation and as I was looking to practice my coding, I decided to implement a tool that would accept any connection that came (any port). It was useful to identify if the compromised host had any outgoing port exposed to the Internet.</p>
 
 <h3 id="trick">Trick</h3>
 
-<p>Essa dica se resume basicamente a um código Python que responde <code class="highlighter-rouge">SYN+ACK</code> para qualquer pacote <code class="highlighter-rouge">SYN</code> que recebido. Utilizando a biblioteca Scapy do Python foi possível desenvolver essa técnica com muito pouco esforço, como pode ser visto abaixo:</p>
+<p>This trick is basically a python code that anwser <code class="highlighter-rouge">SYN+ACK</code> to any incoming <code class="highlighter-rouge">SYN</code> package. Using the python Scapy library, it was possible to easly develop this mechaninsm, as you can see bellow:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env python3</span>
 
@@ -153,7 +151,7 @@
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes <code class="highlighter-rouge">RST</code> quando o memso receber uma mensagem <code class="highlighter-rouge">SYN</code> em uma porta não aberta. Isso pode ser feito com o seguinte comando do <code class="highlighter-rouge">iptables</code>:</p>
+<p>The the above code work properly, we need to avoid the Linux kernel to sennd <code class="highlighter-rouge">RST</code> packades when it receives a <code class="highlighter-rouge">SYN</code> package to a closed port. It can be done usign the following <code class="highlighter-rouge">iptables</code> command:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
 root@hacknroll:~# iptables -L
@@ -168,7 +166,7 @@ target     prot opt source               destination
 DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 </code></pre></div></div>
 
-<p>Tendo feito isso, basta executar o nosso script para começar a receber mensagens de conexão do além (aka Internet):</p>
+<p>Having done that, just run our script to start receiving connection messages from the unknown hosts:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hacknroll:~# ./synack-all.py
 [2019-11-05 14:05:12] SYN packet received from 117.xxx.xxx.160 on port 445. Replying with SYN+ACK...
@@ -180,7 +178,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 ...
 </code></pre></div></div>
 
-<p>Caso deseje capturar e responder somente para algum host/rede específico, basta adicionar os filtros correspondentes, como exemplificado abaixo:</p>
+<p>Or we also can change the filter parameter (pcap filtering) to anwser to only a specific host or network:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sniff</span><span class="p">(</span>
     <span class="n">iface</span><span class="o">=</span><span class="s">"eth0"</span><span class="p">,</span>
@@ -189,7 +187,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>Agora basta utilizar qualquer artifício que desejar para validar se o script está funcionando corretamente. Abaixo é possível verificar que a porta 80 aparenta estar aberta:</p>
+<p>To verify if the host you have access has an specific outgoing port open (e.g. 80/tcp) to the internet, you can use the following command:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ncat -z -v 68.xxx.xxx.181 80
 Ncat: Version 7.80 ( https://nmap.org/ncat )
@@ -197,7 +195,7 @@ Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
 </code></pre></div></div>
 
-<p>Com pouco esfoço é possível varrer todas as portas e validar quais portas podem sair para a internet e, então, utilizá-las para obter a sua tão sonhada shell reversa:</p>
+<p>And with little effort, you can scan all ports and validate which ports can go out to the Internet and then use them to get your desired reverse shell:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">for </span>PORT <span class="k">in</span> <span class="k">$(</span>seq 65535<span class="k">)</span><span class="p">;</span> <span class="k">do </span>ncat <span class="nt">-z</span> <span class="nt">-v</span> 68.xxx.xxx.181 <span class="nv">$PORT</span> 2&gt;&amp;1 | <span class="nb">grep </span>Connected<span class="p">;</span> <span class="k">done
 </span>Ncat: Connected to 68.xxx.xxx.181:80.
@@ -206,9 +204,9 @@ Ncat: Connected to 68.xxx.xxx.181:3389.
 Ncat: Connected to 68.xxx.xxx.181:8080.
 </code></pre></div></div>
 
-<p>No caso acima, as portas 80, 443, 3389 (rdp) e 8080 possúem acesso à internet.</p>
+<p>In the above example, the TCP ports 80, 443, 3389 (rdp) and 8080 have outgoing access to the internet.</p>
 
-<h3 id="conclusão">Conclusão</h3>
+<h3 id="conclusionn">Conclusionn</h3>
 
 <p>That’s all folks!</p>
 
@@ -221,17 +219,17 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 
 	</div>
 
-	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
+	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html" data-colorscheme="dark"></div>
 </div> 
         </section>
         <div id="sidebar">
         	<div class="sidebar-module">
-    <h4>Sobre</h4>
+    <h4>About Me</h4>
     <img title="Maycon Vitali" src="/assets/images/profile.jpg" alt="Maycon Vitali"/>
-    <span>Olá! Me chamo Maycon Vitali e utilizo esse site para fornecer informações sobre hacking e segurança da informação. Puxe uma cadeira, pegue um café, tire seu chapéu e boa leitura.</span>
+    <span>Hi! My name is Maycon Vitali and I have using this personal site to provide information about hacking and InfoSec. Pull up a chair, take off your hat and enjoy the reading.</span>
     <br /><br />
 
-    Mais informações e contatos:<br />
+    More information and contacts:<br />
     <a href="mailto:maycon@hacknroll.com" title="mailto: maycon@hacknroll.com">Email</a> /
     <a target="_blank" href="https://github.com/maycon" title="GithubID: maycon">Github</a> /
     <a target="_blank" href="https://linkedin.com/in/mayconvitali" title="LinkedIn: mayconvitali">LinkedIn</a> /
@@ -239,39 +237,37 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 </div>
 
 <div class="sidebar-module">
-    <h4>Aviso Legal</h4>
-    Todo e qualquer material e publicações feitas nesse site são de inteira responsabilidade minha e não representam a visão de meu empregador. Porém, como o objetivo desse site é fornecer material puramente educacional, e eu não me responsabilizo pelo mal uso de tais informações.
+    <h4>Disclaimer</h4>
+    All and every material and posts on this site represent my own opinion and not those of my employer. All the content of this site should be used purely for educational purposes only. You are solely and personally responsible for your choices, actions, and results obtained through this site content, now and in the future.
 </div>
 
 <div class="sidebar-module">
-	<h4>Publicações Recentes</h4>
+	<h4>Recent Posts</h4>
 	
 	
-		<li><a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" rel="bookmark">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</a></li>
+		<li><a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html" title="Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell" rel="bookmark">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</a></li>
 	
-		<li><a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" title="Hacking Tricks: Escalação de Privilégio em Linux com Capability" rel="bookmark">Hacking Tricks: Escalação de Privilégio em Linux com Capability</a></li>
+		<li><a href="/advisories/2018/03/05/CVE-2017-0932.html" title="UBNT EdgeOS <= v1.9.1.1 Local Privilege Escalation" rel="bookmark">UBNT EdgeOS <= v1.9.1.1 Local Privilege Escalation</a></li>
 	
-		<li><a href="/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html" title="Embedded Hacking: Acessando a interface UART/Serial" rel="bookmark">Embedded Hacking: Acessando a interface UART/Serial</a></li>
+		<li><a href="/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" title="Talk is cheap. Show me the money!" rel="bookmark">Talk is cheap. Show me the money!</a></li>
 	
-		<li><a href="/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" title="Embedded Hacking: Emulando binários dos firmwares" rel="bookmark">Embedded Hacking: Emulando binários dos firmwares</a></li>
-	
-		<li><a href="/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html" title="Embedded Hacking: Extração de Firmware usando SPI" rel="bookmark">Embedded Hacking: Extração de Firmware usando SPI</a></li>
+		<li><a href="/hello-world/2018/01/28/im-back-en.html" title="I'm back!!" rel="bookmark">I'm back!!</a></li>
 	
 </div>
 
 
 <div class="sidebar-module">
-	<h4>Categorias</h4>
+	<h4>Categories</h4>
 	
-		<li><a href="/br/categories/#hello-world" title="hello-world" rel="2">hello-world (2)</a></li>
+		<li><a href="/en/categories/#hello-world" title="hello-world" rel="2">hello-world (2)</a></li>
 	
-		<li><a href="/br/categories/#bug-bounty" title="bug-bounty" rel="2">bug-bounty (2)</a></li>
+		<li><a href="/en/categories/#bug-bounty" title="bug-bounty" rel="2">bug-bounty (2)</a></li>
 	
-		<li><a href="/br/categories/#embedded-hacking" title="embedded-hacking" rel="3">embedded-hacking (3)</a></li>
+		<li><a href="/en/categories/#embedded-hacking" title="embedded-hacking" rel="3">embedded-hacking (3)</a></li>
 	
-		<li><a href="/br/categories/#advisories" title="advisories" rel="1">advisories (1)</a></li>
+		<li><a href="/en/categories/#advisories" title="advisories" rel="1">advisories (1)</a></li>
 	
-		<li><a href="/br/categories/#hacking-tricks" title="hacking-tricks" rel="3">hacking-tricks (3)</a></li>
+		<li><a href="/en/categories/#hacking-tricks" title="hacking-tricks" rel="3">hacking-tricks (3)</a></li>
 	
 </div>
 
@@ -318,7 +314,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 	
 </div>
 <div class="sidebar-module sb-archive-tree">
-    <h4>Histórico</h4>
+    <h4>Archive</h4>
 
 
 
@@ -336,28 +332,11 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 			<li><label for="year2019">► 2019</label>
 				<input type="checkbox" id="year2019" checked/>
 				<ul>
-					<li><label for="November2019">► Novembro</label>
+					<li><label for="November2019">► November</label>
 						<input type="checkbox" id="November2019" checked />
 						<ul>
 	
-	<li>► <a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</a></li>
-
-    
-	
-	
-	
-
-    
-    
-
-	
-					</ul>
-				</li>
-				<li><label for="January2019">► Janeiro</label>
-					<input type="checkbox" id="January2019" />
-					<ul>
-	
-	<li>► <a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html">Hacking Tricks: Escalação de Privilégio em Linux com Capability</a></li>
+	<li>► <a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports-en.html">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</a></li>
 
     
 	
@@ -377,11 +356,11 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 			<li><label for="year2018">► 2018</label>
 				<input type="checkbox" id="year2018" checked/>
 				<ul>
-					<li><label for="March2018">► Março</label>
+					<li><label for="March2018">► March</label>
 						<input type="checkbox" id="March2018" checked />
 						<ul>
 	
-	<li>► <a href="/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html">Embedded Hacking: Acessando a interface UART/Serial</a></li>
+	<li>► <a href="/advisories/2018/03/05/CVE-2017-0932.html">UBNT EdgeOS <= v1.9.1.1 Local Privilege Escalation</a></li>
 
     
 	
@@ -394,11 +373,11 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 	
 					</ul>
 				</li>
-				<li><label for="February2018">► Fevereiro</label>
+				<li><label for="February2018">► February</label>
 					<input type="checkbox" id="February2018" />
 					<ul>
 	
-	<li>► <a href="/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html">Embedded Hacking: Emulando binários dos firmwares</a></li>
+	<li>► <a href="/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html">Talk is cheap. Show me the money!</a></li>
 
     
 	
@@ -411,33 +390,11 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 	
 					</ul>
 				</li>
-				<li><label for="January2018">► Janeiro</label>
+				<li><label for="January2018">► January</label>
 					<input type="checkbox" id="January2018" />
 					<ul>
 	
-	<li>► <a href="/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html">Embedded Hacking: Extração de Firmware usando SPI</a></li>
-
-    
-	
-	
-	
-
-    
-    
-
-	
-	<li>► <a href="/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money.html">Talk is cheap. Show me the money!</a></li>
-
-    
-	
-	
-	
-
-    
-    
-
-	
-	<li>► <a href="/hello-world/2018/01/18/im-back.html">I'm back, bitches!!</a></li>
+	<li>► <a href="/hello-world/2018/01/28/im-back-en.html">I'm back!!</a></li>
 
     
 	    			</ul>

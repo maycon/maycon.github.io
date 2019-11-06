@@ -1,25 +1,23 @@
 ---
 layout: post
-title:  "Hacking Tricks: Identificando Portas de Saída para Shell Reversa"
+title:  "Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell"
 date:   2019-11-05
 categories: hacking-tricks
 tags: hacking-tricks network pentest
-lang: br
+lang: en
 ref: check-outgoing-ports
 has-asciinema: false
 ---
 
-Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.
+Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don't have access to any port.
 
-Durante um teste me deparei com essa situação e, para aproveitar minha saudade de codar alguma tool, resolvi implementar uma ferramenta que aceitasse qualquer conexão que viessem (em qualquer porta). Dessa forma é possível identificar se o host comprometido possui alguma exceção no firewall da rede que permita ele sair para a internet.
-
-No mais, boa leitura.
+During a pentest, I came across this situation and as I was looking to practice my coding, I decided to implement a tool that would accept any connection that came (any port). It was useful to identify if the compromised host had any outgoing port exposed to the Internet.
 
 
 ### Trick
 
 
-Essa dica se resume basicamente a um código Python que responde `SYN+ACK` para qualquer pacote `SYN` que recebido. Utilizando a biblioteca Scapy do Python foi possível desenvolver essa técnica com muito pouco esforço, como pode ser visto abaixo:
+This trick is basically a python code that anwser `SYN+ACK` to any incoming `SYN` package. Using the python Scapy library, it was possible to easly develop this mechaninsm, as you can see bellow:
 
 ``` python
 #!/usr/bin/env python3
@@ -67,7 +65,7 @@ sniff(
 )
 ```
 
-Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes `RST` quando o memso receber uma mensagem `SYN` em uma porta não aberta. Isso pode ser feito com o seguinte comando do `iptables`:
+The the above code work properly, we need to avoid the Linux kernel to sennd `RST` packades when it receives a `SYN` package to a closed port. It can be done usign the following `iptables` command:
 
 ```
 root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
@@ -83,7 +81,7 @@ target     prot opt source               destination
 DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 ```
 
-Tendo feito isso, basta executar o nosso script para começar a receber mensagens de conexão do além (aka Internet):
+Having done that, just run our script to start receiving connection messages from the unknown hosts:
 
 ```
 root@hacknroll:~# ./synack-all.py
@@ -97,7 +95,7 @@ root@hacknroll:~# ./synack-all.py
 ```
 
 
-Caso deseje capturar e responder somente para algum host/rede específico, basta adicionar os filtros correspondentes, como exemplificado abaixo:
+Or we also can change the filter parameter (pcap filtering) to anwser to only a specific host or network:
 
 ``` python
 sniff(
@@ -108,7 +106,7 @@ sniff(
 ```
 
 
-Agora basta utilizar qualquer artifício que desejar para validar se o script está funcionando corretamente. Abaixo é possível verificar que a porta 80 aparenta estar aberta:
+To verify if the host you have access has an specific outgoing port open (e.g. 80/tcp) to the internet, you can use the following command:
 
 ```
 $ ncat -z -v 68.xxx.xxx.181 80
@@ -117,7 +115,7 @@ Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
 ```
 
-Com pouco esfoço é possível varrer todas as portas e validar quais portas podem sair para a internet e, então, utilizá-las para obter a sua tão sonhada shell reversa:
+And with little effort, you can scan all ports and validate which ports can go out to the Internet and then use them to get your desired reverse shell:
 
 ``` bash
 $ for PORT in $(seq 65535); do ncat -z -v 68.xxx.xxx.181 $PORT 2>&1 | grep Connected; done
@@ -127,9 +125,9 @@ Ncat: Connected to 68.xxx.xxx.181:3389.
 Ncat: Connected to 68.xxx.xxx.181:8080.
 ```
 
-No caso acima, as portas 80, 443, 3389 (rdp) e 8080 possúem acesso à internet.
+In the above example, the TCP ports 80, 443, 3389 (rdp) and 8080 have outgoing access to the internet.
 
-### Conclusão
+### Conclusionn
 
 That's all folks!
 
