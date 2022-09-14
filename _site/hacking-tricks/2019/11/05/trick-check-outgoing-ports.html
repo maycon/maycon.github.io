@@ -6,21 +6,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/style.css?v=">
 
-<!-- Begin Jekyll SEO tag v2.5.0 -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Hacking Tricks: Identificando Portas de Saída para Shell Reversa | Maycon Vitali</title>
-<meta name="generator" content="Jekyll v3.7.4" />
+<meta name="generator" content="Jekyll v3.9.2" />
 <meta property="og:title" content="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" />
 <meta name="author" content="Maycon Vitali" />
 <meta property="og:locale" content="br" />
 <meta name="description" content="Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet." />
 <meta property="og:description" content="Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet." />
-<link rel="canonical" href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
-<meta property="og:url" content="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
+<link rel="canonical" href="http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-11-05T00:00:00-03:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"},"url":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html","author":{"@type":"Person","name":"Maycon Vitali"},"description":"Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.","headline":"Hacking Tricks: Identificando Portas de Saída para Shell Reversa","dateModified":"2019-11-05T00:00:00-03:00","datePublished":"2019-11-05T00:00:00-03:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2019-11-05T00:00:00-03:00","datePublished":"2019-11-05T00:00:00-03:00","description":"Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.","headline":"Hacking Tricks: Identificando Portas de Saída para Shell Reversa","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"},"url":"http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -43,8 +45,8 @@
 
 	<li>
 	
-		<a href="/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html" class="en">
-			<img title="English" src="/assets/images/lang/en.png" />
+		<a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" class="br">
+			<img title="Português Brasileiro" src="/assets/images/lang/br.png" />
 		</a>
 	
 	</li>
@@ -55,8 +57,8 @@
 
 	<li>
 	
-		<a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" class="br">
-			<img title="Português Brasileiro" src="/assets/images/lang/br.png" />
+		<a href="/hacking-tricks/2019/11/06/trick-check-outgoing-ports-en.html" class="en">
+			<img title="English" src="/assets/images/lang/en.png" />
 		</a>
 	
 	</li>
@@ -73,15 +75,15 @@
             <ul>
 	
 		
-			<li class='menu-icon'><a href="http://localhost:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
+			<li class='menu-icon'><a href="http://0.0.0.0:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/about">Sobre</a></li>
+			<li><a href="http://0.0.0.0:4000/br/about">Sobre</a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/posts">Publicações</a></li>
+			<li><a href="http://0.0.0.0:4000/br/posts">Publicações</a></li>
 		
 	
 </ul>
@@ -94,7 +96,7 @@
             <div class="post">
 	<header class="post-header">
 	    <h2 class="post-title">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</h2>
-		<div class="fb-like" data-width="" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
+		<div class="fb-like" data-width="" data-href="http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
@@ -106,56 +108,56 @@
 
 <h3 id="trick">Trick</h3>
 
-<p>Essa dica se resume basicamente a um código Python que responde <code class="highlighter-rouge">SYN+ACK</code> para qualquer pacote <code class="highlighter-rouge">SYN</code> que recebido. Utilizando a biblioteca Scapy do Python foi possível desenvolver essa técnica com muito pouco esforço, como pode ser visto abaixo:</p>
+<p>Essa dica se resume basicamente a um código Python que responde <code class="language-plaintext highlighter-rouge">SYN+ACK</code> para qualquer pacote <code class="language-plaintext highlighter-rouge">SYN</code> que recebido. Utilizando a biblioteca Scapy do Python foi possível desenvolver essa técnica com muito pouco esforço, como pode ser visto abaixo:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env python3</span>
-
-<span class="c">#</span>
-<span class="c"># SYN+ACK ALL - Written by Maycon Vitali</span>
-<span class="c">#</span>
-
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="c1">#
+# SYN+ACK ALL - Written by Maycon Vitali
+#
+</span>
 <span class="kn">from</span> <span class="nn">scapy.all</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="k">def</span> <span class="nf">PacketCallback</span><span class="p">(</span><span class="n">pkt</span><span class="p">):</span>
     <span class="k">print</span> <span class="p">(</span>
-        <span class="s">"[{}] SYN packet received from {} on port {}. Replying with SYN+ACK..."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S"</span><span class="p">)),</span>
-                <span class="n">pkt</span><span class="p">[</span><span class="n">IP</span><span class="p">]</span><span class="o">.</span><span class="n">src</span><span class="p">,</span>
-                <span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">dport</span>
+        <span class="s">"[{}] SYN packet received from {} on port {}. Replying with SYN+ACK..."</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">"%Y-%m-%d %H:%M:%S"</span><span class="p">)),</span>
+                <span class="n">pkt</span><span class="p">[</span><span class="n">IP</span><span class="p">].</span><span class="n">src</span><span class="p">,</span>
+                <span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">].</span><span class="n">dport</span>
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="c"># Create the IP datagram exchanging the source and the destination</span>
-    <span class="n">ip</span>  <span class="o">=</span> <span class="n">IP</span><span class="p">(</span>
-        <span class="n">src</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">IP</span><span class="p">]</span><span class="o">.</span><span class="n">dst</span><span class="p">,</span>
-        <span class="n">dst</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">IP</span><span class="p">]</span><span class="o">.</span><span class="n">src</span>
+    <span class="c1"># Create the IP datagram exchanging the source and the destination
+</span>    <span class="n">ip</span>  <span class="o">=</span> <span class="n">IP</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">IP</span><span class="p">].</span><span class="n">dst</span><span class="p">,</span>
+        <span class="n">dst</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">IP</span><span class="p">].</span><span class="n">src</span>
     <span class="p">)</span>
     
-    <span class="c"># Create the TCP datagrana exchanging the ports annd adjusting the flags</span>
-    <span class="c"># and the seq/ack numbers.</span>
-    <span class="n">tcp</span> <span class="o">=</span> <span class="n">TCP</span><span class="p">(</span>
-        <span class="n">sport</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">dport</span><span class="p">,</span>
-        <span class="n">dport</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">sport</span><span class="p">,</span>
+    <span class="c1"># Create the TCP datagrana exchanging the ports annd adjusting the flags
+</span>    <span class="c1"># and the seq/ack numbers.
+</span>    <span class="n">tcp</span> <span class="o">=</span> <span class="n">TCP</span><span class="p">(</span>
+        <span class="n">sport</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">].</span><span class="n">dport</span><span class="p">,</span>
+        <span class="n">dport</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">].</span><span class="n">sport</span><span class="p">,</span>
         <span class="n">flags</span><span class="o">=</span><span class="s">'SA'</span><span class="p">,</span>
-        <span class="n">seq</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">ack</span><span class="p">,</span>
-        <span class="n">ack</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">]</span><span class="o">.</span><span class="n">seq</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">seq</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">].</span><span class="n">ack</span><span class="p">,</span>
+        <span class="n">ack</span><span class="o">=</span><span class="n">pkt</span><span class="p">[</span><span class="n">TCP</span><span class="p">].</span><span class="n">seq</span><span class="o">+</span><span class="mi">1</span>
     <span class="p">)</span>
 
-    <span class="c"># Do it!</span>
-    <span class="n">send</span><span class="p">(</span><span class="n">ip</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="c1"># Do it!
+</span>    <span class="n">send</span><span class="p">(</span><span class="n">ip</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
-<span class="c"># Start the sniffing</span>
-<span class="n">sniff</span><span class="p">(</span>
+<span class="c1"># Start the sniffing
+</span><span class="n">sniff</span><span class="p">(</span>
     <span class="n">iface</span><span class="o">=</span><span class="s">"eth0"</span><span class="p">,</span>
     <span class="n">prn</span><span class="o">=</span><span class="n">PacketCallback</span><span class="p">,</span>
     <span class="nb">filter</span><span class="o">=</span><span class="s">"(tcp[tcpflags] &amp; tcp-syn != 0)"</span>
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes <code class="highlighter-rouge">RST</code> quando o memso receber uma mensagem <code class="highlighter-rouge">SYN</code> em uma porta não aberta. Isso pode ser feito com o seguinte comando do <code class="highlighter-rouge">iptables</code>:</p>
+<p>Para que o código acima funcione apropriadamente, precisamos de dizer ao Kernel do Linux para não enviar pacotes <code class="language-plaintext highlighter-rouge">RST</code> quando o memso receber uma mensagem <code class="language-plaintext highlighter-rouge">SYN</code> em uma porta não aberta. Isso pode ser feito com o seguinte comando do <code class="language-plaintext highlighter-rouge">iptables</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hacknroll:~# iptables -A OUTPUT -p tcp --tcp-flags RST RST -j DROP
 root@hacknroll:~# iptables -L
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -170,7 +172,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 
 <p>Tendo feito isso, basta executar o nosso script para começar a receber mensagens de conexão do além (aka Internet):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hacknroll:~# ./synack-all.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@hacknroll:~# ./synack-all.py
 [2019-11-05 14:05:12] SYN packet received from 117.xxx.xxx.160 on port 445. Replying with SYN+ACK...
 [2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
 [2019-11-05 14:05:41] SYN packet received from 193.xxx.xxx.46 on port 445. Replying with SYN+ACK...
@@ -191,7 +193,7 @@ DROP       tcp  --  anywhere             anywhere             tcp flags:RST/RST
 
 <p>Agora basta utilizar qualquer artifício que desejar para validar se o script está funcionando corretamente. Abaixo é possível verificar que a porta 80 aparenta estar aberta:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ncat -z -v 68.xxx.xxx.181 80
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ncat -z -v 68.xxx.xxx.181 80
 Ncat: Version 7.80 ( https://nmap.org/ncat )
 Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
@@ -199,7 +201,7 @@ Ncat: 0 bytes sent, 0 bytes received in 0.24 seconds.
 
 <p>Com pouco esfoço é possível varrer todas as portas e validar quais portas podem sair para a internet e, então, utilizá-las para obter a sua tão sonhada shell reversa:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">for </span>PORT <span class="k">in</span> <span class="k">$(</span>seq 65535<span class="k">)</span><span class="p">;</span> <span class="k">do </span>ncat <span class="nt">-z</span> <span class="nt">-v</span> 68.xxx.xxx.181 <span class="nv">$PORT</span> 2&gt;&amp;1 | <span class="nb">grep </span>Connected<span class="p">;</span> <span class="k">done
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">for </span>PORT <span class="k">in</span> <span class="si">$(</span><span class="nb">seq </span>65535<span class="si">)</span><span class="p">;</span> <span class="k">do </span>ncat <span class="nt">-z</span> <span class="nt">-v</span> 68.xxx.xxx.181 <span class="nv">$PORT</span> 2&gt;&amp;1 | <span class="nb">grep </span>Connected<span class="p">;</span> <span class="k">done
 </span>Ncat: Connected to 68.xxx.xxx.181:80.
 Ncat: Connected to 68.xxx.xxx.181:443.
 Ncat: Connected to 68.xxx.xxx.181:3389.
@@ -209,7 +211,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 <p>No caso acima, as portas 80, 443, 3389 (rdp) e 8080 possúem acesso à internet.</p>
 
 <p>Uma forma de aumentar a velicidade do scan e evatir algumas regras de firewall/ips é utilizar o seguinte trick sugerido pelo <a href="https://twitter.com/usscastro?lang=pt">@usscastro</a>:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>seq 65535 | shuf | xargs <span class="nt">-P32</span> <span class="nt">-I</span>@ sh <span class="nt">-c</span> <span class="s2">"ncat -z -v 68.xxx.xxx.181 @"</span> 2&gt;&amp;1 | <span class="nb">grep </span>Connected
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">seq </span>65535 | <span class="nb">shuf</span> | xargs <span class="nt">-P32</span> <span class="nt">-I</span>@ sh <span class="nt">-c</span> <span class="s2">"ncat -z -v 68.xxx.xxx.181 @"</span> 2&gt;&amp;1 | <span class="nb">grep </span>Connected
 Ncat: Connected to 68.xxx.xxx.181:3389.
 Ncat: Connected to 68.xxx.xxx.181:443.
 Ncat: Connected to 68.xxx.xxx.181:80.
@@ -230,7 +232,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 
 	</div>
 
-	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
+	<div class="fb-comments" data-width="100%" data-href="http://0.0.0.0:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
 </div> 
         </section>
         <div id="sidebar">

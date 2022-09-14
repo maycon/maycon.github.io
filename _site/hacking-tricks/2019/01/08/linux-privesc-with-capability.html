@@ -6,21 +6,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/assets/css/style.css?v=">
 
-<!-- Begin Jekyll SEO tag v2.5.0 -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Hacking Tricks: Escalação de Privilégio em Linux com Capability | Maycon Vitali</title>
-<meta name="generator" content="Jekyll v3.7.4" />
+<meta name="generator" content="Jekyll v3.9.2" />
 <meta property="og:title" content="Hacking Tricks: Escalação de Privilégio em Linux com Capability" />
 <meta name="author" content="Maycon Vitali" />
 <meta property="og:locale" content="br" />
 <meta name="description" content="Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de hacking tricks que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com Linux Capabilities. Boa leitura!" />
 <meta property="og:description" content="Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de hacking tricks que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com Linux Capabilities. Boa leitura!" />
-<link rel="canonical" href="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" />
-<meta property="og:url" content="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" />
+<link rel="canonical" href="http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-01-08T00:00:00-02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hacking Tricks: Escalação de Privilégio em Linux com Capability" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html"},"url":"http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html","author":{"@type":"Person","name":"Maycon Vitali"},"description":"Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de hacking tricks que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com Linux Capabilities. Boa leitura!","headline":"Hacking Tricks: Escalação de Privilégio em Linux com Capability","dateModified":"2019-01-08T00:00:00-02:00","datePublished":"2019-01-08T00:00:00-02:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2019-01-08T00:00:00-02:00","datePublished":"2019-01-08T00:00:00-02:00","description":"Dizem que quando você adentra em uma máquina seja durante um pentest, durante um estudo ou outra coisa (haha) você já pode ser considerado root/SYSTEM. Que mesmo estando com um usuários com pouco ou nenhum privilégio, existem diversas maneiras de se escalar para a autoridade máxima daquele host (sem entrar em detalhes pedantes). Essa escalação de privilégio pode ser feito através de vulnerabilidades no kernel, por falhas de aplicativos ou pelo simples desleixo/vacilo do sysadmin da rede. Com isso estou dando inicio a uma serie de hacking tricks que são utilizados em pentests, competições de CTF etc. E a primeira publicação será sobre escalação de privilégios com Linux Capabilities. Boa leitura!","headline":"Hacking Tricks: Escalação de Privilégio em Linux com Capability","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html"},"url":"http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -43,8 +45,8 @@
 
 	<li>
 	
-		<a href="/404-en.html?ref=/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" class="en">
-			<img title="English" src="/assets/images/lang/en.png" class="desaturate" />
+		<a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" class="br">
+			<img title="Português Brasileiro" src="/assets/images/lang/br.png" />
 		</a>
 	
 	</li>
@@ -55,8 +57,8 @@
 
 	<li>
 	
-		<a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" class="br">
-			<img title="Português Brasileiro" src="/assets/images/lang/br.png" />
+		<a href="/404-en.html?ref=/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" class="en">
+			<img title="English" src="/assets/images/lang/en.png" class="desaturate" />
 		</a>
 	
 	</li>
@@ -73,15 +75,15 @@
             <ul>
 	
 		
-			<li class='menu-icon'><a href="http://localhost:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
+			<li class='menu-icon'><a href="http://0.0.0.0:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/about">Sobre</a></li>
+			<li><a href="http://0.0.0.0:4000/br/about">Sobre</a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/posts">Publicações</a></li>
+			<li><a href="http://0.0.0.0:4000/br/posts">Publicações</a></li>
 		
 	
 </ul>
@@ -94,7 +96,7 @@
             <div class="post">
 	<header class="post-header">
 	    <h2 class="post-title">Hacking Tricks: Escalação de Privilégio em Linux com Capability</h2>
-		<div class="fb-like" data-width="" data-href="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" data-colorscheme="dark"></div>
+		<div class="fb-like" data-width="" data-href="http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
@@ -108,9 +110,9 @@
 
 <h3 id="como-funciona">Como funciona?</h3>
 
-<p>Para o resito de escalação de privilégio, podemos iniciar enumerando todas as <em>capabilities</em> disponível no sistema. Isso é feito através do comando <code class="highlighter-rouge">getcap</code>, que pode ser executado para buscar de maneira recursiva (<code class="highlighter-rouge">-r</code>) a partir da raiz (<code class="highlighter-rouge">/</code>) do sistema de arquivos:</p>
+<p>Para o resito de escalação de privilégio, podemos iniciar enumerando todas as <em>capabilities</em> disponível no sistema. Isso é feito através do comando <code class="language-plaintext highlighter-rouge">getcap</code>, que pode ser executado para buscar de maneira recursiva (<code class="language-plaintext highlighter-rouge">-r</code>) a partir da raiz (<code class="language-plaintext highlighter-rouge">/</code>) do sistema de arquivos:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maycon@hacknroll:~$ /sbin/getcap -r / 2&gt;/dev/null
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maycon@hacknroll:~$ /sbin/getcap -r / 2&gt;/dev/null
 /usr/bin/rsh = cap_net_bind_service+ep
 /usr/bin/rlogin = cap_net_bind_service+ep
 /usr/bin/dumpcap = cap_dac_override,cap_net_admin,cap_net_raw+eip
@@ -120,21 +122,21 @@
 /usr/lib/gstreamer-1.0/gst-ptp-helper = cap_net_bind_service,cap_net_admin+ep
 </code></pre></div></div>
 
-<p>Nota-se que antes o binário <code class="highlighter-rouge">ping</code>, que geralmente era <code class="highlighter-rouge">suid</code>, hoje ainda pertence ao <em>root</em>, porém sem o <em>suid bit</em> habilitado:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CAP_NET_RAW
+<p>Nota-se que antes o binário <code class="language-plaintext highlighter-rouge">ping</code>, que geralmente era <code class="language-plaintext highlighter-rouge">suid</code>, hoje ainda pertence ao <em>root</em>, porém sem o <em>suid bit</em> habilitado:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CAP_NET_RAW
       * Use RAW and PACKET sockets;
       * bind to any address for transparent proxying.
 </code></pre></div></div>
 
-<p>O que faz com que esse binário seja possível montar e enviar pacotes <em>raw</em> na rede é a <em>capability</em> <code class="highlighter-rouge">cap_net_raw</code>, como podemos ver na <em>man page</em>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maycon@hacknroll:~$ ls -la /usr/bin/ping
+<p>O que faz com que esse binário seja possível montar e enviar pacotes <em>raw</em> na rede é a <em>capability</em> <code class="language-plaintext highlighter-rouge">cap_net_raw</code>, como podemos ver na <em>man page</em>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maycon@hacknroll:~$ ls -la /usr/bin/ping
 -rwxr-xr-x 1 root 60112 Jul 12 01:52 /usr/bin/ping
 </code></pre></div></div>
 
-<p>Um outro exemplo é o <code class="highlighter-rouge">/usr/bin/dumpcap</code>, que é utilizado pelo <code class="highlighter-rouge">wireshark</code>. Essa aplicação que valida se o usuário pertence ao grupo <code class="highlighter-rouge">wireshark</code> para, então, permitir que o mesmo capture o tráfego de rede sem precisar do <code class="highlighter-rouge">sudo</code> ou de escalar para <em>root</em>.</p>
+<p>Um outro exemplo é o <code class="language-plaintext highlighter-rouge">/usr/bin/dumpcap</code>, que é utilizado pelo <code class="language-plaintext highlighter-rouge">wireshark</code>. Essa aplicação que valida se o usuário pertence ao grupo <code class="language-plaintext highlighter-rouge">wireshark</code> para, então, permitir que o mesmo capture o tráfego de rede sem precisar do <code class="language-plaintext highlighter-rouge">sudo</code> ou de escalar para <em>root</em>.</p>
 
-<p>Na listagem acima é possível notar que temos o <code class="highlighter-rouge">/usr/bin/cat</code> com a <code class="highlighter-rouge">capability cap_dac_read_search</code>. Para garantir o entendimento desse atributo, vamos ver o que a <em>man page</em> diz sobre ele:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CAP_DAC_READ_SEARCH
+<p>Na listagem acima é possível notar que temos o <code class="language-plaintext highlighter-rouge">/usr/bin/cat</code> com a <code class="language-plaintext highlighter-rouge">capability cap_dac_read_search</code>. Para garantir o entendimento desse atributo, vamos ver o que a <em>man page</em> diz sobre ele:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CAP_DAC_READ_SEARCH
       * Bypass file read permission checks and directory read and
         execute permission checks;
       * invoke open_by_handle_at(2);
@@ -142,17 +144,17 @@
         file referred to by a file descriptor.
 </code></pre></div></div>
 
-<p>Como pode ser visto, temos uma falha de segurança, pois o <code class="highlighter-rouge">cat</code> possui a <em>capability</em> de <em>bypassar</em> a checagem de permissão de leitura feita pelo kernel. Dessa forma mesmo sem <code class="highlighter-rouge">suid bit</code> ou sem ser <em>root</em> é possível ler qualquer arquivo utilizando o mesmo:</p>
+<p>Como pode ser visto, temos uma falha de segurança, pois o <code class="language-plaintext highlighter-rouge">cat</code> possui a <em>capability</em> de <em>bypassar</em> a checagem de permissão de leitura feita pelo kernel. Dessa forma mesmo sem <code class="language-plaintext highlighter-rouge">suid bit</code> ou sem ser <em>root</em> é possível ler qualquer arquivo utilizando o mesmo:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maycon@hacknroll:~$ cat /etc/shadow | grep root
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>maycon@hacknroll:~$ cat /etc/shadow | grep root
 root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 </code></pre></div></div>
 
-<p>É claro que o <code class="highlighter-rouge">cat</code> foi posto de maneira proposital para exemplificar. Porém as capabilities do <code class="highlighter-rouge">/usr/bin/dumpcap</code>, por exemplo, são padrões nos ambientes que possuem <em>wireshark</em> instalado (eg: Kali Linux). Então fica como exercício para casa descobrir uma forma de escalar privilégio em ambientes cujo seu usuário é não privilegiado e está no grupo <em>wireshark</em> (hint: <code class="highlighter-rouge">cap_dac_override</code> vai te ajudar).</p>
+<p>É claro que o <code class="language-plaintext highlighter-rouge">cat</code> foi posto de maneira proposital para exemplificar. Porém as capabilities do <code class="language-plaintext highlighter-rouge">/usr/bin/dumpcap</code>, por exemplo, são padrões nos ambientes que possuem <em>wireshark</em> instalado (eg: Kali Linux). Então fica como exercício para casa descobrir uma forma de escalar privilégio em ambientes cujo seu usuário é não privilegiado e está no grupo <em>wireshark</em> (hint: <code class="language-plaintext highlighter-rouge">cap_dac_override</code> vai te ajudar).</p>
 
 <h3 id="conclusão">Conclusão</h3>
 
-<p>Essa foi uma escrita rápida para demonstrar uma forma bem interessante de escalar privilégio em sistemas Linux. Espero poder ter tempo para escrever outros <em>hacking tricks</em> e contribuir de alguma forma com quem está iniciando. Quem quiser brincar mais com isso basta ler a <em>man page</em>  e utilizar os comandos <code class="highlighter-rouge">getcap</code> e <code class="highlighter-rouge">setcap</code>.</p>
+<p>Essa foi uma escrita rápida para demonstrar uma forma bem interessante de escalar privilégio em sistemas Linux. Espero poder ter tempo para escrever outros <em>hacking tricks</em> e contribuir de alguma forma com quem está iniciando. Quem quiser brincar mais com isso basta ler a <em>man page</em>  e utilizar os comandos <code class="language-plaintext highlighter-rouge">getcap</code> e <code class="language-plaintext highlighter-rouge">setcap</code>.</p>
 
 <p>Para dúvidas, sugestões ou reclamações basta utilizar o espaço de comentários abaixo ou os contatos disponíveis na barra lateral do site.</p>
 
@@ -165,7 +167,7 @@ root:$6$X.E.toNpWI9G4IL3$8gwwSdv...snip...Ky1duJ9xP6c94Lg.:17870::::::
 
 	</div>
 
-	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" data-colorscheme="dark"></div>
+	<div class="fb-comments" data-width="100%" data-href="http://0.0.0.0:4000/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" data-colorscheme="dark"></div>
 </div> 
         </section>
         <div id="sidebar">

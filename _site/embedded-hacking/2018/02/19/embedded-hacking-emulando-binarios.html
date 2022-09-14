@@ -8,21 +8,23 @@
 
 	<link rel="stylesheet" type="text/css" href="/assets/css/asciinema-player.css?v=" />
 
-<!-- Begin Jekyll SEO tag v2.5.0 -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Embedded Hacking: Emulando binários dos firmwares | Maycon Vitali</title>
-<meta name="generator" content="Jekyll v3.7.4" />
+<meta name="generator" content="Jekyll v3.9.2" />
 <meta property="og:title" content="Embedded Hacking: Emulando binários dos firmwares" />
 <meta name="author" content="Maycon Vitali" />
 <meta property="og:locale" content="br" />
 <meta name="description" content="Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho." />
 <meta property="og:description" content="Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho." />
-<link rel="canonical" href="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
-<meta property="og:url" content="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
+<link rel="canonical" href="http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-02-19T00:00:00-03:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Embedded Hacking: Emulando binários dos firmwares" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html"},"url":"http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html","author":{"@type":"Person","name":"Maycon Vitali"},"description":"Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho.","headline":"Embedded Hacking: Emulando binários dos firmwares","dateModified":"2018-02-19T00:00:00-03:00","datePublished":"2018-02-19T00:00:00-03:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2018-02-19T00:00:00-03:00","datePublished":"2018-02-19T00:00:00-03:00","description":"Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho.","headline":"Embedded Hacking: Emulando binários dos firmwares","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html"},"url":"http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -45,8 +47,8 @@
 
 	<li>
 	
-		<a href="/404-en.html?ref=/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" class="en">
-			<img title="English" src="/assets/images/lang/en.png" class="desaturate" />
+		<a href="/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" class="br">
+			<img title="Português Brasileiro" src="/assets/images/lang/br.png" />
 		</a>
 	
 	</li>
@@ -57,8 +59,8 @@
 
 	<li>
 	
-		<a href="/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" class="br">
-			<img title="Português Brasileiro" src="/assets/images/lang/br.png" />
+		<a href="/404-en.html?ref=/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" class="en">
+			<img title="English" src="/assets/images/lang/en.png" class="desaturate" />
 		</a>
 	
 	</li>
@@ -75,15 +77,15 @@
             <ul>
 	
 		
-			<li class='menu-icon'><a href="http://localhost:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
+			<li class='menu-icon'><a href="http://0.0.0.0:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/about">Sobre</a></li>
+			<li><a href="http://0.0.0.0:4000/br/about">Sobre</a></li>
 		
 	
 		
-			<li><a href="http://localhost:4000/br/posts">Publicações</a></li>
+			<li><a href="http://0.0.0.0:4000/br/posts">Publicações</a></li>
 		
 	
 </ul>
@@ -96,7 +98,7 @@
             <div class="post">
 	<header class="post-header">
 	    <h2 class="post-title">Embedded Hacking: Emulando binários dos firmwares</h2>
-		<div class="fb-like" data-width="" data-href="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
+		<div class="fb-like" data-width="" data-href="http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
@@ -110,9 +112,9 @@
 
 <p>O <a href="https://github.com/ReFirmLabs/binwalk">binwalk</a> é uma ferramente utilizada para análise, extração e engenharia reversa de firmwares. Ela possui dezenas de funcionalidades, desde a extração de firmware, disassembly de código (utilizando o <a href="http://www.capstone-engine.org/">capstone</a>) e análise de entropia, muito útil para identificar se todo ou parte de um arquivo está criptografado ou compactado.</p>
 
-<p>Basicamente quando queremos saber o tipo de um arquivo desconhecido nós utilizamos o comando <code class="highlighter-rouge">file</code> passando o arquivo como argumento. Esse comando possui uma base de assinatura (aka <code class="highlighter-rouge">magic numbers</code>) de binários e utiliza essa base de assinatura para verificar o tipo do arquivo. Porém o comando file faz o match da assinatura no começo do arquivo, diferente da ferramenta binwalk.</p>
+<p>Basicamente quando queremos saber o tipo de um arquivo desconhecido nós utilizamos o comando <code class="language-plaintext highlighter-rouge">file</code> passando o arquivo como argumento. Esse comando possui uma base de assinatura (aka <code class="language-plaintext highlighter-rouge">magic numbers</code>) de binários e utiliza essa base de assinatura para verificar o tipo do arquivo. Porém o comando file faz o match da assinatura no começo do arquivo, diferente da ferramenta binwalk.</p>
 
-<p>Além de ter uma base de assinatura mais específica e complexa, o binwalk percorre todo o binário procurando por formatos conhecidos, como bootloaders, sistemas de arquivos, imagens compactadas etc. Além disso, é possível extrair esse conteúdo (ao invés de fazer na mão com o comando <code class="highlighter-rouge">dd</code>) e, caso necessário, fazer esse processo de extração de maneira recursiva.</p>
+<p>Além de ter uma base de assinatura mais específica e complexa, o binwalk percorre todo o binário procurando por formatos conhecidos, como bootloaders, sistemas de arquivos, imagens compactadas etc. Além disso, é possível extrair esse conteúdo (ao invés de fazer na mão com o comando <code class="language-plaintext highlighter-rouge">dd</code>) e, caso necessário, fazer esse processo de extração de maneira recursiva.</p>
 
 <p>Por exemplo, supomos que uma imagem de um firmware possui um sistema de arquivos compactado, e nesse sistema de arquivos possui um arquivo compactado com tar.gz. O binwalk com os argumentos certos iria identificar e extrair o sistema de arquivos principal e, então, identificar e extrair o arquivo tar.gz compactado.</p>
 
@@ -124,7 +126,7 @@
 <p>Caso esteja utilizando alguma outra distribuição, verifique nos repositórios oficiais se a ferramenta está disponível. Caso contrário, a instalação a partir do github seria a melhor alternativa.</p>
 
 <p>Abaixo temos a lista completa de opções disponíveis na ferramenta:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Binwalk v2.1.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Binwalk v2.1.1
 Craig Heffner, http://www.binwalk.org
 
 Usage: binwalk [OPTIONS] [FILE1] [FILE2] [FILE3] ...
@@ -197,12 +199,12 @@ General Options:
 
 <h2 id="extração-do-firmware">Extração do firmware</h2>
 
-<p>Para extrair o sistema de arquivos do firmware do nosso device, iremos executar o binwalk com o argumento -e (de <code class="highlighter-rouge">extract</code>) no dump da memória flash, extraída por SPI na publicação anterior. Caso você esteja analisando algum outro firmware obtido por outro meio (ex: página de download do fabricante), o procedimento seria o mesmo.</p>
+<p>Para extrair o sistema de arquivos do firmware do nosso device, iremos executar o binwalk com o argumento -e (de <code class="language-plaintext highlighter-rouge">extract</code>) no dump da memória flash, extraída por SPI na publicação anterior. Caso você esteja analisando algum outro firmware obtido por outro meio (ex: página de download do fabricante), o procedimento seria o mesmo.</p>
 
 <p>Abaixo é possível ver o processo de extração e o resultado obtido:</p>
 <asciinema-player src="/assets/cast/binwalk-extract.json" rows="20" preload="true" poster="npt:0:22"></asciinema-player>
 
-<p>A imagem do firmware contém alguns elementos. Porém o que nos interessa a princípio é o sistema de arquivos Squashfs. O binwalk com o arquivo <code class="highlighter-rouge">-e</code> já extrai e monta o sistema de arquivos, e ao acessar a pasta destino foi possível ver os arquivos do dispositivo. Nessa etapa já é possível comectar a procurar por alguns ítens interessantes, como por exemplo:</p>
+<p>A imagem do firmware contém alguns elementos. Porém o que nos interessa a princípio é o sistema de arquivos Squashfs. O binwalk com o arquivo <code class="language-plaintext highlighter-rouge">-e</code> já extrai e monta o sistema de arquivos, e ao acessar a pasta destino foi possível ver os arquivos do dispositivo. Nessa etapa já é possível comectar a procurar por alguns ítens interessantes, como por exemplo:</p>
 <ul>
   <li>Serviços inicializando</li>
   <li>Usuários não documentados</li>
@@ -215,22 +217,22 @@ General Options:
 
 <p>Uma coisa muito interessante para se fazer é executar os binários disponíveis no firmware para uma análise dinâmica prévia. Isso pode ser útil para identificar vulnerabilidades e/ou simplesmente analisar o funcionamento de alguma aplicação legacy disponível no firmware.</p>
 
-<p>Para a execução de binários, temos que identificar a arquitetura do dispositivo. Geralmente a arquitetura é MIPS ou ARM, mas para tira a dúvida basta executar o comando <code class="highlighter-rouge">file</code> em algum dos binários disponíveis no sistema de arquivos do firware.</p>
+<p>Para a execução de binários, temos que identificar a arquitetura do dispositivo. Geralmente a arquitetura é MIPS ou ARM, mas para tira a dúvida basta executar o comando <code class="language-plaintext highlighter-rouge">file</code> em algum dos binários disponíveis no sistema de arquivos do firware.</p>
 
-<p>Abaixo o comando <code class="highlighter-rouge">file</code> comprova que estamos trabalhando com um dispositivo com arquitetura MIPS:</p>
+<p>Abaixo o comando <code class="language-plaintext highlighter-rouge">file</code> comprova que estamos trabalhando com um dispositivo com arquitetura MIPS:</p>
 
 <asciinema-player src="/assets/cast/file-binary.json" rows="10" preload="true" poster="npt:0:8"></asciinema-player>
 
-<p>Para executar os binários, vamos utilizar uma combinação do <code class="highlighter-rouge">chroot</code> + <code class="highlighter-rouge">qemu</code>. O chroot irá alterar o root do sistema para o root do sistema de arquivos do firmware. Dessa forma todas as bibliotecas (também MIPS) e arquivos de configuração estarão disponíveis. Já o qemu irá executar o binário propriamente dito. Porém para isto o qemu deve ser compilado de maneira estática, para não depender de qualquer biblioteca que esteja fora do ambiente chroot. No archlinux existe um pacote AUR chamado <a href="https://aur.archlinux.org/packages/qemu-user-static/">qemu-user-static</a>, que contém o QEMU compilado de maneira estática para diversas arquiteturas diferentes.</p>
+<p>Para executar os binários, vamos utilizar uma combinação do <code class="language-plaintext highlighter-rouge">chroot</code> + <code class="language-plaintext highlighter-rouge">qemu</code>. O chroot irá alterar o root do sistema para o root do sistema de arquivos do firmware. Dessa forma todas as bibliotecas (também MIPS) e arquivos de configuração estarão disponíveis. Já o qemu irá executar o binário propriamente dito. Porém para isto o qemu deve ser compilado de maneira estática, para não depender de qualquer biblioteca que esteja fora do ambiente chroot. No archlinux existe um pacote AUR chamado <a href="https://aur.archlinux.org/packages/qemu-user-static/">qemu-user-static</a>, que contém o QEMU compilado de maneira estática para diversas arquiteturas diferentes.</p>
 
-<p>Para executar os binários MIPS do firmware primeiramente copiamos o binário estático do qemu para arquitetura MIPS (no caso <code class="highlighter-rouge">qemu-mips-static</code>) para dentro do squashfs-root e, então, executamos o binário copiado dentro de um ambiente de chroot.</p>
+<p>Para executar os binários MIPS do firmware primeiramente copiamos o binário estático do qemu para arquitetura MIPS (no caso <code class="language-plaintext highlighter-rouge">qemu-mips-static</code>) para dentro do squashfs-root e, então, executamos o binário copiado dentro de um ambiente de chroot.</p>
 
 <p>O vídeo abaixo demostra a execução do binário MIPS de listagem de arquivos (ls):</p>
 <asciinema-player src="/assets/cast/qemu-embedded-binary.json" rows="20" preload="true" poster="npt:0:2"></asciinema-player>
 
 <h2 id="conclusão">Conclusão</h2>
 
-<p>Apesar dessa publicação ter sido razoavelmente simples, acredito que a utilização do <code class="highlighter-rouge">chroot</code> + <code class="highlighter-rouge">qemu</code> para análise dinâmica de binários seja extremamente útil. Porém, infelizmente, nem todos os binário executam com sucesso através desse método. Isso ocorre pelo motivo óbvio que o qemu não emula o hardware completo do nosso dispositivo embarcado. Entretanto a maioria das dificuldades conseguem ser contornadas utilizando alguns artifícios como uma melhoria no setup do ambiente (ex: montar o <code class="highlighter-rouge">/proc</code> e o <code class="highlighter-rouge">/dev</code>), seja mudando algum arquivo de configuração, seja rodando o binário com LD_PRELOAD para burlar algumas chamadas específicas de biblioteca (ex: acesso a <code class="highlighter-rouge">nvram</code>) ou, no pior caso, fazendo um patch no binário em execução.</p>
+<p>Apesar dessa publicação ter sido razoavelmente simples, acredito que a utilização do <code class="language-plaintext highlighter-rouge">chroot</code> + <code class="language-plaintext highlighter-rouge">qemu</code> para análise dinâmica de binários seja extremamente útil. Porém, infelizmente, nem todos os binário executam com sucesso através desse método. Isso ocorre pelo motivo óbvio que o qemu não emula o hardware completo do nosso dispositivo embarcado. Entretanto a maioria das dificuldades conseguem ser contornadas utilizando alguns artifícios como uma melhoria no setup do ambiente (ex: montar o <code class="language-plaintext highlighter-rouge">/proc</code> e o <code class="language-plaintext highlighter-rouge">/dev</code>), seja mudando algum arquivo de configuração, seja rodando o binário com LD_PRELOAD para burlar algumas chamadas específicas de biblioteca (ex: acesso a <code class="language-plaintext highlighter-rouge">nvram</code>) ou, no pior caso, fazendo um patch no binário em execução.</p>
 
 <p>Recomendo aos que estão acompanhando a série a praticarem com algum dispositivo que possuem ou a escolherem algum firmware na internet para seguir o processo. Caso tenham qualquer dúvida ou comentário basta entrar em contato ou utilizar os campos de comentário no final da página.</p>
 
@@ -241,7 +243,7 @@ Hack N’ Roll</p>
 
 	</div>
 
-	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
+	<div class="fb-comments" data-width="100%" data-href="http://0.0.0.0:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
 </div> 
         </section>
         <div id="sidebar">
