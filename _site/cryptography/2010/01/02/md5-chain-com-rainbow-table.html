@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset='utf-8'>
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/css/style.css?v=">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Hack New Year: MD5 Chain com Rainbow Table | Maycon Vitali</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Hack New Year: MD5 Chain com Rainbow Table" />
+<meta name="author" content="Maycon Vitali" />
+<meta property="og:locale" content="br" />
+<meta name="description" content="Antes de qualquer coisa, gostaria de desejar a todos um feliz ano novo cheio de felicidades e que seus objetivos sejam edificados em 2010." />
+<meta property="og:description" content="Antes de qualquer coisa, gostaria de desejar a todos um feliz ano novo cheio de felicidades e que seus objetivos sejam edificados em 2010." />
+<link rel="canonical" href="http://localhost:4000/cryptography/2010/01/02/md5-chain-com-rainbow-table.html" />
+<meta property="og:url" content="http://localhost:4000/cryptography/2010/01/02/md5-chain-com-rainbow-table.html" />
+<meta property="og:site_name" content="Maycon Vitali" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-01-02T00:00:00-02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hack New Year: MD5 Chain com Rainbow Table" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2010-01-02T00:00:00-02:00","datePublished":"2010-01-02T00:00:00-02:00","description":"Antes de qualquer coisa, gostaria de desejar a todos um feliz ano novo cheio de felicidades e que seus objetivos sejam edificados em 2010.","headline":"Hack New Year: MD5 Chain com Rainbow Table","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cryptography/2010/01/02/md5-chain-com-rainbow-table.html"},"url":"http://localhost:4000/cryptography/2010/01/02/md5-chain-com-rainbow-table.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body> 
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <header class="site-header">
+    <div class="container lang-selector">
+		<ul>
+
+	
+	
+
+	<li>
+	
+		<a href="/404-en.html?ref=/cryptography/2010/01/02/md5-chain-com-rainbow-table.html" class="en">
+			<img title="English" src="/assets/images/lang/en.png" class="desaturate" />
+		</a>
+	
+	</li>
+
+
+	
+	
+
+	<li>
+	
+		<a href="/cryptography/2010/01/02/md5-chain-com-rainbow-table.html" class="br">
+			<img title="Português Brasileiro" src="/assets/images/lang/br.png" />
+		</a>
+	
+	</li>
+
+
+</ul>
+	</div>
+    <div class="container">
+        <h1>Maycon Vitali</h1>
+        <h2>I hack stuff!</h2>
+    </div>
+    <nav id="menu">
+        <div class="container">
+            <ul>
+	
+		
+			<li class='menu-icon'><a href="http://localhost:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
+		
+	
+		
+			<li><a href="http://localhost:4000/br/about">Sobre</a></li>
+		
+	
+		
+			<li><a href="http://localhost:4000/br/posts">Publicações</a></li>
+		
+	
+</ul>
+        </div>
+    </nav>
+</header>
+
+    <div class="container">
+        <section id="main_content">
+            <div class="post">
+	<header class="post-header">
+	    <h2 class="post-title">Hack New Year: MD5 Chain com Rainbow Table</h2>
+		<div class="fb-like" data-width="" data-href="http://localhost:4000/cryptography/2010/01/02/md5-chain-com-rainbow-table.html" data-colorscheme="dark"></div>
+	</header>
+
+	<div class="post-content">
+    	<p>Antes de qualquer coisa, gostaria de desejar a todos um feliz ano novo cheio de felicidades e que seus objetivos sejam edificados em 2010.</p>
+
+<p>Criptografia com certeza é um assunto de interesse de muitos, porém por ser uma área tão extensa e de pré-requisitos (álgebra, geometria, trigonometria, teoria dos números, etc) que realmente não agradam alguns muitas vezes não são estudadas como hobby.</p>
+
+<p>A criptoanálise é o ramo da ciência que estuda métodos de criptografia, capacitando ao profissional fazer a análise de um algoritmo criptográfico quanto a sua complexidade, podendo definir um algoritmo como forte (de difícil quebra) ou fraco (de fácil quebra).</p>
+
+<p>Como dito, para se estudar criptografia, geralmente tem-se a necessidade de um forte embasamento matemático. Para se ter idéia, algumas linhas da matemática pura estudados a 20 anos atrás são chave fundamental para os melhores algoritmos de criptografia da atualidade.</p>
+
+<p>Alguns ramos de estudo de criptografia não necessitam de um embasamento profundo em matemática. Um desses ramos é o Hash Chain, base para o tão conhecido <em>Rainbow Table</em> (vide Project RainbowCrack), que utiliza uma técnica chamada <em>Time-memory Tradeoff (TMTO)</em>.</p>
+
+<p>Em um ataque de força-bruta (<em>brute-force</em>) convencional a um algoritmo de hash, são gerados todas as possíveis senhas com seus respectivos <em>hashes</em>, e então procura-se um determinado <em>hash</em> para tentar obter a senha original. Porém, levando em consideração uma senha composto das letras de a à z (26 letras) e uma senha de até 7 caracteres, temos o total de:</p>
+
+<p><img src="http://localhost:4000/assets/images/posts/2010/01/hash-formula1.jpeg" alt="Fórmula" /></p>
+
+<p>O maior problema não é calcular as senhas, e sim armazená-las, já que só para armazenar cada um dos 16 bytes do hash MD5 serão necessários mais que 124Gb de espaço. Se fosse até 8 (oito) caracteres esse valor iria mais que dobrar.</p>
+
+<p>O <em>Time-Memory Tradeoff</em> tem por objetivo reduzir drasticamente a quantidade de memória utilizada em troca de um processamento um pouco maior, porém esse processamento poderia ser feito uma única vez e, dentro a tabela de <em>hash</em> bastaria apenas consultar.</p>
+
+<p>Para se reduzir o tamanho do espaço armazenado, utiliza-se o chamado <em>Hash Chain</em>, que tem por finalidade armazenar uma palavra pertencente ao alfabeto e um <em>hash</em> não necessariamente equivalente a ela.</p>
+
+<p>Iremos tomar como exemplo um alfabeto contendo as letras minúsculas de a à z. Com isto temos 26 letras em nosso alfabeto. Uma palavra é qualquer sequência de caracteres, todos pertencentes ao alfabeto dado e um dicionário é um conjunto de palavras.</p>
+
+<p>O <em>Hash Chain</em> é formado da seguinte forma, dado uma palavra do dicionário, aplica-se uma função de hash <code class="language-plaintext highlighter-rouge">H()</code> e em seguida aplica-se uma função <code class="language-plaintext highlighter-rouge">R()</code>, tal que <code class="language-plaintext highlighter-rouge">R()</code> resulte em uma palavra também pertencente ao dicionário. Faz-se essa operação uma determinada quantidade de vezes (aqui chamadas de iterações) e, ao final, armazena-se o hash resultante, por exemplo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>H("aaaaaa") = 281DAF40
+R(281DAF40) = "sgfnyd"
+H("sgfnyd") = 920ECF10
+</code></pre></div></div>
+
+<p>Ou, em forma de cadeia:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aaaaaa —[H]→ 281DAF40 —[R]→ sgfnyd —[H]→ 920ECF10
+</code></pre></div></div>
+<p>No exemplo acima fizemos apenas duas iterações com a palavra <code class="language-plaintext highlighter-rouge">aaaaaa</code>. Inicialmente aplicamos a função de hash e obtivemos o valor <code class="language-plaintext highlighter-rouge">281DAF40</code>. Em seguida foi aplicação a função R resultando na palavra <code class="language-plaintext highlighter-rouge">sgfnyd</code> , pertencente ao dicionário. Por ultimo aplicou-se novamente a função de hash resultando no hash <code class="language-plaintext highlighter-rouge">920ECF10</code>.</p>
+
+<p>Dado um hash para consultar, verifica-se se ele esta contido na tabela de hash’s gerada. Caso ele seja encontrado, é provável que a partir da palavra inicial consiga-se obter a palavra equivalente ao hash. Por exemplo, se tivermos o hash <code class="language-plaintext highlighter-rouge">920ECF10</code>, podemos encontrá-lo na tabela, sendo equivalente a palavra inicial <code class="language-plaintext highlighter-rouge">aaaaaa</code>, bastando apenas fazer as operações <code class="language-plaintext highlighter-rouge">H()</code> e <code class="language-plaintext highlighter-rouge">R()</code> algumas vezes até encontramos a palavra que tenha o hash dado ou não encontrarmos (atingindo o máximo de iterações – muito azar). Caso o hash procurado não esteja na tabela, aplica-se consecutivamente as funções <code class="language-plaintext highlighter-rouge">R()</code> e <code class="language-plaintext highlighter-rouge">H()</code> no hash fornecido, procurando novamente na tabela, fazendo assim com que o hash fornecido converja à um hash da tabela ou atinja o número máximo de iterações (caso não seja encontrado).</p>
+
+<p>É importante ressaltar que a função <code class="language-plaintext highlighter-rouge">R()</code> não pode ter qualquer aleatoriedade, ou seja, um valor de hash é sempre transformado na mesma palavra do dicionário. A diferença do <em>Hash Chain</em> puro para o <em>Rainbow Table</em>, é que o segundo possui diversas funções R que transformam um hash qualquer em uma palavra do dicionário, tentando assim evitar colisões (dois hash resultarem na mesma palavra).</p>
+
+<p>Para efeitos de ilustração escrevi um código como prova de conceito (p0c), que gera em tempo real um dicionário, faz diversas iterações e depois procura um dado hash. É importante deixar claro que esse código é somente demonstrativo, porém ele pode futuramente virar um projeto da Hack N’ Roll.</p>
+
+<p>Algumas limitações dele é o dicionário ser fixo (letras de <code class="language-plaintext highlighter-rouge">a</code> à <code class="language-plaintext highlighter-rouge">z</code>), e você tem que fornecer o tamanho da senha do hash (isso o torna completamente inútil sozinho em um ambiente real). Além disso, teria que melhorar (e muito) a função que transforma o hash em uma palavra do dicionário.</p>
+
+<p><img src="http://localhost:4000/assets/images/posts/2010/01/hash-hack1.jpeg" alt="Fórmula" /></p>
+
+<p>A ferramenta faz o que promete, porém algumas (muitas) vezes ele não encontra a palavra solicitada. Isso se dá porque o dicionário inicial é gerado aleatóriamente, para um melhor resultado, basta executar novamente com os mesmos parâmetros até ele encontrar a palavra solicitada:</p>
+
+<p><img src="http://localhost:4000/assets/images/posts/2010/01/hash-natal1.jpeg" alt="Fórmula" /></p>
+
+<p>Não recomendo tentar utilizar o <em>md5-chain</em> como ferramente de quebra de hash MD5. Ele foi escrito com o único propósito de explicar o conceito de <em>hash chain</em>, <em>time-memory tradeoff</em> e como funciona o projeto <em>RainbowCrack</em>. Este ultimo já possui diversas melhorias matemáticas além de ter instruções específicas para trabalhar com GPU (processadores de placas de vídeo).</p>
+
+<p>No projeto RainbowCrack, a tabela palavra/hash é gerada e armazenada em arquivo, sempre fazendo algumas verificações. Dessa forma bastaria fazer as consultas necessárias e obter os resultados.</p>
+
+<p>O código-fonte do md5-chain pode ser obtido <s>aqui</s>. Sinta-se livre para modificá-lo e estudá-lo à vontade. Um desafio seria reescrever a função <code class="language-plaintext highlighter-rouge">makepass()</code> que gera uma palavra a partir de um hash, cuja execução com um dicionário inicial de 2000 palavras e 2000 iterações de uma senha de 5 caracteres não gere muitas (ou nenhuma) repetição.</p>
+
+<p>Bom estudo e feliz hack’n roll.</p>
+
+<h3 id="referências">Referências</h3>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Rainbow_table">Rainbow Table</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Space-time_tradeoff">Space-time Tradeoff</a></li>
+  <li><a href="https://www.cs.sjsu.edu/faculty/stamp/RUA/TMTO.pdf">Time-memory Tradeoff</a></li>
+  <li><a href="https://project-rainbowcrack.com/">Projeto Rainbow Crack</a></li>
+</ul>
+
+	</div>
+
+	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/cryptography/2010/01/02/md5-chain-com-rainbow-table.html" data-colorscheme="dark"></div>
+</div> 
+        </section>
+        <div id="sidebar">
+        	<div class="sidebar-module">
+    <h4>Sobre</h4>
+    <img title="Maycon Vitali" src="/assets/images/profile.jpg" alt="Maycon Vitali"/>
+    <span>Olá! Me chamo Maycon Vitali e utilizo esse site para fornecer informações sobre hacking e segurança da informação. Puxe uma cadeira, pegue um café, tire seu chapéu e boa leitura.</span>
+    <br /><br />
+
+    Mais informações e contatos:<br />
+    <a href="mailto:maycon@hacknroll.com" title="mailto: maycon@hacknroll.com">Email</a> /
+    <a target="_blank" href="https://github.com/maycon" title="GithubID: maycon">Github</a> /
+    <a target="_blank" href="https://linkedin.com/in/mayconvitali" title="LinkedIn: mayconvitali">LinkedIn</a> /
+    <a target="_blank" href="https://twitter.com/mayconvitali" title="TwitterID: mayconvitali">Twitter</a>
+</div>
+
+<div class="sidebar-module">
+    <h4>Aviso Legal</h4>
+    Todo e qualquer material e publicações feitas nesse site são de inteira responsabilidade minha e não representam a visão de meu empregador. Porém, como o objetivo desse site é fornecer material puramente educacional, e eu não me responsabilizo pelo mal uso de tais informações.
+</div>
+
+<div class="sidebar-module">
+	<h4>Publicações Recentes</h4>
+	
+	
+		<li><a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" title="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" rel="bookmark">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</a></li>
+	
+		<li><a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html" title="Hacking Tricks: Escalação de Privilégio em Linux com Capability" rel="bookmark">Hacking Tricks: Escalação de Privilégio em Linux com Capability</a></li>
+	
+		<li><a href="/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html" title="Embedded Hacking: Acessando a interface UART/Serial" rel="bookmark">Embedded Hacking: Acessando a interface UART/Serial</a></li>
+	
+		<li><a href="/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" title="Embedded Hacking: Emulando binários dos firmwares" rel="bookmark">Embedded Hacking: Emulando binários dos firmwares</a></li>
+	
+		<li><a href="/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html" title="Embedded Hacking: Extração de Firmware usando SPI" rel="bookmark">Embedded Hacking: Extração de Firmware usando SPI</a></li>
+	
+</div>
+
+
+<div class="sidebar-module">
+	<h4>Categorias</h4>
+	
+		<li><a href="/br/categories/#programming" title="programming" rel="1">programming (1)</a></li>
+	
+		<li><a href="/br/categories/#reverse-engineering" title="reverse-engineering" rel="1">reverse-engineering (1)</a></li>
+	
+		<li><a href="/br/categories/#malwares" title="malwares" rel="2">malwares (2)</a></li>
+	
+		<li><a href="/br/categories/#cryptography" title="cryptography" rel="1">cryptography (1)</a></li>
+	
+		<li><a href="/br/categories/#exploit" title="exploit" rel="1">exploit (1)</a></li>
+	
+		<li><a href="/br/categories/#hacking" title="hacking" rel="1">hacking (1)</a></li>
+	
+		<li><a href="/br/categories/#hello-world" title="hello-world" rel="2">hello-world (2)</a></li>
+	
+		<li><a href="/br/categories/#bug-bounty" title="bug-bounty" rel="2">bug-bounty (2)</a></li>
+	
+		<li><a href="/br/categories/#embedded-hacking" title="embedded-hacking" rel="3">embedded-hacking (3)</a></li>
+	
+		<li><a href="/br/categories/#advisories" title="advisories" rel="1">advisories (1)</a></li>
+	
+		<li><a href="/br/categories/#hacking-tricks" title="hacking-tricks" rel="3">hacking-tricks (3)</a></li>
+	
+</div>
+
+<div class="sidebar-module">
+	<h4>Tags</h4>
+	
+		<a href="/tags/#programming" title="programming" rel="1">programming</a> &nbsp;
+	
+		<a href="/tags/#sdlc" title="sdlc" rel="1">sdlc</a> &nbsp;
+	
+		<a href="/tags/#reverse-engineering" title="reverse-engineering" rel="1">reverse-engineering</a> &nbsp;
+	
+		<a href="/tags/#assembly" title="assembly" rel="1">assembly</a> &nbsp;
+	
+		<a href="/tags/#serial-phishing" title="serial-phishing" rel="1">serial-phishing</a> &nbsp;
+	
+		<a href="/tags/#malware-analisys" title="malware-analisys" rel="1">malware-analisys</a> &nbsp;
+	
+		<a href="/tags/#vacina" title="vacina" rel="1">vacina</a> &nbsp;
+	
+		<a href="/tags/#urban" title="urban" rel="2">urban</a> &nbsp;
+	
+		<a href="/tags/#hacking-tricks" title="hacking-tricks" rel="5">hacking-tricks</a> &nbsp;
+	
+		<a href="/tags/#cryptography" title="cryptography" rel="1">cryptography</a> &nbsp;
+	
+		<a href="/tags/#exploit" title="exploit" rel="1">exploit</a> &nbsp;
+	
+		<a href="/tags/#0day" title="0day" rel="1">0day</a> &nbsp;
+	
+		<a href="/tags/#fake" title="fake" rel="1">fake</a> &nbsp;
+	
+		<a href="/tags/#hello" title="hello" rel="2">hello</a> &nbsp;
+	
+		<a href="/tags/#bug-bounty" title="bug-bounty" rel="2">bug-bounty</a> &nbsp;
+	
+		<a href="/tags/#hackerone" title="hackerone" rel="2">hackerone</a> &nbsp;
+	
+		<a href="/tags/#ubiquiti" title="ubiquiti" rel="2">ubiquiti</a> &nbsp;
+	
+		<a href="/tags/#embedded-devices" title="embedded-devices" rel="4">embedded-devices</a> &nbsp;
+	
+		<a href="/tags/#hacking-embedded" title="hacking-embedded" rel="4">hacking-embedded</a> &nbsp;
+	
+		<a href="/tags/#IoT-hacking" title="IoT-hacking" rel="4">IoT-hacking</a> &nbsp;
+	
+		<a href="/tags/#qemu" title="qemu" rel="1">qemu</a> &nbsp;
+	
+		<a href="/tags/#mips" title="mips" rel="1">mips</a> &nbsp;
+	
+		<a href="/tags/#ubnt" title="ubnt" rel="1">ubnt</a> &nbsp;
+	
+		<a href="/tags/#cve" title="cve" rel="1">cve</a> &nbsp;
+	
+		<a href="/tags/#uart" title="uart" rel="1">uart</a> &nbsp;
+	
+		<a href="/tags/#serial" title="serial" rel="1">serial</a> &nbsp;
+	
+		<a href="/tags/#privilege-escalation" title="privilege-escalation" rel="1">privilege-escalation</a> &nbsp;
+	
+		<a href="/tags/#linux" title="linux" rel="1">linux</a> &nbsp;
+	
+		<a href="/tags/#capability" title="capability" rel="1">capability</a> &nbsp;
+	
+		<a href="/tags/#network" title="network" rel="2">network</a> &nbsp;
+	
+		<a href="/tags/#pentest" title="pentest" rel="2">pentest</a> &nbsp;
+	
+</div>
+<div class="sidebar-module sb-archive-tree">
+    <h4>Histórico</h4>
+
+
+
+
+
+
+
+    
+    
+
+	
+		
+			<ul>
+		
+			<li><label for="year2019">► 2019</label>
+				<input type="checkbox" id="year2019" checked/>
+				<ul>
+					<li><label for="November2019">► Novembro</label>
+						<input type="checkbox" id="November2019" checked />
+						<ul>
+	
+	<li>► <a href="/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+					</ul>
+				</li>
+				<li><label for="January2019">► Janeiro</label>
+					<input type="checkbox" id="January2019" />
+					<ul>
+	
+	<li>► <a href="/hacking-tricks/2019/01/08/linux-privesc-with-capability.html">Hacking Tricks: Escalação de Privilégio em Linux com Capability</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+		
+						</ul>
+					</li>
+				</ul>
+			</li>
+		
+			<li><label for="year2018">► 2018</label>
+				<input type="checkbox" id="year2018" checked/>
+				<ul>
+					<li><label for="March2018">► Março</label>
+						<input type="checkbox" id="March2018" checked />
+						<ul>
+	
+	<li>► <a href="/embedded-hacking/2018/03/10/embedded-hacking-acessando-interface-UART.html">Embedded Hacking: Acessando a interface UART/Serial</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+					</ul>
+				</li>
+				<li><label for="February2018">► Fevereiro</label>
+					<input type="checkbox" id="February2018" />
+					<ul>
+	
+	<li>► <a href="/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html">Embedded Hacking: Emulando binários dos firmwares</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+					</ul>
+				</li>
+				<li><label for="January2018">► Janeiro</label>
+					<input type="checkbox" id="January2018" />
+					<ul>
+	
+	<li>► <a href="/embedded-hacking/2018/01/25/iot-hacking-extracao-de-firmware-usando-spi.html">Embedded Hacking: Extração de Firmware usando SPI</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+	<li>► <a href="/bug-bounty/2018/01/21/talk-is-cheap-show-me-the-money.html">Talk is cheap. Show me the money!</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+	<li>► <a href="/hello-world/2018/01/18/im-back.html">I'm back, bitches!!</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+		
+						</ul>
+					</li>
+				</ul>
+			</li>
+		
+			<li><label for="year2011">► 2011</label>
+				<input type="checkbox" id="year2011" checked/>
+				<ul>
+					<li><label for="May2011">► Maio</label>
+						<input type="checkbox" id="May2011" checked />
+						<ul>
+	
+	<li>► <a href="/hacking/2011/05/20/urban-hacking.html">Urban Hacking</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+		
+						</ul>
+					</li>
+				</ul>
+			</li>
+		
+			<li><label for="year2010">► 2010</label>
+				<input type="checkbox" id="year2010" checked/>
+				<ul>
+					<li><label for="January2010">► Janeiro</label>
+						<input type="checkbox" id="January2010" checked />
+						<ul>
+	
+	<li>► <a href="/exploit/2010/01/02/fake-openssh-53p1-remote-root.c.html">0-Day openssh-53p1-remote-root.c?</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+	<li>► <a href="/cryptography/2010/01/02/md5-chain-com-rainbow-table.html">Hack New Year: MD5 Chain com Rainbow Table</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+		
+						</ul>
+					</li>
+				</ul>
+			</li>
+		
+			<li><label for="year2009">► 2009</label>
+				<input type="checkbox" id="year2009" checked/>
+				<ul>
+					<li><label for="April2009">► Abril</label>
+						<input type="checkbox" id="April2009" checked />
+						<ul>
+	
+	<li>► <a href="/malwares/2009/04/12/analise-do-virus-tr-atraps-parte-i.html">Análise do Virus TR/ATRAPS.Gen – Parte 1</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+					</ul>
+				</li>
+				<li><label for="March2009">► Março</label>
+					<input type="checkbox" id="March2009" />
+					<ul>
+	
+	<li>► <a href="/malwares/2009/03/21/vacina-tinyh.html">Vacina Tiny.H</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+	<li>► <a href="/reverse-engineering/2009/03/03/serial-fishing.html">Serial Fishing</a></li>
+
+    
+	
+	
+	
+
+    
+    
+
+	
+					</ul>
+				</li>
+				<li><label for="January2009">► Janeiro</label>
+					<input type="checkbox" id="January2009" />
+					<ul>
+	
+	<li>► <a href="/programming/2009/01/09/return-sim-ou-nao.html">return! Sim ou Não?</a></li>
+
+    
+	    			</ul>
+	    		</li>
+	    	</ul>
+    	</li>
+    </ul>
+    
+	
+	
+	
+
+</div>
+
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-112771650-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+<footer class="site-footer">
+	<p>Copyright &copy; <a href="/">Maycon Vitali</a></p>
+</footer>
+
+    
+</body>
+
+</html>
