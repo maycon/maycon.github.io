@@ -3,7 +3,7 @@ layout: post
 title:  "Análise do Virus TR/ATRAPS.Gen – Parte 1"
 date:   2009-04-12
 categories: malwares
-tags: urban hacking-tricks
+tags: urban hacking-tricks gold
 lang: br
 ref: analise-do-virus-tr-atraps-parte-i
 has-asciinema: false

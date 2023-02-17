@@ -3,7 +3,7 @@ layout: post
 title:  "Vacina Tiny.H"
 date:   2009-03-21
 categories: malwares
-tags: malware-analisys vacina
+tags: malware-analisys vacina gold
 lang: br
 ref: vacina-tiny-h
 has-asciinema: false

@@ -3,7 +3,7 @@ layout: post
 title:  "return! Sim ou Não?"
 date:   2009-01-09
 categories: programming
-tags: programming sdlc
+tags: programming sdlc gold
 lang: br
 ref: return-sim-ou-nao
 has-asciinema: false

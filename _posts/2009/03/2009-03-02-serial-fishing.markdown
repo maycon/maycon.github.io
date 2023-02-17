@@ -3,7 +3,7 @@ layout: post
 title:  "Serial Fishing"
 date:   2009-03-03
 categories: reverse-engineering
-tags: reverse-engineering assembly serial-phishing
+tags: reverse-engineering assembly serial-phishing gold
 lang: br
 ref: serial-phishing
 has-asciinema: false

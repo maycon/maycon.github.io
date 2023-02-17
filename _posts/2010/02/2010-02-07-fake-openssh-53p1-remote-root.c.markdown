@@ -3,7 +3,7 @@ layout: post
 title:  "0-Day openssh-53p1-remote-root.c?"
 date:   2010-01-02
 categories: exploit
-tags: exploit 0day fake
+tags: exploit 0day fake gold
 lang: br
 ref: 0-day-openssh-53p1-remote-root-c
 has-asciinema: false

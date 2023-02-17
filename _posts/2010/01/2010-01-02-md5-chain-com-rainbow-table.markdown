@@ -3,7 +3,7 @@ layout: post
 title:  "Hack New Year: MD5 Chain com Rainbow Table"
 date:   2010-01-02
 categories: cryptography
-tags: cryptography
+tags: cryptography gold
 lang: br
 ref: hack-new-year-md5-chain-com-rainbow-table
 has-asciinema: false

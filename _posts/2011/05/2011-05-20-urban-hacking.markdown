@@ -3,7 +3,7 @@ layout: post
 title:  "Urban Hacking"
 date:   2011-05-20
 categories: hacking
-tags: urban hacking-tricks
+tags: urban hacking-tricks gold
 lang: br
 ref: urban-hacking
 has-asciinema: false
