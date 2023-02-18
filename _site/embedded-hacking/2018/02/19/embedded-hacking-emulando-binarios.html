@@ -16,15 +16,15 @@
 <meta property="og:locale" content="br" />
 <meta name="description" content="Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho." />
 <meta property="og:description" content="Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho." />
-<link rel="canonical" href="http://maycon.hacknroll.io/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
-<meta property="og:url" content="http://maycon.hacknroll.io/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
+<link rel="canonical" href="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
+<meta property="og:url" content="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-02-19T00:00:00-03:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Embedded Hacking: Emulando binários dos firmwares" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2018-02-19T00:00:00-03:00","datePublished":"2018-02-19T00:00:00-03:00","description":"Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho.","headline":"Embedded Hacking: Emulando binários dos firmwares","mainEntityOfPage":{"@type":"WebPage","@id":"http://maycon.hacknroll.io/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html"},"url":"http://maycon.hacknroll.io/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2018-02-19T00:00:00-03:00","datePublished":"2018-02-19T00:00:00-03:00","description":"Seguindo a série sobre hacking de dispositivo embarcados, nessa postagem será demonstrado uma forma simples de iniciar a análise do firmware extraído na postagem anterior. Nessa etapa iremos somente fazer uma análise do firmware, sem acesso ao dispositivo propriamente dito. Isso pode ser útil para identificar vulnerabilidades em firmwares que, por algum motivo, não possuímos o hardware para testes. Para isso continuaremos utilizando como teste o formware dispositivo da MITRASTAR, o DSL-100HN-T1-NV, extraído diretamente da memória flash do aparelho.","headline":"Embedded Hacking: Emulando binários dos firmwares","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html"},"url":"http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -35,7 +35,8 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0';
+  js.colorscheme = 'dark';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
     <header class="site-header">
@@ -77,15 +78,15 @@
             <ul>
 	
 		
-			<li class='menu-icon'><a href="http://maycon.hacknroll.io/br/home"><img src="/assets/images/icons/home.png" /></a></li>
+			<li class='menu-icon'><a href="http://localhost:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
 		
 	
 		
-			<li><a href="http://maycon.hacknroll.io/br/about">Sobre</a></li>
+			<li><a href="http://localhost:4000/br/about">Sobre</a></li>
 		
 	
 		
-			<li><a href="http://maycon.hacknroll.io/br/posts">Publicações</a></li>
+			<li><a href="http://localhost:4000/br/posts">Publicações</a></li>
 		
 	
 </ul>
@@ -98,7 +99,7 @@
             <div class="post">
 	<header class="post-header">
 	    <h2 class="post-title">Embedded Hacking: Emulando binários dos firmwares</h2>
-		<div class="fb-like" data-width="" data-href="http://maycon.hacknroll.io/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
+		<div class="fb-like" data-width="" data-href="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
@@ -243,7 +244,7 @@ Hack N’ Roll</p>
 
 	</div>
 
-	<div class="fb-comments" data-width="100%" data-href="http://maycon.hacknroll.io/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
+	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/embedded-hacking/2018/02/19/embedded-hacking-emulando-binarios.html" data-colorscheme="dark"></div>
 </div> 
         </section>
         <div id="sidebar">

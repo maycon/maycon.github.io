@@ -14,15 +14,15 @@
 <meta property="og:locale" content="br" />
 <meta name="description" content="Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet." />
 <meta property="og:description" content="Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet." />
-<link rel="canonical" href="http://maycon.hacknroll.io/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
-<meta property="og:url" content="http://maycon.hacknroll.io/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
+<link rel="canonical" href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
+<meta property="og:url" content="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-11-05T00:00:00-03:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Hacking Tricks: Identificando Portas de Saída para Shell Reversa" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2019-11-05T00:00:00-03:00","datePublished":"2019-11-05T00:00:00-03:00","description":"Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.","headline":"Hacking Tricks: Identificando Portas de Saída para Shell Reversa","mainEntityOfPage":{"@type":"WebPage","@id":"http://maycon.hacknroll.io/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"},"url":"http://maycon.hacknroll.io/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2019-11-05T00:00:00-03:00","datePublished":"2019-11-05T00:00:00-03:00","description":"Algumas vezes durante os projetos do dia-a-dia nos deparamos com acesso (ex: RCE) em que o host afetado que (aparentemente) não possui qualquer liberação de acesso à internet para a nossa boa e velha shell reversa. Dessa forma temos que procurar por alternativas para exfiltrar dados (ex: DNS) ou, antes disso, validar se realmente não temos qualquer acesso à internet.","headline":"Hacking Tricks: Identificando Portas de Saída para Shell Reversa","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"},"url":"http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -33,7 +33,8 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0';
+  js.colorscheme = 'dark';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
     <header class="site-header">
@@ -75,15 +76,15 @@
             <ul>
 	
 		
-			<li class='menu-icon'><a href="http://maycon.hacknroll.io/br/home"><img src="/assets/images/icons/home.png" /></a></li>
+			<li class='menu-icon'><a href="http://localhost:4000/br/home"><img src="/assets/images/icons/home.png" /></a></li>
 		
 	
 		
-			<li><a href="http://maycon.hacknroll.io/br/about">Sobre</a></li>
+			<li><a href="http://localhost:4000/br/about">Sobre</a></li>
 		
 	
 		
-			<li><a href="http://maycon.hacknroll.io/br/posts">Publicações</a></li>
+			<li><a href="http://localhost:4000/br/posts">Publicações</a></li>
 		
 	
 </ul>
@@ -96,7 +97,7 @@
             <div class="post">
 	<header class="post-header">
 	    <h2 class="post-title">Hacking Tricks: Identificando Portas de Saída para Shell Reversa</h2>
-		<div class="fb-like" data-width="" data-href="http://maycon.hacknroll.io/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
+		<div class="fb-like" data-width="" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
@@ -232,7 +233,7 @@ Ncat: Connected to 68.xxx.xxx.181:8080.
 
 	</div>
 
-	<div class="fb-comments" data-width="100%" data-href="http://maycon.hacknroll.io/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
+	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/hacking-tricks/2019/11/05/trick-check-outgoing-ports.html" data-colorscheme="dark"></div>
 </div> 
         </section>
         <div id="sidebar">

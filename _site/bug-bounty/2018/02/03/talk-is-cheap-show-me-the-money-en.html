@@ -14,15 +14,15 @@
 <meta property="og:locale" content="en" />
 <meta name="description" content="The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future." />
 <meta property="og:description" content="The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future." />
-<link rel="canonical" href="http://maycon.hacknroll.io/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" />
-<meta property="og:url" content="http://maycon.hacknroll.io/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" />
+<link rel="canonical" href="http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" />
+<meta property="og:url" content="http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" />
 <meta property="og:site_name" content="Maycon Vitali" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-02-03T00:00:00-02:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Talk is cheap. Show me the money!" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2018-02-03T00:00:00-02:00","datePublished":"2018-02-03T00:00:00-02:00","description":"The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future.","headline":"Talk is cheap. Show me the money!","mainEntityOfPage":{"@type":"WebPage","@id":"http://maycon.hacknroll.io/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html"},"url":"http://maycon.hacknroll.io/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Maycon Vitali"},"dateModified":"2018-02-03T00:00:00-02:00","datePublished":"2018-02-03T00:00:00-02:00","description":"The main goal of this post is to incentive the security professionals, hackers and enthusiasts to join the fantastic world of the Bug Bounty programs. You should not expect any technical stuff in this post, but it’s reserved for the future.","headline":"Talk is cheap. Show me the money!","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html"},"url":"http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -33,7 +33,8 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0';
+  js.colorscheme = 'dark';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
     <header class="site-header">
@@ -75,15 +76,15 @@
             <ul>
 	
 		
-			<li class='menu-icon'><a href="http://maycon.hacknroll.io/en/home"><img src="/assets/images/icons/home.png" /></a></li>
+			<li class='menu-icon'><a href="http://localhost:4000/en/home"><img src="/assets/images/icons/home.png" /></a></li>
 		
 	
 		
-			<li><a href="http://maycon.hacknroll.io/en/about">About</a></li>
+			<li><a href="http://localhost:4000/en/about">About</a></li>
 		
 	
 		
-			<li><a href="http://maycon.hacknroll.io/en/posts">Posts</a></li>
+			<li><a href="http://localhost:4000/en/posts">Posts</a></li>
 		
 	
 </ul>
@@ -96,7 +97,7 @@
             <div class="post">
 	<header class="post-header">
 	    <h2 class="post-title">Talk is cheap. Show me the money!</h2>
-		<div class="fb-like" data-width="" data-href="http://maycon.hacknroll.io/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" data-colorscheme="dark"></div>
+		<div class="fb-like" data-width="" data-href="http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" data-colorscheme="dark"></div>
 	</header>
 
 	<div class="post-content">
@@ -130,7 +131,7 @@
 
 <p>The next step was to choose the target. After few researching with friends, I decided to buy online an <a href="https://produto.mercadolivre.com.br/MLB-811540935-ubiquiti-edgerouter-x-er-x-5-portas-rj45-_JM?source=gps">EdgeRouter X</a>, a managed router with interesting features. The router (with the delivery service) cost me about $100.00, but I had in my mind that if I find a simple Cross-site Scripting vulnerability I will earn for about $150.00, and it will be enough to recover the value I paid (and a few profit).</p>
 
-<p><img src="http://maycon.hacknroll.io/assets/images/posts/2018/01/edgerouter-ml.png" alt="EdgeRouter X" /></p>
+<p><img src="http://localhost:4000/assets/images/posts/2018/01/edgerouter-ml.png" alt="EdgeRouter X" /></p>
 
 <p>I bought it on Wednesday, 30th May, and the device was delivered almost two weeks later, on 14th July, before a holiday.</p>
 
@@ -166,7 +167,7 @@
 
 <p>I was satisfied and happy with the possible $ 250.00 that would be coming. Until I saw the second email saying that I had already been paid. That’s it! In less than 12 hours after I sent my first vulnerability report, it was confirmed and the reward was paid. But the best is still to come. Instead of the $ 250.00 that I was expecting, I was rewarded with $ 1,500.00, which rather than pay the investment in the EdgeRouter that I had bought, would allow me buying another 15 models alike.</p>
 
-<p><img src="http://maycon.hacknroll.io/assets/images/posts/2018/01/ubnt-primeiro-report.png" alt="First vulnerability report" /></p>
+<p><img src="http://localhost:4000/assets/images/posts/2018/01/ubnt-primeiro-report.png" alt="First vulnerability report" /></p>
 
 <h3 id="money-money-and-an-unexpected-invite">Money, money and an unexpected invite(?)</h3>
 
@@ -174,7 +175,7 @@
 
 <p>As I took a liking to the result but did not have much time available out on the weekends, I decided to calm down a bit and just study a little more during the weekends. But on June 15th I received a private message from Ubiquiti inviting me to test a beta device, the [EtherMagic] (https://store.ubnt.com/products/ethermagic). They told me that if I accepted the invite they would send a <strong>free kit</strong>. This made me happy to realize the company’s recognition of my vulnerability research on their equipment.</p>
 
-<p><img src="http://maycon.hacknroll.io/assets/images/posts/2018/01/invite-beta-test.png" alt="Invite" /></p>
+<p><img src="http://localhost:4000/assets/images/posts/2018/01/invite-beta-test.png" alt="Invite" /></p>
 
 <h3 id="dont-let-the-samba-die-its-a-brazilian-expression">Don’t let the samba die (it’s a Brazilian expression)</h3>
 
@@ -186,7 +187,7 @@
 
 <p>After two weeks that the new device was posted, it finally arrived into my hands. At first, I was a bit worried about already opening it and going out soldering pinout to UART (I’ll talk about it in a future post) and end up breaking it. After all, if it breaks I could not just open the vendor online store and buy another. But as the device was beta, unfortunately, its support is very limited (maybe we can say it does not exist), and there is no version of its firmware on the vendor download page. Conclusion: I should extract the firmware directly from the device (I’ll also mention it in a future post) to get access to it and the running applications.</p>
 
-<p><img src="http://maycon.hacknroll.io/assets/images/posts/2018/01/ethermagic.png" alt="EtherMagic" /></p>
+<p><img src="http://localhost:4000/assets/images/posts/2018/01/ethermagic.png" alt="EtherMagic" /></p>
 
 <p>It was late at night and I was reasonably tired of trying to get access to the device. However, with my hardware knowledge tending to zero, I started playing with its bootloader commands (U-Boot) and, in a miraculous and bad lucky way, I managed to brick with the FLASH memory of the device. #genius</p>
 
@@ -204,11 +205,11 @@
 
 <p>The summary of that month I was playing with Bug Bounties were 10 vulnerabilities reported, where one of them was duplicated and the another nine were rewarded with a total of $ 19,800.00:</p>
 
-<p><img src="http://maycon.hacknroll.io/assets/images/posts/2018/01/h1-extrato.png" alt="Extrato do HackerOne" /></p>
+<p><img src="http://localhost:4000/assets/images/posts/2018/01/h1-extrato.png" alt="Extrato do HackerOne" /></p>
 
 <p>Also as a result of this, I finished 2017 in the fifth place in the “Ranking of Thanks” of Ubiquiti Networks:</p>
 
-<p><img src="http://maycon.hacknroll.io/assets/images/posts/2018/01/ubnt-thanks.png" alt="Ubiquiti Ranking - 2017" /></p>
+<p><img src="http://localhost:4000/assets/images/posts/2018/01/ubnt-thanks.png" alt="Ubiquiti Ranking - 2017" /></p>
 
 <h3 id="conclusion">Conclusion</h3>
 
@@ -221,7 +222,7 @@ Hack N’ Roll</p>
 
 	</div>
 
-	<div class="fb-comments" data-width="100%" data-href="http://maycon.hacknroll.io/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" data-colorscheme="dark"></div>
+	<div class="fb-comments" data-width="100%" data-href="http://localhost:4000/bug-bounty/2018/02/03/talk-is-cheap-show-me-the-money-en.html" data-colorscheme="dark"></div>
 </div> 
         </section>
         <div id="sidebar">
