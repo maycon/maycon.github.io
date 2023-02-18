@@ -2,27 +2,16 @@
 	{% if site.posts == empty %}
 		No posts
 	{% else %}
-		{% for cat in site.categories %}
-			<a href="#{{ cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">{{ cat[0] | join: "/"}}<span class="size"> ({{ cat[1].size }})</span></a>
+		{% for tag in site.tags %}
+			<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] | join: "/"}}<span class="size"> ({{ tag[1].size }})</span></a>
 		{% endfor %}
 		<br/><br/>
 
-		<!--
-		{% for cat in site.categories %}
-			{{ cat[0]}}<br />
-			{% for post in cat[1] %}
-				<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
-				<a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a><br />
-			{% endfor %}
-			<br />
-		{% endfor %}
-		-->
-
-		{% for cat in site.categories %}
-			<h3><a name="{{ cat[0]}}">{{ cat[0]}}</a></h3>
+		{% for tag in site.tags %}
+			<h3><a name="{{ tag[0]}}">{{ tag[0]}}</a></h3>
 
 			<ul class="post-list">
-				{% assign posts = cat[1] %}
+				{% assign posts = tag[1] %}
 				{% for post in posts %}
 
 					{% assign first_posts = true %}
@@ -51,7 +40,7 @@
 							{% if post_lang[0] %}
 								<a href="{{ post_lang[0].url }}">{{ post_lang[0].title }}</a>
 							{% else %}
-								<abbr title="{{ site.data.lang[page.lang].not-available-lang }}">{{ post.title }}</abbr>
+								{<abbr title="{{ site.data.lang[page.lang].not-available-lang }}">{{ post.title }}</abbr>
 							{% endif %}
 						</li>
 					{% endif %}
